@@ -1,20 +1,26 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
-import { loginUser } from '../../_actions/user_actions';
-import { withRouter } from 'react-router-dom';
-import loginBackground from '../../public/loginBackground.jpeg';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../../modules/user";
+// import { loginUser } from '../../_actions/user_actions';
+import { withRouter } from "react-router-dom";
+import loginBackground from "../../public/loginBackground.jpeg";
 
 //import Container
-import HeaderContainer from '../../container/HeaderContainer';
+import HeaderContainer from "../../container/HeaderContainer";
 
 //Condition DOM
 let conditonErrMessage = null;
 
 //Main Component
 const LoginPage = (props) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const { error, loginSuccess } = useSelector(({ userReduce }) => ({
+    error: userReduce.error,
+    loginSuccess: userReduce.loginSuccess,
+  }));
 
   // Redux-Dispatch
   const dispatch = useDispatch();
@@ -27,7 +33,7 @@ const LoginPage = (props) => {
     setPassword(event.target.value);
   };
   const onRegisterHandler = () => {
-    props.history.push('/register');
+    props.history.push("/register");
   };
   const onSubmitHandler = (event) => {
     event.preventDefault(); // 새로고침 방지
@@ -35,21 +41,26 @@ const LoginPage = (props) => {
       email,
       password,
     };
-    dispatch(loginUser(requestBody)).then((response) => {
-      response.payload.loginSuccess === true
-        ? props.history.push('/')
-        : cleanInput();
-    });
+    dispatch(loginUser(requestBody));
   };
+
+  useEffect(() => {
+    if (error === "해당 이메일이 존재하지 않습니다.") {
+      cleanInput();
+    }
+    if (loginSuccess) {
+      props.history.push("/");
+    }
+  }, [error, loginSuccess]);
 
   // Submit-Error-condition
   const cleanInput = () => {
     conditonErrMessage = (
       <ErrMsg>이메일 혹은 패스워드가 잘못되었습니다.</ErrMsg>
     );
-    setEmail('');
-    setPassword('');
-    if (email !== '') {
+    setEmail("");
+    setPassword("");
+    if (email !== "") {
       conditonErrMessage = <span></span>;
     }
   };

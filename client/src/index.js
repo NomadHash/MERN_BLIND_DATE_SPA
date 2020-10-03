@@ -3,28 +3,27 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+
+// * ===========================
+// * REDUX & SAGA_MIDDLE_WARE
 import { Provider } from 'react-redux';
-
 import { applyMiddleware, createStore } from 'redux';
-import promiseMiddleware from 'redux-promise';
-import ReduxThunk from 'redux-thunk';
-import Reducer from './_reducers';
+import rootReducer, { rootSaga } from './modules';
+import createSagaMiddleware from 'redux-saga';
+import { composeWithDevTools } from 'redux-devtools-extension';
+const sagaMiddleware = createSagaMiddleware();
+// * ===========================
 
-const createStoteWithMiddleware = applyMiddleware(
-  promiseMiddleware,
-  ReduxThunk,
-)(createStore);
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(sagaMiddleware)),
+);
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider
-      store={createStoteWithMiddleware(
-        Reducer,
-        window.__REDUX_DEVTOOLS_EXTENSION__ &&
-          window.__REDUX_DEVTOOLS_EXTENSION__(),
-      )}
-    >
-      <App />
+    <Provider store={store}>
+      <App />,
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'),

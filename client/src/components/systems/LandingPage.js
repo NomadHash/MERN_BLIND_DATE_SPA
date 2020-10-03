@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
-import { auth } from '../../_actions/user_actions';
+// import { auth } from '../../_actions/user_actions';
+import { loginUser } from '../../modules/user';
 
 //import Container
 import HeaderContainer from '../../container/HeaderContainer';
@@ -12,11 +13,6 @@ import contentImg from '../../public/contentImg.png';
 import profileImg from '../../public/profile.png';
 
 const LandingPage = (props) => {
-  const dispatch = useDispatch();
-  dispatch(auth()).then((response) => {
-    console.log(response);
-  });
-
   return (
     <LandingContent>
       <HeaderContainer />

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { registerUser } from '../../_actions/user_actions';
+// import { registerUser } from '../../_actions/user_actions';
 import { withRouter } from 'react-router-dom';
 
 //=================================
@@ -38,7 +38,7 @@ const RegisterPage = (props) => {
 
   //=================================
   // Redux-Dispatch
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const onSubmitHandler = (event) => {
     event.preventDefault(); // 새로고침 방지
     if (password !== confilmPassword) {
@@ -51,12 +51,12 @@ const RegisterPage = (props) => {
         profileImage: images,
       };
       console.log(requestBody);
-      dispatch(registerUser(requestBody)).then((response) => {
-        console.log(response);
-        response.payload.registerSuccess === true
-          ? props.history.push('/login')
-          : cleanInput();
-      });
+      // dispatch(registerUser(requestBody)).then((response) => {
+      //   console.log(response);
+      //   response.payload.registerSuccess === true
+      //     ? props.history.push('/login')
+      //     : cleanInput();
+      // });
     }
     const cleanInput = () => {
       conditonErrMessage = <ErrMsg>이미 존재하는 이메일 입니다.</ErrMsg>;
