@@ -1,18 +1,21 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import styled from 'styled-components';
-// import { auth } from '../../_actions/user_actions';
-import { loginUser } from '../../modules/user';
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { withRouter } from "react-router-dom";
+import styled from "styled-components";
+import { authUser } from "../../modules/auth";
 
 //import Container
-import HeaderContainer from '../../container/HeaderContainer';
+import HeaderContainer from "../../container/HeaderContainer";
 
 //LogoImg
-import contentImg from '../../public/contentImg.png';
-import profileImg from '../../public/profile.png';
+import contentImg from "../../public/contentImg.png";
+import profileImg from "../../public/profile.png";
 
 const LandingPage = (props) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(authUser());
+  }, []);
   return (
     <LandingContent>
       <HeaderContainer />

@@ -1,9 +1,9 @@
-import * as UserApi from '../api/user';
-import { call, put, takeEvery } from 'redux-saga/effects';
+import * as UserApi from "../api/user";
+import { call, put, takeEvery } from "redux-saga/effects";
 
-const LOGIN_USER = 'user/LOGIN_USER'; // 요청 시작
-const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS'; // 요청 성공
-const LOGIN_USER_FAILURE = 'LOGIN_USER_FAILURE'; // 요청 실패
+const LOGIN_USER = "user/LOGIN_USER"; // 요청 시작
+const LOGIN_USER_SUCCESS = "user/LOGIN_USER_SUCCESS"; // 요청 성공
+const LOGIN_USER_FAILURE = "user/LOGIN_USER_FAILURE"; // 요청 실패
 
 export const loginUser = (formData) => ({
   type: LOGIN_USER,
@@ -32,15 +32,12 @@ export function* userSaga() {
 
 const initialState = {
   userData: {
-    isAuth: false,
-    userId: null,
-    userName: null,
+    error: null,
+    loginSuccess: null,
   },
-  error: null,
-  loginSuccess: null,
 };
 
-export default function userReduce(state = initialState, action) {
+export default function userReduce(state = {}, action) {
   switch (action.type) {
     case LOGIN_USER:
       return {
@@ -49,8 +46,8 @@ export default function userReduce(state = initialState, action) {
     case LOGIN_USER_SUCCESS:
       return {
         ...state,
-        loginSuccess: action.payload,
-        error: null,
+        loginSuccess: action.payload.loginSuccess,
+        token: action.payload.token,
       };
     case LOGIN_USER_FAILURE:
       return {

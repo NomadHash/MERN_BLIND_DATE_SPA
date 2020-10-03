@@ -1,6 +1,6 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import Header from '../components/systems/Header';
+import React from "react";
+import { useSelector } from "react-redux";
+import Header from "../components/systems/Header";
 
 const HeaderContainer = () => {
   // const { isAuth, name } = useSelector(({ user }) => ({
@@ -8,6 +8,7 @@ const HeaderContainer = () => {
   //   name: user.userData.name,
   // }));
   return <Header />;
+  //name={name} isAuth={isAuth}
 };
 
 export default HeaderContainer;

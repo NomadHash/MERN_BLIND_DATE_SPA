@@ -40,7 +40,9 @@ const userSchema = mongoose.Schema({
 });
 
 userSchema.pre("save", function (next) {
-  // bcrypt 암호화
+  //* =================
+  //*  bcrypt 암호화
+  //* =================
   var user = this;
   if (user.isModified("password")) {
     bcrypt.genSalt(10, (err, salt) => {
@@ -77,12 +79,19 @@ userSchema.methods.generateToken = function (callback) {
 
 userSchema.statics.findByToken = function (token, callback) {
   var user = this;
-  jwt.verify(token, SECRET_TOKEN, function (err, decoded) {
-    console.log(decoded);
-    user.findOne({ _id: decoded.id, token: token }, function (err, user) {
-      if (err) return callback(err);
-      callback(null, user);
-    });
+  console.log(user);
+  jwt.verify(token, SECRET_TOKEN, (err, decoded) => {
+    user.findOne(
+      {
+        _id: decoded.id,
+        token: token,
+      },
+      (err, user) => {
+        console.log(err);
+        if (err) return callback(err);
+        callback(null, user);
+      }
+    );
     // 유저 아이디를 이용하여 유저를 찾은뒤 클라이언트의 토큰과 db토큰과 비교
   });
 };

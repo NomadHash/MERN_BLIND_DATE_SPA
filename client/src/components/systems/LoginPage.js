@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../../modules/user";
+import userReduce, { loginUser } from "../../modules/user";
 // import { loginUser } from '../../_actions/user_actions';
 import { withRouter } from "react-router-dom";
 import loginBackground from "../../public/loginBackground.jpeg";
@@ -16,10 +16,9 @@ let conditonErrMessage = null;
 const LoginPage = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const { error, loginSuccess } = useSelector(({ userReduce }) => ({
-    error: userReduce.error,
+  const { loginSuccess, error } = useSelector(({ userReduce }) => ({
     loginSuccess: userReduce.loginSuccess,
+    error: userReduce.error,
   }));
 
   // Redux-Dispatch
@@ -45,13 +44,14 @@ const LoginPage = (props) => {
   };
 
   useEffect(() => {
+    console.log("init");
     if (error === "해당 이메일이 존재하지 않습니다.") {
       cleanInput();
     }
     if (loginSuccess) {
       props.history.push("/");
     }
-  }, [error, loginSuccess]);
+  }, [error, loginSuccess, props.history]);
 
   // Submit-Error-condition
   const cleanInput = () => {
