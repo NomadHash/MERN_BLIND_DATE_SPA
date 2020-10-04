@@ -9,3 +9,11 @@ export async function authUserAsync(formData) {
 
   return response.data;
 }
+
+export async function logoutAsync() {
+  const response = await axios.get("/api/users/logout");
+  if (!response.data.success) {
+    throw new Error("로그 아웃에 실패했습니다.");
+  }
+  return response.data;
+}

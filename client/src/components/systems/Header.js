@@ -1,41 +1,47 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { withRouter } from 'react-router-dom';
-import logoImg from '../../public/rocket.png';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import { withRouter } from "react-router-dom";
+import logoImg from "../../public/rocket.png";
+import { logOutUser } from "../../modules/auth";
+import { useDispatch } from "react-redux";
 let conditonRegistBtn = null;
 let conditonLoginBtn = null;
-const Header = (props) => {
-  //State-Hook
-  const [open, setOpen] = useState(false);
 
-  // React-Router
+// ! ==================
+// ! HEADER-COMPONENT
+// ! ==================
+
+const Header = (props) => {
+  const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
+  // * ==================
+  // * React-Router
+  // * ==================
   const goLoginPage = () => {
-    props.history.push('/login');
+    props.history.push("/login");
   };
   const goRegistPage = () => {
-    props.history.push('/register');
+    props.history.push("/register");
   };
   const goRootPage = () => {
-    props.history.push('/');
+    props.history.push("/");
   };
 
-  // Handler Function
+  // * ==================
+  // * HANDLER_FUNCTIONS
+  // * ==================
   const onClickHandler = () => {
-    axios.get('/api/users/logout').then((response) => {
-      console.log(response.data);
-      if (response.data.success === true) {
-        props.history.push('/');
-      }
-    });
+    dispatch(logOutUser());
   };
-
   const onMypageHandler = () => {
     setOpen(!open);
-    console.log(open);
   };
 
-  props.isAuth === true
+  // * ====================
+  // * CONDITION_RENDERING
+  // * ====================
+
+  props.auth === true
     ? (conditonLoginBtn = (
         <MypageBtn onClick={onMypageHandler}>
           마이페이지
@@ -47,11 +53,15 @@ const Header = (props) => {
       ))
     : (conditonLoginBtn = <LoginBtn onClick={goLoginPage}>Login</LoginBtn>);
 
-  props.isAuth === true
-    ? (conditonRegistBtn = '')
+  props.auth === true
+    ? (conditonRegistBtn = "")
     : (conditonRegistBtn = (
         <SignUpBtn onClick={goRegistPage}>Sign up</SignUpBtn>
       ));
+
+  // * ====================
+  // * STYLED_COMPONENT
+  // * ====================
 
   return (
     <HeaderDiv>
@@ -149,7 +159,7 @@ const ArcodianMypage = styled.div`
   height: 5vw;
   border-radius: 15px;
   align-items: flex-start;
-  display: ${(props) => (props.open === true ? 'flex' : 'none')};
+  display: ${(props) => (props.open === true ? "flex" : "none")};
   flex-direction: column;
   padding: 15px;
 `;
