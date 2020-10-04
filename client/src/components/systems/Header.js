@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { withRouter } from "react-router-dom";
-import logoImg from "../../public/rocket.png";
 import { logOutUser } from "../../modules/auth";
 import { useDispatch } from "react-redux";
+import headerLogo from "../../public/logoWhite.png";
 let conditonRegistBtn = null;
 let conditonLoginBtn = null;
 
@@ -51,13 +51,7 @@ const Header = (props) => {
           </ArcodianMypage>
         </MypageBtn>
       ))
-    : (conditonLoginBtn = <LoginBtn onClick={goLoginPage}>Login</LoginBtn>);
-
-  props.auth === true
-    ? (conditonRegistBtn = "")
-    : (conditonRegistBtn = (
-        <SignUpBtn onClick={goRegistPage}>Sign up</SignUpBtn>
-      ));
+    : (conditonLoginBtn = <LoginBtn onClick={goLoginPage}>로그인</LoginBtn>);
 
   // * ====================
   // * STYLED_COMPONENT
@@ -65,28 +59,27 @@ const Header = (props) => {
 
   return (
     <HeaderDiv>
-      <HeaderContent>
-        <HeaderLogo onClick={goRootPage}>
-          <LogoImg src={logoImg} alt="logo" />
-          <HeaderTitle>M.B.P</HeaderTitle>
-        </HeaderLogo>
-        <TitleBtn>
-          {conditonLoginBtn}
-          {conditonRegistBtn}
-        </TitleBtn>
-      </HeaderContent>
+      <HeaderLogo onClick={goRootPage}>
+        <LogoImg src={headerLogo} alt="logo" />
+      </HeaderLogo>
+      <TitleBtn>
+        {conditonLoginBtn}
+        {conditonRegistBtn}
+      </TitleBtn>
     </HeaderDiv>
   );
 };
 
 const HeaderDiv = styled.div`
   top: 0;
-  display: block;
   position: fixed;
   width: 100vw;
-  background: none
+  background: none;
   height: 57px;
   z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
 `;
 
 const HeaderLogo = styled.div`
@@ -94,23 +87,19 @@ const HeaderLogo = styled.div`
   align-items: center;
 `;
 
-const LogoImg = styled.img`
-  transform: rotate(45deg);
-  width: 35px;
-  padding-right: 4px;
-`;
+const LogoImg = styled.img``;
 
 const HeaderContent = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  margin-left: 20vw;
+  // display: flex;
+  // justify-content: flex-start;
+  // align-items: center;
+  // width: 100%;
+  // margin-left: 20vw;
 `;
 const TitleBtn = styled.div`
-  position: absolute;
-  right: 0;
-  margin-right: 20vw;
+  // position: absolute;
+  // right: 0;
+  // margin-right: 20vw;
 `;
 const HeaderTitle = styled.h1`
   padding-left: 6px;
@@ -121,17 +110,16 @@ const HeaderTitle = styled.h1`
 `;
 const LoginBtn = styled.button`
   border: 0;
-  background: none;
+  padding: 0px 18px;
+  height: 37px;
+  background: white;
+  border-radius: 5px;
   font-size: 16px;
-  font-weight: 500;
-  color: #61dafb;
-  width: 56px;
-  padding: 0;
-  height: 54px;
-  margin-right: 14px;
+  font-weight: 600;
+  color: #ff496c;
   cursor: pointer;
   &:hover {
-    box-shadow: 0px 4px 0px rgb(27 185 93);
+    box-shadow: 0px 4px 0px #ff496c;
     outline: none;
   }
 `;

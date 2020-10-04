@@ -9,7 +9,7 @@ const HeaderContainer = () => {
     };
   });
 
-  return <Header name={"park"} auth={auth} />;
+  return <Header auth={auth} />;
 };
 
 export default HeaderContainer;

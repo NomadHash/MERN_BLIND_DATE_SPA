@@ -1,9 +1,13 @@
 import * as authApi from "../api/auth";
 import { call, put, takeEvery } from "redux-saga/effects";
 
-const AUTH_USER = "auth/AUTH_USER"; // 요청 시작
-const AUTH_USER_SUCCESS = "auth/AUTH_USER_SUCCESS"; // 요청 성공
-const AUTH_USER_FAILURE = "auth/AUTH_USER_FAILURE"; // 요청 실패
+// * =======================
+// * AUTH_SAGA_MODULE
+// * =======================
+
+const AUTH_USER = "auth/AUTH_USER";
+const AUTH_USER_SUCCESS = "auth/AUTH_USER_SUCCESS";
+const AUTH_USER_FAILURE = "auth/AUTH_USER_FAILURE";
 
 const LOG_OUT_USER = "auth/LOG_OUT_USER";
 const LOG_OUT_USER_SUCCESS = "auth/LOG_OUT_USER_SUCCESS";
@@ -25,7 +29,6 @@ export function* authUserSaga() {
       payload: authRusult,
     });
   } catch (e) {
-    console.log(e);
     yield put({
       type: AUTH_USER_FAILURE,
       payload: e,
