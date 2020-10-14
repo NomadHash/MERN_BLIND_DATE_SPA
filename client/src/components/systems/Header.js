@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { withRouter } from "react-router-dom";
-import { logOutUser } from "../../modules/auth";
-import { useDispatch } from "react-redux";
-import headerLogo from "../../public/logoWhite.png";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
+import { logOutUser } from '../../modules/auth';
+import { useDispatch } from 'react-redux';
+import headerLogo from '../../public/logo.png';
 let conditonRegistBtn = null;
 let conditonLoginBtn = null;
 
@@ -18,13 +18,13 @@ const Header = (props) => {
   // * React-Router
   // * ==================
   const goLoginPage = () => {
-    props.history.push("/login");
+    props.history.push('/login');
   };
   const goRegistPage = () => {
-    props.history.push("/register");
+    props.history.push('/register');
   };
   const goRootPage = () => {
-    props.history.push("/");
+    props.history.push('/');
   };
 
   // * ==================
@@ -78,7 +78,7 @@ const HeaderDiv = styled.div`
   height: 57px;
   z-index: 2;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-around;
 `;
 
@@ -87,26 +87,14 @@ const HeaderLogo = styled.div`
   align-items: center;
 `;
 
-const LogoImg = styled.img``;
-
-const HeaderContent = styled.div`
-  // display: flex;
-  // justify-content: flex-start;
-  // align-items: center;
-  // width: 100%;
-  // margin-left: 20vw;
+const LogoImg = styled.img`
+  cursor: pointer;
 `;
+
 const TitleBtn = styled.div`
   // position: absolute;
   // right: 0;
   // margin-right: 20vw;
-`;
-const HeaderTitle = styled.h1`
-  padding-left: 6px;
-  font-weight: bold;
-  margin: 0;
-  font-size: 26px;
-  color: white;
 `;
 const LoginBtn = styled.button`
   border: 0;
@@ -123,21 +111,21 @@ const LoginBtn = styled.button`
     outline: none;
   }
 `;
-const SignUpBtn = styled.button`
-  border: 0;
-  color: white;
-  background: none;
-  font-size: 16px;
-  font-weight: 500;
-  width: 56px;
-  padding: 0;
-  height: 54px;
-  cursor: pointer;
-  &:hover {
-    box-shadow: 0px 4px 0px rgb(27 185 93);
-    outline: none;
-  }
-`;
+// const SignUpBtn = styled.button`
+//   border: 0;
+//   color: white;
+//   background: none;
+//   font-size: 16px;
+//   font-weight: 500;
+//   width: 56px;
+//   padding: 0;
+//   height: 54px;
+//   cursor: pointer;
+//   &:hover {
+//     box-shadow: 0px 4px 0px rgb(27 185 93);
+//     outline: none;
+//   }
+// `;
 
 const ArcodianMypage = styled.div`
   box-shadow: 0px 5px 0px rgba(0, 0, 0, 0.7);
@@ -147,7 +135,7 @@ const ArcodianMypage = styled.div`
   height: 5vw;
   border-radius: 15px;
   align-items: flex-start;
-  display: ${(props) => (props.open === true ? "flex" : "none")};
+  display: ${(props) => (props.open === true ? 'flex' : 'none')};
   flex-direction: column;
   padding: 15px;
 `;

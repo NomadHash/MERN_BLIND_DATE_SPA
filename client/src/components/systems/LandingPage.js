@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { withRouter } from "react-router-dom";
-import styled from "styled-components";
-import { authUser } from "../../modules/auth";
-import backGround from "../../public/background.png";
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import styled, { keyframes } from 'styled-components';
+import { authUser } from '../../modules/auth';
+import backGround from '../../public/background.png';
 
 //import Container
-import HeaderContainer from "../../container/HeaderContainer";
+import HeaderContainer from '../../container/HeaderContainer';
 
 //LogoImg
 
@@ -17,7 +17,7 @@ const LandingPage = (props) => {
   }, []);
 
   const onRegisterHandler = () => {
-    props.history.push("/register");
+    props.history.push('/register');
   };
   return (
     <>
@@ -30,8 +30,8 @@ const LandingPage = (props) => {
           </RegisterButton>
         </MainContent>
       </LandingContent>
-      <div style={{ padding: "20px 25vw" }}>
-        <span style={{ color: "gray" }}>
+      <div style={{ padding: '20px 25vw' }}>
+        <span style={{ color: 'gray' }}>
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever
           since the 1500s, when an unknown printer took a galley of type and
@@ -46,6 +46,20 @@ const LandingPage = (props) => {
     </>
   );
 };
+
+const zUp = keyframes`
+
+  0% {
+    transform: translateY(0px);
+  }
+  35% {
+      transform: translateY(-6px);
+  }
+  100% {
+      transform: translateY(0px);
+  }
+ 
+`;
 const MainContent = styled.div`
   position: relative;
   display: flex;
@@ -56,15 +70,20 @@ const MainContent = styled.div`
 `;
 const RegisterButton = styled.button`
   font-size: 16px;
-  /* background: #f857a6; */
   background: -webkit-linear-gradient(to right, #ff5858, #f857a6);
   background: linear-gradient(to right, #ff5858, #f857a6);
   padding: 17px 90px;
   border-radius: 30px;
   border: none;
   color: white;
-  /* background: #ff77ed; */
   font-weight: 600;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    animation: ${zUp} 1s forwards;
+  }
 `;
 const LandingContent = styled.div`
   height: 750px;

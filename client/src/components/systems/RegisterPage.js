@@ -1,26 +1,34 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-import { registerUser } from "../../modules/register";
-import { withRouter } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import styled, { keyframes } from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { registerUser } from '../../modules/register';
+import { withRouter } from 'react-router-dom';
+import Residence from '../resist/Residence';
+import Age_gender from '../resist/Age_gender';
+import ImageUploadContainer from '../../container/ImageUploadContainer';
+
+import logoOnly from '../../public/logoOnly.png';
 
 // * =================================
 // *       Register-Page
 // * =================================
 
 //import Container
-import HeaderContainer from "../../container/HeaderContainer";
-import FileUpload from "../utils/FileUpload";
+import HeaderContainer from '../../container/HeaderContainer';
+import FileUpload from '../utils/FileUpload';
 //Condition DOM
 let conditonErrMessage = null;
 
 const RegisterPage = (props) => {
   // State
-  const [images, setImages] = useState("");
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [confilmPassword, setConfilmPassword] = useState("");
+  const [images, setImages] = useState('');
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [confilmPassword, setConfilmPassword] = useState('');
+  const [location, setLocation] = useState('');
+  const [gender, setGender] = useState('');
+  const [age, setAge] = useState('');
 
   // Handler function
   const onEmailHandler = (event) => {
@@ -49,7 +57,7 @@ const RegisterPage = (props) => {
   const onSubmitHandler = (event) => {
     event.preventDefault();
     if (password !== confilmPassword) {
-      alert("패스워드가 일치하지 않습니다.");
+      alert('패스워드가 일치하지 않습니다.');
     } else {
       let requestBody = {
         email,
@@ -61,7 +69,7 @@ const RegisterPage = (props) => {
     }
   };
   const cleanInput = () => {
-    setEmail("");
+    setEmail('');
     conditonErrMessage = <ErrMsg>이미 존재하는 이메일 입니다.</ErrMsg>;
   };
 
@@ -74,39 +82,54 @@ const RegisterPage = (props) => {
       cleanInput();
     }
     if (registerSuccess) {
-      props.history.push("/login");
+      props.history.push('/login');
     }
   }, [registerSuccess, props.history]);
 
   return (
     <LoginPageContent>
       <HeaderContainer />
+      <IntroDiv>
+        <IntroImg src={logoOnly} alt="logo" />
+        <Introtext>새 계정을 만들어 볼까요?</Introtext>
+      </IntroDiv>
       <FormContent>
-        <LoginText>회원가입</LoginText>
-
-        <RegisterInputText>프로필 사진</RegisterInputText>
-        <FileUpload fileToParents={updataImages}></FileUpload>
-
-        <form onSubmit={onSubmitHandler} encType="multipart/form-data">
+        <RegistForm onSubmit={onSubmitHandler} encType="multipart/form-data">
           <RegisterInputText>이름</RegisterInputText>
-          <RegisterInput type="text" value={name} onChange={onNameHandler} />
+          <RegisterInput
+            type="text"
+            value={name}
+            onChange={onNameHandler}
+            style={{ width: '140px' }}
+          />
           <RegisterInputText>이메일 주소</RegisterInputText>
-          <RegisterInput type="email" value={email} onChange={onEmailHandler} />
+          <RegisterInput
+            type="email"
+            value={email}
+            onChange={onEmailHandler}
+            style={{ width: '250px' }}
+          />
           {conditonErrMessage}
-          <PasswordText>패스워드</PasswordText>
-          <PwdInput
+          <Age_gender />
+          <Residence name={name} />
+          <ImageUploadContainer />
+
+          <RegisterInputText>패스워드</RegisterInputText>
+          <RegisterInput
             type="password"
             value={password}
             onChange={onPasswordHandler}
+            style={{ width: '170px' }}
           />
-          <PasswordText>패스워드 확인</PasswordText>
-          <PwdInput
+          <RegisterInputText>패스워드 확인</RegisterInputText>
+          <RegisterInput
             type="password"
             value={confilmPassword}
             onChange={onConfilmPasswordHandler}
+            style={{ width: '170px' }}
           />
           <LoginBtn>회원가입</LoginBtn>
-        </form>
+        </RegistForm>
       </FormContent>
     </LoginPageContent>
   );
@@ -116,12 +139,45 @@ const RegisterPage = (props) => {
 //       Styled-Component
 //=================================
 
+const boxFade = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+const IntroImg = styled.img`
+  width: 27vw;
+  animation: ${boxFade} 1s forwards;
+`;
+
+const IntroDiv = styled.div`
+  margin-top: 80px;
+  align-items: center;
+  display: flex;
+  /* justify-content: center; */
+  flex-direction: column;
+`;
+
+const Introtext = styled.h2`
+  animation: ${boxFade} 4s forwards;
+  color: #495863;
+  font-size: 75px;
+  font-weight: 500;
+  margin: 40px 0;
+`;
+
 const FormContent = styled.div`
-  height: 620px;
   background: white;
   border-radius: 30px;
   padding: 40px;
-  margin-top: 2vw;
+`;
+
+const RegistForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 const LoginPageContent = styled.div`
@@ -130,27 +186,22 @@ const LoginPageContent = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  height: 100vh;
   padding: 10px;
-`;
-
-const LoginText = styled.h1`
-  margin: 0;
 `;
 
 const RegisterInputText = styled.h2`
   margin: 0;
   margin-bottom: 8px;
-  font-size: 12px;
+  font-size: 30px;
   color: #5f5f5f;
-  font-weight: 500;
+  font-weight: 400;
   margin-top: 29px;
 `;
 
 const RegisterInput = styled.input`
-  width: 23vw;
-  border: none;
-  border-bottom: 1px solid #cbcbcb;
+  border: 2px solid #f94670;
+  border-radius: 20px;
+  padding: 6px 24px;
   font-size: 22px;
   &:focus {
     outline: none;
@@ -162,39 +213,21 @@ const ErrMsg = styled.h3`
   margin: 0;
   font-size: 14px;
   font-weight: 400;
-`;
-
-const PasswordText = styled.h2`
-  margin: 0;
-  margin-bottom: 8px;
-  font-size: 12px;
-  color: #5f5f5f;
-  font-weight: 500;
-  margin-top: 29px;
-`;
-
-const PwdInput = styled.input`
-  width: 23vw;
-  border: none;
-  border-bottom: 1px solid #cbcbcb;
-  font-size: 22px;
-
-  &:focus {
-    outline: none;
-  }
+  margin: 5px 10px 0;
 `;
 
 const LoginBtn = styled.button`
   color: white;
   background: #49709f;
+  font-weight: 500;
   border: none;
   border-radius: 26px;
   font-size: 21px;
   padding: 11px;
-  font-weight: 300;
-  width: 23vw;
   display: block;
   margin-top: 2vw;
+  background: linear-gradient(to right, #ff5858, #f857a6);
+  width: 100%;
   &:focus {
     outline: none;
   }
