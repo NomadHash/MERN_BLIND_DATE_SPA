@@ -8,7 +8,8 @@ var storage = multer.diskStorage({
     cb(null, "uploads/");
   },
   filename: (req, file, cb) => {
-    cb(null, `${Date.now()}_${file.originalname}`);
+    console.log(file);
+    cb(null, `${Date.now()}_${file.originalname}.png`);
   },
 });
 var upload = multer({ storage: storage }).single("profile_img");
@@ -19,6 +20,7 @@ router.post("/", (req, res) => {
     if (err) {
       return res.json({ success: false, err });
     }
+    console.log(res.req.file);
     return res.json({
       success: true,
       image: res.req.file.path,

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
-import { logOutUser } from '../../modules/auth';
+import { logOutUser } from '../../../modules/auth';
 import { useDispatch } from 'react-redux';
-import headerLogo from '../../public/logo.png';
+import headerLogo from '../../../public/logo.png';
 let conditonRegistBtn = null;
 let conditonLoginBtn = null;
 

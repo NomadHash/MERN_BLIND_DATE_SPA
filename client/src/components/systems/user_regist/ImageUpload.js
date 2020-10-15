@@ -1,29 +1,38 @@
 import React, { useState, useEffect } from 'react';
-import styled, { keyframes } from 'styled-components';
-import { useSelector } from 'react-redux';
-import defaultAvatar from '../public/default.png';
-import ImageCrop from '../components/resist/ImageCrop';
-import { uploadState } from '../modules/imageUpload';
+import styled from 'styled-components';
+import defaultAvatar from '../../../public/default.png';
+import ImageCrop from '../../utils/ImageCrop';
 import { useDispatch } from 'react-redux';
-const ImageUpload = () => {
+import axios from 'axios';
+const ImageUpload = ({ onImageHandler }) => {
   const [avatar, setAvatar] = useState({
     default: defaultAvatar,
   });
+  const [blobData, setBlobData] = useState([]);
+  // const onBlobData = (blobObj) => {
+  //   console.log(blobObj);
+  //   setBlobData(blobObj);
+  // };
+
+  if (blobData) console.log(blobData);
 
   const [cropSrc, setCropSrc] = useState();
-  const { preview } = useSelector(({ profileUploadReducer }) => ({
-    preview: profileUploadReducer.url,
-  }));
   const dispatch = useDispatch();
   useEffect(() => {
-    if (cropSrc !== undefined) dispatch(uploadState(cropSrc));
-  }, [dispatch, cropSrc]);
-
-  useEffect(() => {
-    if (preview) {
-      setAvatar({ ...avatar, default: preview });
+    if (cropSrc) {
+      const formData = new FormData();
+      formData.append('profile_img', blobData);
+      axios
+        .post('/api/users/upload', formData, {
+          header: { 'content-type': 'multipart/form-data' },
+        })
+        .then((response) => {
+          console.log({ response });
+        });
+      onImageHandler(cropSrc);
+      setAvatar({ ...avatar, default: cropSrc });
     }
-  }, [preview]);
+  }, [dispatch, cropSrc]);
   const updateCropSrc = (src) => {
     setCropSrc(src);
   };
@@ -31,7 +40,7 @@ const ImageUpload = () => {
     <ContentDiv>
       <LiveText>나의 가장 멋진 사진</LiveText>
       <Preview src={avatar.default} alt="profileImage" />
-      <ImageCrop updateCropSrc={updateCropSrc} />
+      <ImageCrop updateCropSrc={updateCropSrc} setBlobData={setBlobData} />
     </ContentDiv>
   );
 };

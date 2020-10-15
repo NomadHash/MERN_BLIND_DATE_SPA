@@ -1,6 +1,6 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import Header from "../components/systems/Header";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import Header from '../components/systems/header/Header';
 
 const HeaderContainer = () => {
   const { auth } = useSelector(({ authReduce }) => {

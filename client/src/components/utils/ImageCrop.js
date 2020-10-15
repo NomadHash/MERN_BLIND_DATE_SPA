@@ -85,6 +85,8 @@ class ImageCrop extends PureComponent {
         window.URL.revokeObjectURL(this.fileUrl);
         this.fileUrl = window.URL.createObjectURL(blob);
         resolve(this.fileUrl);
+        let file = new File([blob], 'profileImg');
+        this.props.setBlobData(file);
       }, 'image/jpeg');
     });
   }
@@ -118,7 +120,7 @@ class ImageCrop extends PureComponent {
             <BackGround>
               <CropContainer>
                 <MainTextSpan>
-                  <MainTextH3>Crop your new profile picture</MainTextH3>
+                  <MainTextH3>가장 멋진사진을 골라주세요!</MainTextH3>
                 </MainTextSpan>
                 <div
                   style={{
@@ -136,7 +138,7 @@ class ImageCrop extends PureComponent {
                 </div>
                 <BtnDiv>
                   <SetButton onClick={this.setNewImage}>
-                    Set new profile picture
+                    새로운 사진 등록하기.
                   </SetButton>
                 </BtnDiv>
               </CropContainer>
@@ -160,7 +162,7 @@ const BackGround = style.div`
 const SetButton = style.button`
     border: none;
     color: white;
-    background: #2C974B;
+    background: linear-gradient(to right,#ff5858,#f857a6);
     border-radius: 6px;
     border-radius: 3px;
     width: 93%;

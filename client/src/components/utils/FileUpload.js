@@ -27,6 +27,7 @@ const FileUpload = (props) => {
 
     // Post-API
     const formData = new FormData();
+    console.log(event.target.files);
     formData.append('profile_img', event.target.files[0]);
     Axios.post('/api/users/upload', formData, {
       header: { 'content-type': 'multipart/form-data' },
