@@ -3,8 +3,9 @@ import styled, { keyframes } from 'styled-components';
 
 const Residence = (props) => {
   const [location, setLocation] = useState('');
-  const selectLoc = (loc) => {
-    setLocation(loc);
+  const selectLoc = (locName, locNum) => {
+    setLocation(locName);
+    props.onLocationHandler(locNum);
   };
   const area = [
     {
@@ -49,8 +50,9 @@ const Residence = (props) => {
       <li key={e.locNum}>
         <span>
           <LocationBtn
+            type="button"
             onClick={() => {
-              selectLoc(e.loc);
+              selectLoc(e.loc, e.locNum);
             }}
           >
             {e.loc}

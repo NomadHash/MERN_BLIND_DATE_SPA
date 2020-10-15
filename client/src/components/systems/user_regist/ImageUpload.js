@@ -2,24 +2,15 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import defaultAvatar from '../../../public/default.png';
 import ImageCrop from '../../utils/ImageCrop';
-import { useDispatch } from 'react-redux';
 import axios from 'axios';
 const ImageUpload = ({ onImageHandler }) => {
   const [avatar, setAvatar] = useState({
     default: defaultAvatar,
   });
-  const [blobData, setBlobData] = useState([]);
-  // const onBlobData = (blobObj) => {
-  //   console.log(blobObj);
-  //   setBlobData(blobObj);
-  // };
+  const [blobData, setBlobData] = useState();
 
-  if (blobData) console.log(blobData);
-
-  const [cropSrc, setCropSrc] = useState();
-  const dispatch = useDispatch();
   useEffect(() => {
-    if (cropSrc) {
+    if (blobData) {
       const formData = new FormData();
       formData.append('profile_img', blobData);
       axios
@@ -28,13 +19,13 @@ const ImageUpload = ({ onImageHandler }) => {
         })
         .then((response) => {
           console.log({ response });
+          onImageHandler(response.data.image);
         });
-      onImageHandler(cropSrc);
-      setAvatar({ ...avatar, default: cropSrc });
     }
-  }, [dispatch, cropSrc]);
-  const updateCropSrc = (src) => {
-    setCropSrc(src);
+  }, [blobData]);
+
+  const updateCropSrc = (cropSrc) => {
+    setAvatar({ ...avatar, default: cropSrc });
   };
   return (
     <ContentDiv>

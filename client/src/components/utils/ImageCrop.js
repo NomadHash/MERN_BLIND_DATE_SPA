@@ -12,6 +12,7 @@ class ImageCrop extends PureComponent {
       aspect: 5 / 5,
     },
     cropSrc: null,
+    file: null,
   };
 
   onSelectFile = (e) => {
@@ -50,9 +51,11 @@ class ImageCrop extends PureComponent {
   }
 
   setNewImage = () => {
-    const { cropSrc } = this.state;
+    const { cropSrc, file } = this.state;
+    console.log(cropSrc);
     this.props.updateCropSrc(cropSrc);
     this.setState({ src: null });
+    this.props.setBlobData(file);
   };
 
   getCroppedImg(image, crop, fileName) {
@@ -85,8 +88,8 @@ class ImageCrop extends PureComponent {
         window.URL.revokeObjectURL(this.fileUrl);
         this.fileUrl = window.URL.createObjectURL(blob);
         resolve(this.fileUrl);
-        let file = new File([blob], 'profileImg');
-        this.props.setBlobData(file);
+        let file = new File([blob], 'profileImg ');
+        this.setState({ file: file });
       }, 'image/jpeg');
     });
   }

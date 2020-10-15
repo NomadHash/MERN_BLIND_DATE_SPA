@@ -22,6 +22,7 @@ const Age_gender = ({ onGenderHandler }) => {
     return (
       <li key={ele.number}>
         <button
+          type="button"
           onClick={() => {
             genderHandler(ele.number);
           }}
@@ -36,6 +37,14 @@ const Age_gender = ({ onGenderHandler }) => {
     <ContentDiv>
       <TitleH2>성별</TitleH2>
       <ButtonList>{repeatElement}</ButtonList>
+      <TitleH2>나이</TitleH2>
+      <select name="fruit">
+        <option value="바나나">바나나</option>
+        <option value="사과">사과</option>
+        <option value="파인애플" selected="selected">
+          파인애플
+        </option>
+      </select>
     </ContentDiv>
   );
 };

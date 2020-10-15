@@ -6,6 +6,7 @@ import User from "../../../models/User";
 const router = express.Router();
 
 router.post("/", (req, res) => {
+  console.log("s");
   User.findOne({ email: req.body.email }, (err, user) => {
     if (user) {
       return res.json({

@@ -41,6 +41,12 @@ const RegisterContainer = (props) => {
   const onEmailHandler = (email) => {
     setEmail(email);
   };
+  const onImageHandler = (img) => {
+    setImages(img);
+  };
+  const onLocationHandler = (loc) => {
+    setLocation(loc);
+  };
   const onPasswordHandler = (pwd) => {
     setPassword(pwd);
   };
@@ -49,9 +55,6 @@ const RegisterContainer = (props) => {
   };
   const onGenderHandler = (genderNum) => {
     setGender(genderNum);
-  };
-  const onImageHandler = (img) => {
-    setImages(img);
   };
 
   //* USE_SELECTOR & USE_EFFECT
@@ -71,6 +74,7 @@ const RegisterContainer = (props) => {
   // *       HANDLER_FUNCTIONS
   // * =================================
   const onSubmitHandler = (event) => {
+    console.log('?');
     event.preventDefault();
     if (password !== confilmPassword) {
       alert('패스워드가 일치하지 않습니다.');
@@ -101,15 +105,15 @@ const RegisterContainer = (props) => {
             onEmailHandler={onEmailHandler}
           />
           <Age_gender onGenderHandler={onGenderHandler} />
-          <Residence name={name} />
-          <ImageUpload onImageHandler={onImageHandler} images={images} />
+          <Residence name={name} onLocationHandler={onLocationHandler} />
+          <ImageUpload onImageHandler={onImageHandler} />
           <Password
             password={password}
             confilmPassword={confilmPassword}
             onPasswordHandler={onPasswordHandler}
             onConfilmPasswordHandler={onConfilmPasswordHandler}
           />
-          <LoginBtn>회원가입</LoginBtn>
+          <LoginBtn type="submit">회원가입</LoginBtn>
         </RegistForm>
       </FormContent>
     </LoginPageContent>

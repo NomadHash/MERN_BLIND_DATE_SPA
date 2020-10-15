@@ -86,7 +86,7 @@ const RegisterButton = styled.button`
   }
 `;
 const LandingContent = styled.div`
-  height: 750px;
+  height: 820px;
   background: linear-gradient(
       to top,
       rgba(0, 0, 0, 0.7),
@@ -95,6 +95,7 @@ const LandingContent = styled.div`
       rgba(0, 0, 0, 1)
     ),
     url(${backGround});
+  background-size: cover;
 `;
 
 const SecondTitle = styled.h1`
