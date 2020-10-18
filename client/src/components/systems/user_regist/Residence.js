@@ -99,7 +99,7 @@ const textFade = keyframes`
     transform: translateY(0px);
   }
   100% {
-      transform: translateY(-10px);
+      transform: translateY(-6px);
   }
  
 `;

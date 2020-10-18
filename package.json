@@ -2,14 +2,13 @@
   "name": "mern-tinder-clone",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./server/index.js",
   "scripts": {
-    "dev": "nodemon ./server/index.js --exec babel-node",
-    "devStart": "concurrently \"npm run dev\" \"npm run start --prefix client\""
-  },
-  "repository": {
-    "type": "git"
-  },
+        "serve": "nodemon ./server/index.js --exec babel-node",
+        "client": "npm run start --prefix client",
+        "clean" : "killall -9 node",
+        "dev": "concurrently  \"npm run serve\" \"npm run client\""
+    },
   "author": "",
   "license": "ISC",
   "dependencies": {

@@ -1,20 +1,45 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-// * =========================
+// * =======================
 // * Age_gender_CP
-// * =========================
+// * =======================
 
-const Age_gender = ({ onGenderHandler }) => {
-  const [choice, setChoice] = useState([]);
+const Age_gender = ({ onGenderHandler, onAgeHandler }) => {
+  const [choice, setChoice] = useState();
+  const [ageChoice, setAgeChoice] = useState();
   const gender = [
     { gender: '남', number: 0 },
     { gender: '여', number: 1 },
   ];
 
+  const age = [
+    {
+      age: '20 ~ 24',
+      number: 1,
+    },
+    {
+      age: '25 ~ 29',
+      number: 2,
+    },
+    {
+      age: '30 ~ 34',
+      number: 3,
+    },
+    {
+      age: '35 ~ 40',
+      number: 4,
+    },
+  ];
+
   const genderHandler = (genderNum) => {
     setChoice(genderNum);
     onGenderHandler(genderNum);
+  };
+  const ageHandler = (event) => {
+    console.log(event.target.value);
+    setAgeChoice(event.target.value);
+    onAgeHandler(event.target.value);
   };
 
   const { onClick, nonClick } = GenderBtnstyles;
@@ -33,18 +58,23 @@ const Age_gender = ({ onGenderHandler }) => {
       </li>
     );
   });
+
+  const ageRepeatElement = age.map((ele) => {
+    return (
+      <option key={ele.number} value={ele.number}>
+        {ele.age}
+      </option>
+    );
+  });
+
   return (
     <ContentDiv>
       <TitleH2>성별</TitleH2>
       <ButtonList>{repeatElement}</ButtonList>
       <TitleH2>나이</TitleH2>
-      <select name="fruit">
-        <option value="바나나">바나나</option>
-        <option value="사과">사과</option>
-        <option value="파인애플" selected="selected">
-          파인애플
-        </option>
-      </select>
+      <AgeSelect value={ageChoice} onChange={ageHandler} name="age">
+        {ageRepeatElement}
+      </AgeSelect>
     </ContentDiv>
   );
 };
@@ -93,14 +123,23 @@ const TitleH2 = styled.h2`
 `;
 
 const ButtonList = styled.ul`
-     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 130px;
-        list-style: none;
-    padding: 0;
-}
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 130px;
+  list-style: none;
+  padding: 0;
+`;
+
+const AgeSelect = styled.select`
+  font-weight: 600;
+  color: white;
+  background: #f94670;
+  font-size: 18px;
+  border-radius: 32px;
+  border: none;
+  padding: 5px 10px;
 `;
 
 export default Age_gender;

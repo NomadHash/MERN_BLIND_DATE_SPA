@@ -21,7 +21,7 @@ import HeaderContainer from './HeaderContainer';
 
 const RegisterContainer = (props) => {
   const [gender, setGender] = useState('');
-  const [age, setAge] = useState('');
+  const [age, setAge] = useState(1);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [location, setLocation] = useState('');
@@ -41,6 +41,12 @@ const RegisterContainer = (props) => {
   const onEmailHandler = (email) => {
     setEmail(email);
   };
+  const onGenderHandler = (genderNum) => {
+    setGender(genderNum);
+  };
+  const onAgeHandler = (ageNum) => {
+    setAge(Number(ageNum));
+  };
   const onImageHandler = (img) => {
     setImages(img);
   };
@@ -52,9 +58,6 @@ const RegisterContainer = (props) => {
   };
   const onConfilmPasswordHandler = (confilmPwn) => {
     setConfilmPassword(confilmPwn);
-  };
-  const onGenderHandler = (genderNum) => {
-    setGender(genderNum);
   };
 
   //* USE_SELECTOR & USE_EFFECT
@@ -98,21 +101,24 @@ const RegisterContainer = (props) => {
       </IntroDiv>
       <FormContent>
         <RegistForm onSubmit={onSubmitHandler} encType="multipart/form-data">
+          <Age_gender
+            onGenderHandler={onGenderHandler}
+            onAgeHandler={onAgeHandler}
+          />
           <Name_email
             name={name}
             email={email}
             onNameHandler={onNameHandler}
             onEmailHandler={onEmailHandler}
           />
-          <Age_gender onGenderHandler={onGenderHandler} />
-          <Residence name={name} onLocationHandler={onLocationHandler} />
-          <ImageUpload onImageHandler={onImageHandler} />
           <Password
             password={password}
             confilmPassword={confilmPassword}
             onPasswordHandler={onPasswordHandler}
             onConfilmPasswordHandler={onConfilmPasswordHandler}
           />
+          <Residence name={name} onLocationHandler={onLocationHandler} />
+          <ImageUpload onImageHandler={onImageHandler} />
           <LoginBtn type="submit">회원가입</LoginBtn>
         </RegistForm>
       </FormContent>
@@ -171,7 +177,6 @@ const LoginPageContent = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  padding: 10px;
 `;
 
 const LoginBtn = styled.button`
@@ -183,7 +188,6 @@ const LoginBtn = styled.button`
   font-size: 21px;
   padding: 11px;
   display: block;
-  margin-top: 2vw;
   background: linear-gradient(to right, #ff5858, #f857a6);
   width: 100%;
   &:focus {
