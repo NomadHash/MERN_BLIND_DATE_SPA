@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
@@ -30,21 +30,27 @@ const RegisterInput = styled.input`
 `;
 
 const Name_email = ({ onChange }) => {
-  let conditonErrMessage = null;
-
-  const { name, email } = useSelector(({ registerReduce }) => ({
+  const { name, email, error } = useSelector(({ registerReduce }) => ({
     name: registerReduce.name,
     email: registerReduce.email,
+    error: registerReduce.error,
   }));
+
+  let conditonErrMessage = <ErrMsg>이미 존재하는 이메일 입니다.</ErrMsg>;
+
+  useEffect(() => {
+    if (error) {
+      console.log('clean');
+      onChange('email', '');
+    }
+  }, [error]);
 
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
     onChange(name, value);
+    if (error) onChange('error', '');
   };
 
-  const cleanInput = () => {
-    conditonErrMessage = <ErrMsg>이미 존재하는 이메일 입니다.</ErrMsg>;
-  };
   return (
     <div>
       <RegisterInputText>이름</RegisterInputText>
@@ -63,7 +69,7 @@ const Name_email = ({ onChange }) => {
         onChange={onChangeHandler}
         style={{ width: '250px' }}
       />
-      {conditonErrMessage}
+      {error && conditonErrMessage}
     </div>
   );
 };

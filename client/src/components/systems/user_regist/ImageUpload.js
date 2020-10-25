@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import defaultAvatar from '../../../public/default.png';
 import ImageCrop from '../../utils/ImageCrop';
 import axios from 'axios';
-const ImageUpload = ({ onImageHandler }) => {
-  const [avatar, setAvatar] = useState({
-    default: defaultAvatar,
-  });
+
+const ImageUpload = ({ onChange }) => {
   const [blobData, setBlobData] = useState();
+  const { profileImage } = useSelector(({ registerReduce }) => ({
+    profileImage: registerReduce.profileImage,
+  }));
+
+  useEffect(() => {
+    onChange(onChange('profileImage', defaultAvatar));
+  }, []);
 
   useEffect(() => {
     if (blobData) {
@@ -19,19 +25,22 @@ const ImageUpload = ({ onImageHandler }) => {
         })
         .then((response) => {
           console.log({ response });
-          onImageHandler(response.data.image);
+          onChange('profileImage', response.data.image);
         });
     }
   }, [blobData]);
 
-  const updateCropSrc = (cropSrc) => {
-    setAvatar({ ...avatar, default: cropSrc });
+  let conditionImage = () => {
+    return profileImage[0] === 'u'
+      ? `http://localhost:7000/${profileImage}`
+      : profileImage;
   };
+
   return (
     <ContentDiv>
       <LiveText>나의 가장 멋진 사진</LiveText>
-      <Preview src={avatar.default} alt="profileImage" />
-      <ImageCrop updateCropSrc={updateCropSrc} setBlobData={setBlobData} />
+      <Preview src={conditionImage()} alt="profileImage" />
+      <ImageCrop setBlobData={setBlobData} />
     </ContentDiv>
   );
 };

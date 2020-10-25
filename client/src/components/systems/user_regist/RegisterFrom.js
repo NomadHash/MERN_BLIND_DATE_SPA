@@ -40,13 +40,11 @@ const LoginBtn = styled.button`
   }
 `;
 
-const RegisterFrom = ({ onChange }) => {
+const RegisterFrom = ({ onChange, onSubmitHandler }) => {
   return (
     <>
       <FormContent>
-        <RegistForm
-        // onSubmit={onSubmitHandler} encType="multipart/form-data"
-        >
+        <RegistForm onSubmit={onSubmitHandler} encType="multipart/form-data">
           <Age_gender onChange={onChange} />
           <Name_email onChange={onChange} />
           <Password onChange={onChange} />

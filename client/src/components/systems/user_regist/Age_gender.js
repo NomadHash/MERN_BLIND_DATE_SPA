@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 // * ===STYLED_COMPONENTS
@@ -57,13 +57,17 @@ const Age_gender = ({ onChange }) => {
     },
   ];
 
+  useEffect(() => {
+    onChange('age', 1);
+  }, []);
+
   const genderHandler = (genderNum) => {
     setChoice(genderNum);
     onChange('gender', genderNum);
   };
   const ageHandler = (event) => {
     const { name, value } = event.target;
-    onChange(name, value);
+    onChange(name, Number(value));
   };
 
   const { onClick, nonClick } = GenderBtnstyles;

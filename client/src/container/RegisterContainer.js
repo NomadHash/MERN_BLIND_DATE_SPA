@@ -60,7 +60,6 @@ const RegisterContainer = (props) => {
 
   //* ON_CHANGE & ON_SUBMIT
   const onChange = (name, value) => {
-    // const { name, value } = e.target;
     dispatch(
       changeField({
         key: name,
@@ -70,8 +69,26 @@ const RegisterContainer = (props) => {
   };
 
   //* USE_SELECTOR & USE_EFFECT
-  const { registerSuccess } = useSelector(({ registerReduce }) => ({
+  const {
+    registerSuccess,
+    gender,
+    age,
+    name,
+    email,
+    password,
+    passwordConfirm,
+    residence,
+    profileImage,
+  } = useSelector(({ registerReduce }) => ({
     registerSuccess: registerReduce.registerSuccess,
+    gender: registerReduce.gender,
+    age: registerReduce.age,
+    name: registerReduce.name,
+    email: registerReduce.email,
+    password: registerReduce.password,
+    passwordConfirm: registerReduce.passwordConfirm,
+    residence: registerReduce.residence,
+    profileImage: registerReduce.profileImage,
   }));
   useEffect(() => {
     if (registerSuccess === false) {
@@ -84,20 +101,20 @@ const RegisterContainer = (props) => {
   // * =================================
   // *       HANDLER_FUNCTIONS
   // * =================================
-  // const onSubmitHandler = (event) => {
-  //   event.preventDefault();
-  //   if (password !== confilmPassword) {
-  //     alert('패스워드가 일치하지 않습니다.');
-  //   } else {
-  //     let requestBody = {
-  //       email,
-  //       name,
-  //       password,
-  //       profileImage: images,
-  //     };
-  //     dispatch(registerUser(requestBody));
-  //   }
-  // };
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
+    if (password !== passwordConfirm) {
+      alert('패스워드가 일치하지 않습니다.');
+    } else {
+      let requestBody = {
+        email,
+        name,
+        password,
+        profileImage: profileImage,
+      };
+      dispatch(registerUser(requestBody));
+    }
+  };
   //* VIRTURE_DOM
   return (
     <LoginPageContent>
@@ -106,7 +123,7 @@ const RegisterContainer = (props) => {
         <IntroImg src={logoOnly} alt="logo" />
         <Introtext>새 계정을 만들어 볼까요?</Introtext>
       </IntroDiv>
-      <RegisterFrom onChange={onChange} />
+      <RegisterFrom onSubmitHandler={onSubmitHandler} onChange={onChange} />
     </LoginPageContent>
   );
 };

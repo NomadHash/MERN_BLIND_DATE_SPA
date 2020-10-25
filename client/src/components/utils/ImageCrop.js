@@ -52,8 +52,6 @@ class ImageCrop extends PureComponent {
 
   setNewImage = () => {
     const { cropSrc, file } = this.state;
-    console.log(cropSrc);
-    this.props.updateCropSrc(cropSrc);
     this.setState({ src: null });
     this.props.setBlobData(file);
   };

@@ -54,10 +54,6 @@ const Residence = ({ onChange }) => {
     onChange(name, location);
   };
 
-  useEffect(() => {
-    console.log(residence);
-  }, [onChange]);
-
   const area = [
     {
       loc: '서울특별시',
