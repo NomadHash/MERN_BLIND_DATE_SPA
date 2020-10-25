@@ -1,3 +1,4 @@
+// * IMPORT_MODULES
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,7 +17,7 @@ import logoOnly from '../public/logoOnly.png';
 // *       REGISTER_PAGE_CT
 // * =================================
 
-//! import Container
+//* IMPORT_CONTAINER
 import HeaderContainer from './HeaderContainer';
 
 const RegisterContainer = (props) => {
@@ -66,7 +67,6 @@ const RegisterContainer = (props) => {
   }));
   useEffect(() => {
     if (registerSuccess === false) {
-      // cleanInput();
     }
     if (registerSuccess) {
       props.history.push('/login');
@@ -77,7 +77,6 @@ const RegisterContainer = (props) => {
   // *       HANDLER_FUNCTIONS
   // * =================================
   const onSubmitHandler = (event) => {
-    console.log('?');
     event.preventDefault();
     if (password !== confilmPassword) {
       alert('패스워드가 일치하지 않습니다.');
@@ -91,7 +90,7 @@ const RegisterContainer = (props) => {
       dispatch(registerUser(requestBody));
     }
   };
-
+  //* VIRTURE_DOM
   return (
     <LoginPageContent>
       <HeaderContainer />
