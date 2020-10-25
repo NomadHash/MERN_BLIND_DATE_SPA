@@ -1,15 +1,23 @@
-import * as registerApi from "../api/register";
-import { call, put, takeEvery } from "redux-saga/effects";
+import * as registerApi from '../api/register';
+import { call, put, takeEvery } from 'redux-saga/effects';
+import { createRequestActionTypes } from '../api/createRequestSaga';
 
 // * =======================
 // * REGISTER_SAGA_MODULE
 // * =======================
-const REGISTER_USER = "register/REGISTER_USER";
-const REGISTER_USER_SUCCESS = "register/REGISTER_USER_SUCCESS";
-const REGISTER_USER_FAILURE = "register/REGISTER_FAILURE";
+const CHANGE_FIELD = 'register/CHANGE_FIELD'; // change_field action
+
+const [REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE] = createRequestActionTypes(
+  'register/REGISTER',
+);
+
+export const changeField = ({ key, value }) => ({
+  type: CHANGE_FIELD,
+  payload: { key, value },
+});
 
 export const registerUser = (formData) => ({
-  type: REGISTER_USER,
+  type: REGISTER,
   payload: formData,
 });
 
@@ -17,38 +25,54 @@ export function* registerUserSaga(action) {
   try {
     const registerRusult = yield call(
       registerApi.registerUserAsync,
-      action.payload
+      action.payload,
     );
     yield put({
-      type: REGISTER_USER_SUCCESS,
+      type: REGISTER_SUCCESS,
       payload: registerRusult,
     });
   } catch (e) {
     console.log(e);
     yield put({
-      type: REGISTER_USER_FAILURE,
+      type: REGISTER_FAILURE,
       payload: e,
     });
   }
 }
 
 export function* registerSaga() {
-  yield takeEvery(REGISTER_USER, registerUserSaga);
+  yield takeEvery(REGISTER, registerUserSaga);
 }
 
-export default function registerReduce(state = {}, action) {
+const initialState = {
+  gender: '',
+  age: '',
+  name: '',
+  email: '',
+  password: '',
+  passwordConfirm: '',
+  residence: '',
+  profileImage: '',
+};
+
+export default function registerReduce(state = initialState, action) {
   switch (action.type) {
-    case REGISTER_USER:
+    case CHANGE_FIELD:
+      return {
+        ...state,
+        [action.payload.key]: action.payload.value,
+      };
+    case REGISTER:
       return {
         ...state,
       };
-    case REGISTER_USER_SUCCESS:
+    case REGISTER_SUCCESS:
       return {
         ...state,
         registerSuccess: action.payload.registerSuccess,
         err: null,
       };
-    case REGISTER_USER_FAILURE:
+    case REGISTER_FAILURE:
       return {
         ...state,
         registerSuccess: false,

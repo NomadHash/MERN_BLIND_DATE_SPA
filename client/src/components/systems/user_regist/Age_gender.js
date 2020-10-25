@@ -1,13 +1,38 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-// * =======================
-// * Age_gender_CP
-// * =======================
+// * ===STYLED_COMPONENTS
+const TitleH2 = styled.h2`
+  margin-bottom: 8px;
+  font-size: 30px;
+  color: #5f5f5f;
+  font-weight: 400;
+  margin-top: 29px;
+  cursor: pointer;
+`;
 
-const Age_gender = ({ onGenderHandler, onAgeHandler }) => {
+const ButtonList = styled.ul`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 130px;
+  list-style: none;
+  padding: 0;
+`;
+
+const AgeSelect = styled.select`
+  font-weight: 600;
+  color: white;
+  background: #f94670;
+  font-size: 18px;
+  border-radius: 32px;
+  border: none;
+  padding: 5px 10px;
+`;
+
+const Age_gender = ({ onChange }) => {
   const [choice, setChoice] = useState();
-  const [ageChoice, setAgeChoice] = useState();
   const gender = [
     { gender: '남', number: 0 },
     { gender: '여', number: 1 },
@@ -34,12 +59,11 @@ const Age_gender = ({ onGenderHandler, onAgeHandler }) => {
 
   const genderHandler = (genderNum) => {
     setChoice(genderNum);
-    onGenderHandler(genderNum);
+    onChange('gender', genderNum);
   };
   const ageHandler = (event) => {
-    console.log(event.target.value);
-    setAgeChoice(event.target.value);
-    onAgeHandler(event.target.value);
+    const [name, value] = event.target;
+    onChange(name, value);
   };
 
   const { onClick, nonClick } = GenderBtnstyles;
@@ -68,14 +92,14 @@ const Age_gender = ({ onGenderHandler, onAgeHandler }) => {
   });
 
   return (
-    <ContentDiv>
+    <div>
       <TitleH2>성별</TitleH2>
       <ButtonList>{repeatElement}</ButtonList>
       <TitleH2>나이</TitleH2>
-      <AgeSelect value={ageChoice} onChange={ageHandler} name="age">
+      <AgeSelect onChange={ageHandler} name="age">
         {ageRepeatElement}
       </AgeSelect>
-    </ContentDiv>
+    </div>
   );
 };
 
@@ -106,40 +130,5 @@ const GenderBtnstyles = {
     cursor: 'pointer',
   },
 };
-
-// * =========================
-// * STYLED_COMPONENTS
-// * =========================
-
-const ContentDiv = styled.div``;
-
-const TitleH2 = styled.h2`
-  margin-bottom: 8px;
-  font-size: 30px;
-  color: #5f5f5f;
-  font-weight: 400;
-  margin-top: 29px;
-  cursor: pointer;
-`;
-
-const ButtonList = styled.ul`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 130px;
-  list-style: none;
-  padding: 0;
-`;
-
-const AgeSelect = styled.select`
-  font-weight: 600;
-  color: white;
-  background: #f94670;
-  font-size: 18px;
-  border-radius: 32px;
-  border: none;
-  padding: 5px 10px;
-`;
 
 export default Age_gender;
