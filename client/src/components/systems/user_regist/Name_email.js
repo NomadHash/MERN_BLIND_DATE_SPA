@@ -1,41 +1,6 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-
-const Name_email = ({ name, email, onNameHandler, onEmailHandler }) => {
-  let conditonErrMessage = null;
-
-  const NameHandler = (event) => {
-    onNameHandler(event.target.value);
-  };
-  const EmailHandler = (event) => {
-    onEmailHandler(event.target.value);
-    // conditonErrMessage = <span></span>;
-  };
-
-  const cleanInput = () => {
-    // setEmail('');
-    conditonErrMessage = <ErrMsg>이미 존재하는 이메일 입니다.</ErrMsg>;
-  };
-  return (
-    <div>
-      <RegisterInputText>이름</RegisterInputText>
-      <RegisterInput
-        type="text"
-        value={name}
-        onChange={NameHandler}
-        style={{ width: '140px' }}
-      />
-      <RegisterInputText>이메일 주소</RegisterInputText>
-      <RegisterInput
-        type="email"
-        value={email}
-        onChange={EmailHandler}
-        style={{ width: '250px' }}
-      />
-      {conditonErrMessage}
-    </div>
-  );
-};
 
 const ErrMsg = styled.h3`
   color: firebrick;
@@ -63,5 +28,44 @@ const RegisterInput = styled.input`
     outline: none;
   }
 `;
+
+const Name_email = ({ onChange }) => {
+  let conditonErrMessage = null;
+
+  const { name, email } = useSelector(({ registerReduce }) => ({
+    name: registerReduce.name,
+    email: registerReduce.email,
+  }));
+
+  const onChangeHandler = (event) => {
+    const { name, value } = event.target;
+    onChange(name, value);
+  };
+
+  const cleanInput = () => {
+    conditonErrMessage = <ErrMsg>이미 존재하는 이메일 입니다.</ErrMsg>;
+  };
+  return (
+    <div>
+      <RegisterInputText>이름</RegisterInputText>
+      <RegisterInput
+        type="text"
+        name="name"
+        value={name}
+        onChange={onChangeHandler}
+        style={{ width: '140px' }}
+      />
+      <RegisterInputText>이메일 주소</RegisterInputText>
+      <RegisterInput
+        type="email"
+        name="email"
+        value={email}
+        onChange={onChangeHandler}
+        style={{ width: '250px' }}
+      />
+      {conditonErrMessage}
+    </div>
+  );
+};
 
 export default Name_email;

@@ -62,7 +62,7 @@ const Age_gender = ({ onChange }) => {
     onChange('gender', genderNum);
   };
   const ageHandler = (event) => {
-    const [name, value] = event.target;
+    const { name, value } = event.target;
     onChange(name, value);
   };
 

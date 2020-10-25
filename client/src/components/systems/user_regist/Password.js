@@ -1,38 +1,6 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-
-const Password = ({
-  password,
-  confilmPassword,
-  onPasswordHandler,
-  onConfilmPasswordHandler,
-}) => {
-  const passwordHandler = (event) => {
-    onPasswordHandler(event.target.value);
-  };
-  const confilmPasswordHandler = (event) => {
-    onConfilmPasswordHandler(event.target.value);
-    // conditonErrMessage = <span></span>;
-  };
-  return (
-    <div>
-      <RegisterInputText>패스워드</RegisterInputText>
-      <RegisterInput
-        type="password"
-        value={password}
-        onChange={passwordHandler}
-        style={{ width: '170px' }}
-      />
-      <RegisterInputText>패스워드 확인</RegisterInputText>
-      <RegisterInput
-        type="password"
-        value={confilmPassword}
-        onChange={confilmPasswordHandler}
-        style={{ width: '170px' }}
-      />
-    </div>
-  );
-};
 
 const RegisterInputText = styled.h2`
   margin: 0;
@@ -52,4 +20,37 @@ const RegisterInput = styled.input`
     outline: none;
   }
 `;
+
+const Password = ({ onChange }) => {
+  const onChangeHandler = (event) => {
+    const { name, value } = event.target;
+    onChange(name, value);
+  };
+
+  const { password, confilmPassword } = useSelector((registerReduce) => ({
+    password: registerReduce.password,
+    confilmPassword: registerReduce.confilmPassword,
+  }));
+
+  return (
+    <div>
+      <RegisterInputText>패스워드</RegisterInputText>
+      <RegisterInput
+        name="password"
+        type="password"
+        value={password}
+        onChange={onChangeHandler}
+        style={{ width: '170px' }}
+      />
+      <RegisterInputText>패스워드 확인</RegisterInputText>
+      <RegisterInput
+        name="passwordConfirm"
+        type="password"
+        value={confilmPassword}
+        onChange={onChangeHandler}
+        style={{ width: '170px' }}
+      />
+    </div>
+  );
+};
 export default Password;

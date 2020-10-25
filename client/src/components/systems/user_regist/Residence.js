@@ -1,97 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
-
-const Residence = (props) => {
-  const [location, setLocation] = useState('');
-  const selectLoc = (locName, locNum) => {
-    setLocation(locName);
-    props.onLocationHandler(locNum);
-  };
-  const area = [
-    {
-      loc: '서울특별시',
-      locNum: 1,
-    },
-    {
-      loc: '경기도',
-      locNum: 2,
-    },
-    {
-      loc: '강원도',
-      locNum: 3,
-    },
-    {
-      loc: '충청북도',
-      locNum: 4,
-    },
-    {
-      loc: '충청남도',
-      locNum: 5,
-    },
-    {
-      loc: '전라북도',
-      locNum: 6,
-    },
-    {
-      loc: '전라남도',
-      locNum: 7,
-    },
-    {
-      loc: '경상북도',
-      locNum: 8,
-    },
-    {
-      loc: '경상남도',
-      locNum: 9,
-    },
-  ];
-  const iterationElement = area.map((e) => {
-    return (
-      <li key={e.locNum}>
-        <span>
-          <LocationBtn
-            type="button"
-            onClick={() => {
-              selectLoc(e.loc, e.locNum);
-            }}
-          >
-            {e.loc}
-          </LocationBtn>
-        </span>
-      </li>
-    );
-  });
-  let conditionText = null;
-
-  if (location) {
-    conditionText = (
-      <div
-        style={{
-          textAlign: 'center',
-          fontSize: '30px',
-          fontWeight: '400',
-          color: '#404548',
-          margin: '80px 127px 50px',
-        }}
-      >
-        {props?.name}님은
-        <h3 style={{ fontWeight: '500', margin: '5px 0px' }}>{location}</h3> 에
-        거주하고 계시군요.
-      </div>
-    );
-  }
-
-  return (
-    <div>
-      <LiveText>
-        {props?.name}
-        {props.name && '님은'} 어디에 거주하시나요?
-      </LiveText>
-      <Locationlist>{iterationElement}</Locationlist>
-      {conditionText}
-    </div>
-  );
-};
 
 const textFade = keyframes`
 
@@ -134,5 +43,110 @@ const LiveText = styled.h2`
   margin: 150px 0 20px 0;
   width: 710px;
 `;
+
+const Residence = ({ onChange }) => {
+  const { residence, name } = useSelector(({ registerReduce }) => ({
+    residence: registerReduce.residence,
+    name: registerReduce.name,
+  }));
+
+  const onChangeHandler = (name, location) => {
+    onChange(name, location);
+  };
+
+  useEffect(() => {
+    console.log(residence);
+  }, [onChange]);
+
+  const area = [
+    {
+      loc: '서울특별시',
+      locNum: 1,
+    },
+    {
+      loc: '경기도',
+      locNum: 2,
+    },
+    {
+      loc: '강원도',
+      locNum: 3,
+    },
+    {
+      loc: '충청북도',
+      locNum: 4,
+    },
+    {
+      loc: '충청남도',
+      locNum: 5,
+    },
+    {
+      loc: '전라북도',
+      locNum: 6,
+    },
+    {
+      loc: '전라남도',
+      locNum: 7,
+    },
+    {
+      loc: '경상북도',
+      locNum: 8,
+    },
+    {
+      loc: '경상남도',
+      locNum: 9,
+    },
+  ];
+  const locationArr = Object.values(area);
+
+  const iterationElement = area.map((e) => {
+    return (
+      <li key={e.locNum}>
+        <span>
+          <LocationBtn
+            name="residence"
+            type="button"
+            onClick={() => {
+              onChangeHandler('residence', e.locNum);
+            }}
+          >
+            {e.loc}
+          </LocationBtn>
+        </span>
+      </li>
+    );
+  });
+  let conditionText = null;
+
+  if (name && residence) {
+    conditionText = (
+      <div
+        style={{
+          textAlign: 'center',
+          fontSize: '30px',
+          fontWeight: '400',
+          color: '#404548',
+          margin: '80px 127px 50px',
+        }}
+      >
+        {name}님은
+        <h3 style={{ fontWeight: '500', margin: '5px 0px' }}>
+          {locationArr[residence - 1].loc}
+        </h3>
+        에 거주하고 계시군요.
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <LiveText>
+        {name}
+        {name && '님은'} 어디에 거주하시나요?
+      </LiveText>
+      <Locationlist>{iterationElement}</Locationlist>
+      {conditionText}
+    </div>
+  );
+};
 
 export default Residence;
