@@ -3,6 +3,93 @@ import ReactCrop from 'react-image-crop';
 import style from 'styled-components';
 import 'react-image-crop/dist/ReactCrop.css';
 import { HiPlusCircle } from 'react-icons/hi';
+// * =================================
+// *       IMAGE_CROP_MODULE
+// * =================================
+
+// * STYLED_COMPONENT
+const BackGround = style.div`
+    background: rgba(0,0,0,0.3);
+    position: fixed;
+    height: 100vh;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+`;
+
+const SetButton = style.button`
+    border: none;
+    color: white;
+    background: linear-gradient(to right,#ff5858,#f857a6);
+    border-radius: 6px;
+    border-radius: 3px;
+    width: 93%;
+    padding: 7px 10px;
+    font-weight: 600;
+    font-size: 14px;
+     &:focus {
+     outline:none;
+   }
+    cursor : pointer;
+    `;
+const BtnDiv = style.div`
+   margin-top: 9px;
+    padding: 11px 0px;
+    text-align: center;
+    background: #f1f0f0;
+    border-radius: 0px 0px 11px 11px;
+    border-top: 1px solid #d2d2d2`;
+
+const CropContainer = style.div`
+background: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 11px;
+    position: relative;
+    margin: 0 auto;
+    top: 50vh;
+    width: 390px;
+    height: auto;
+    transform: translate(0, -50%);
+    box-shadow: 0px 6px 9px rgba(0, 0, 0, 0.3);
+`;
+
+const MainTextSpan = style.span`
+    border-bottom: 1px solid #e6e6e6;
+    color: #272727;
+    font-weight: 600;
+    background: #f1f1f1;
+    border-radius: 10px 10px 0px 0px;
+    padding: 13px 0px;
+    margin-bottom: 8px;`;
+
+const MainTextH3 = style.span`
+    margin: 4px;
+    text-align: start;
+    margin-left: 15px;
+    font-size: 14px;
+    `;
+
+const UploadBtn = style.label`
+  //   font-family: inherit;
+  //   border: none;
+  //   font-weight: 500;
+  //   background: none;
+  //   width: 100%;
+  //   text-align: left;
+  //   color: #333333;
+  //   font-size: 14px;
+  //   padding: 5px 15px;
+  //   cursor : pointer;
+  //  &:hover {
+  //    background-color: #0064d4;
+  //     color: white;
+  //  }
+  //  &:focus {
+  //    outline:none;
+  //  }
+      `;
+
 class ImageCrop extends PureComponent {
   state = {
     src: null,
@@ -51,7 +138,7 @@ class ImageCrop extends PureComponent {
   }
 
   setNewImage = () => {
-    const { cropSrc, file } = this.state;
+    const { file } = this.state;
     this.setState({ src: null });
     this.props.setBlobData(file);
   };
@@ -150,87 +237,4 @@ class ImageCrop extends PureComponent {
     );
   }
 }
-
-const BackGround = style.div`
-    background: rgba(0,0,0,0.3);
-    position: fixed;
-    height: 100vh;
-    top: 0px;
-    right: 0px;
-    left: 0px;
-`;
-
-const SetButton = style.button`
-    border: none;
-    color: white;
-    background: linear-gradient(to right,#ff5858,#f857a6);
-    border-radius: 6px;
-    border-radius: 3px;
-    width: 93%;
-    padding: 7px 10px;
-    font-weight: 600;
-    font-size: 14px;
-     &:focus {
-     outline:none;
-   }
-    cursor : pointer;
-    `;
-const BtnDiv = style.div`
-   margin-top: 9px;
-    padding: 11px 0px;
-    text-align: center;
-    background: #f1f0f0;
-    border-radius: 0px 0px 11px 11px;
-    border-top: 1px solid #d2d2d2`;
-
-const CropContainer = style.div`
-background: white;
-    display: flex;
-    flex-direction: column;
-    border-radius: 11px;
-    position: relative;
-    margin: 0 auto;
-    top: 50vh;
-    width: 390px;
-    height: auto;
-    transform: translate(0, -50%);
-    box-shadow: 0px 6px 9px rgba(0, 0, 0, 0.3);
-`;
-
-const MainTextSpan = style.span`
-    border-bottom: 1px solid #e6e6e6;
-    color: #272727;
-    font-weight: 600;
-    background: #f1f1f1;
-    border-radius: 10px 10px 0px 0px;
-    padding: 13px 0px;
-    margin-bottom: 8px;`;
-
-const MainTextH3 = style.span`
-    margin: 4px;
-    text-align: start;
-    margin-left: 15px;
-    font-size: 14px;
-    `;
-
-const UploadBtn = style.label`
-  //   font-family: inherit;
-  //   border: none;
-  //   font-weight: 500;
-  //   background: none;
-  //   width: 100%;
-  //   text-align: left;
-  //   color: #333333;
-  //   font-size: 14px;
-  //   padding: 5px 15px;
-  //   cursor : pointer;
-  //  &:hover {
-  //    background-color: #0064d4;
-  //     color: white;
-  //  }
-  //  &:focus {
-  //    outline:none;
-  //  }
-      `;
-
 export default ImageCrop;

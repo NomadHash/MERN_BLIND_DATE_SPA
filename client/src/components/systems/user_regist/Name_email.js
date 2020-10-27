@@ -2,6 +2,11 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
+// * ==============================
+// *      NAME_EMAIL
+// *===============================
+
+// * STYLED_COMPONENT
 const ErrMsg = styled.h3`
   color: firebrick;
   margin: 0;

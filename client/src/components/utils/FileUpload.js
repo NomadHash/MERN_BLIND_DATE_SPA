@@ -1,16 +1,34 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
 import styled from 'styled-components';
+// * =================================
+// *       FILE_UPLOAD
+// * =================================
 
-//=================================
-//       File-Upload
-//=================================
+// * STYLED_COMPONENT
+const FakeUploadBtn = styled.div`
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  width: 120px;
+  height: 120px;
+  justify-content: center;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #49709f;
+`;
+
+const UploadButton = styled.input`
+  position: relative;
+  margin-right: 1px;
+  width: 9vw;
+  right: 11vw;
+  opacity: 0;
+`;
 
 const FileUpload = (props) => {
-  //=================================
-  //     State-Hook
   const [previewImg, setPreviewImg] = useState([]);
-  //=================================
 
   const handleFileOnChange = (event) => {
     event.preventDefault();
@@ -69,30 +87,4 @@ const FileUpload = (props) => {
     </>
   );
 };
-
-//=================================
-//       Styled-Component
-//=================================
-
-const FakeUploadBtn = styled.div`
-  display: flex;
-  overflow: hidden;
-  position: relative;
-  width: 120px;
-  height: 120px;
-  justify-content: center;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: #49709f;
-`;
-
-const UploadButton = styled.input`
-  position: relative;
-  margin-right: 1px;
-  width: 9vw;
-  right: 11vw;
-  opacity: 0;
-`;
-
 export default FileUpload;

@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-// * ===STYLED_COMPONENTS
+// * =================================
+// *       AGE_GENDER
+// * =================================
+
+// * STYLED_COMPONENT
 const TitleH2 = styled.h2`
   margin-bottom: 8px;
   font-size: 30px;

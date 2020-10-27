@@ -13,10 +13,11 @@ import RegisterFrom from '../components/systems/user_regist/RegisterFrom';
 import HeaderContainer from './HeaderContainer';
 import logoOnly from '../public/logoOnly.png';
 
-// * ==============================
-// *       Styled-Component
-// *===============================
+// * =================================
+// *       REGISTER_CONTAINER
+// * =================================
 
+// * STYLED_COMPONENT
 const boxFade = keyframes`
   0% {
     opacity: 0;

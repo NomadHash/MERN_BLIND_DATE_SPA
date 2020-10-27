@@ -1,7 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
+// * =================================
+// *       RESIDENCE
+// * =================================
 
+// * STYLED_COMPONENT
 const textFade = keyframes`
 
 0% {

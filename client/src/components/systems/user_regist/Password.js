@@ -1,7 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+// * =================================
+// *       PASS_WORD
+// * =================================
 
+// * STYLED_COMPONENT
 const RegisterInputText = styled.h2`
   margin: 0;
   margin-bottom: 8px;

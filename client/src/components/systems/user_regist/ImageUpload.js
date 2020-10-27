@@ -4,6 +4,34 @@ import styled from 'styled-components';
 import defaultAvatar from '../../../public/default.png';
 import ImageCrop from '../../utils/ImageCrop';
 import axios from 'axios';
+// * =================================
+// *       IMAGE_UPLOAD
+// * =================================
+
+// * STYLED_COMPONENT
+const LiveText = styled.h2`
+  font-size: 60px;
+  color: #404548;
+  font-weight: 300;
+  text-align: center;
+  width: 710px;
+`;
+
+const Preview = styled.img`
+  margin-left: 0px;
+  height: 300px;
+  width: 300px;
+  background: #d8d8d8;
+  border-radius: 39px;
+  cursor: pointer;
+`;
+
+const ContentDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 100px;
+`;
 
 const ImageUpload = ({ onChange }) => {
   const [blobData, setBlobData] = useState();
@@ -12,7 +40,7 @@ const ImageUpload = ({ onChange }) => {
   }));
 
   useEffect(() => {
-    onChange(onChange('profileImage', defaultAvatar));
+    onChange('profileImage', defaultAvatar);
   }, []);
 
   useEffect(() => {
@@ -44,29 +72,5 @@ const ImageUpload = ({ onChange }) => {
     </ContentDiv>
   );
 };
-
-const LiveText = styled.h2`
-  font-size: 60px;
-  color: #404548;
-  font-weight: 300;
-  text-align: center;
-  width: 710px;
-`;
-
-const Preview = styled.img`
-  margin-left: 0px;
-  height: 300px;
-  width: 300px;
-  background: #d8d8d8;
-  border-radius: 39px;
-  cursor: pointer;
-`;
-
-const ContentDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 100px;
-`;
 
 export default ImageUpload;

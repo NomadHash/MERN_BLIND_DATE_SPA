@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import styled, { keyframes } from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import styled from 'styled-components';
 
+// * IMPORT_FORM_COMPONENT
 import Name_email from '../user_regist/Name_email';
 import Residence from '../user_regist/Residence';
 import Age_gender from '../user_regist/Age_gender';
@@ -9,9 +9,10 @@ import ImageUpload from '../user_regist/ImageUpload';
 import Password from '../user_regist/Password';
 
 // * ==============================
-// *       Styled-Component
+// *      REGISTER_FORM
 // *===============================
 
+// * STYLED_COMPONENT
 const FormContent = styled.div`
   background: white;
   border-radius: 30px;
