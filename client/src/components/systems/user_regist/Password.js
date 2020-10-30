@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { Element, scroller } from 'react-scroll';
 // * =================================
 // *       PASS_WORD
 // * =================================
@@ -25,12 +26,34 @@ const RegisterInput = styled.input`
   }
 `;
 
-const Password = ({ onChange }) => {
+const ErrMsg = styled.h3`
+  color: firebrick;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  margin: 5px 10px 0;
+`;
+
+const Password = ({ onChange, confilmErr, setConfilmErr }) => {
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
     onChange(name, value);
   };
 
+  let conditonErrMessage = <ErrMsg>패스워드가 서로 일치하지 않습니다.</ErrMsg>;
+  const scrollTo = () => {
+    scroller.scrollTo('myScrollToElement', {
+      duration: 800,
+      smooth: 'easeInOutQuart',
+      offset: -200,
+    });
+  };
+  useEffect(() => {
+    if (confilmErr) {
+      console.log('error!');
+      scrollTo();
+    }
+  }, [confilmErr]);
   const { password, confilmPassword } = useSelector((registerReduce) => ({
     password: registerReduce.password,
     confilmPassword: registerReduce.confilmPassword,
@@ -47,6 +70,7 @@ const Password = ({ onChange }) => {
         style={{ width: '170px' }}
       />
       <RegisterInputText>패스워드 확인</RegisterInputText>
+      <Element name="myScrollToElement"></Element>
       <RegisterInput
         name="passwordConfirm"
         type="password"
@@ -54,6 +78,7 @@ const Password = ({ onChange }) => {
         onChange={onChangeHandler}
         style={{ width: '170px' }}
       />
+      {confilmErr ? conditonErrMessage : null}
     </div>
   );
 };

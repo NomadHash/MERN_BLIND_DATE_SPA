@@ -41,14 +41,23 @@ const LoginBtn = styled.button`
   }
 `;
 
-const RegisterFrom = ({ onChange, onSubmitHandler }) => {
+const RegisterFrom = ({
+  onChange,
+  onSubmitHandler,
+  confilmErr,
+  setConfilmErr,
+}) => {
   return (
     <>
       <FormContent>
         <RegistForm onSubmit={onSubmitHandler} encType="multipart/form-data">
           <Age_gender onChange={onChange} />
           <Name_email onChange={onChange} />
-          <Password onChange={onChange} />
+          <Password
+            onChange={onChange}
+            confilmErr={confilmErr}
+            setConfilmErr={setConfilmErr}
+          />
           <Residence onChange={onChange} />
           <ImageUpload onChange={onChange} />
           <LoginBtn type="submit">회원가입</LoginBtn>

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { Element, scroller } from 'react-scroll';
 
 // * ==============================
 // *      NAME_EMAIL
@@ -43,17 +44,18 @@ const Name_email = ({ onChange }) => {
 
   let conditonErrMessage = <ErrMsg>이미 존재하는 이메일 입니다.</ErrMsg>;
 
-  const scrollToRef = (ref) => {
-    window.scrollTo(123123, 112300);
-    console.log(ref.current.offsetTop);
+  const scrollTo = () => {
+    scroller.scrollTo('myScrollToElement', {
+      duration: 800,
+      smooth: 'easeInOutQuart',
+      offset: -200,
+    });
   };
-
-  const myRef = useRef(null);
 
   useEffect(() => {
     if (error) {
       onChange('email', '');
-      scrollToRef(myRef);
+      scrollTo();
     }
   }, [error]);
 
@@ -74,8 +76,8 @@ const Name_email = ({ onChange }) => {
         style={{ width: '140px' }}
       />
       <RegisterInputText>이메일 주소</RegisterInputText>
+      <Element name="myScrollToElement"></Element>
       <RegisterInput
-        ref={myRef}
         type="email"
         name="email"
         value={email}

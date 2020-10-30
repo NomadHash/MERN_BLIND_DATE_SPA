@@ -1,5 +1,5 @@
 // * IMPORT_MODULES
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../modules/register';
@@ -56,6 +56,7 @@ const LoginPageContent = styled.div`
 `;
 
 const RegisterContainer = (props) => {
+  const [confilmErr, setConfilmErr] = useState(0);
   //* USE_DISPATCH
   const dispatch = useDispatch();
 
@@ -67,6 +68,9 @@ const RegisterContainer = (props) => {
         value,
       }),
     );
+    if (confilmErr) {
+      setConfilmErr(0);
+    }
   };
 
   //* USE_SELECTOR & USE_EFFECT
@@ -91,6 +95,7 @@ const RegisterContainer = (props) => {
     residence: registerReduce.residence,
     profileImage: registerReduce.profileImage,
   }));
+
   useEffect(() => {
     window.scrollTo(0, 0);
     if (registerSuccess === false) {
@@ -106,7 +111,7 @@ const RegisterContainer = (props) => {
   const onSubmitHandler = (event) => {
     event.preventDefault();
     if (password !== passwordConfirm) {
-      alert('패스워드가 일치하지 않습니다.');
+      setConfilmErr(1);
     } else {
       let requestBody = {
         email,
@@ -125,7 +130,12 @@ const RegisterContainer = (props) => {
         <IntroImg src={logoOnly} alt="logo" />
         <Introtext>새 계정을 만들어 볼까요?</Introtext>
       </IntroDiv>
-      <RegisterFrom onSubmitHandler={onSubmitHandler} onChange={onChange} />
+      <RegisterFrom
+        onSubmitHandler={onSubmitHandler}
+        onChange={onChange}
+        confilmErr={confilmErr}
+        setConfilmErr={setConfilmErr}
+      />
     </LoginPageContent>
   );
 };
