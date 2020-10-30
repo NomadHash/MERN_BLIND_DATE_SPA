@@ -92,6 +92,7 @@ const RegisterContainer = (props) => {
     profileImage: registerReduce.profileImage,
   }));
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (registerSuccess === false) {
     }
     if (registerSuccess) {

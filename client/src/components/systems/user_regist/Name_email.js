@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
@@ -43,10 +43,17 @@ const Name_email = ({ onChange }) => {
 
   let conditonErrMessage = <ErrMsg>이미 존재하는 이메일 입니다.</ErrMsg>;
 
+  const scrollToRef = (ref) => {
+    window.scrollTo(123123, 112300);
+    console.log(ref.current.offsetTop);
+  };
+
+  const myRef = useRef(null);
+
   useEffect(() => {
     if (error) {
-      console.log('clean');
       onChange('email', '');
+      scrollToRef(myRef);
     }
   }, [error]);
 
@@ -57,7 +64,7 @@ const Name_email = ({ onChange }) => {
   };
 
   return (
-    <div>
+    <div style={{ position: 'relative' }}>
       <RegisterInputText>이름</RegisterInputText>
       <RegisterInput
         type="text"
@@ -68,6 +75,7 @@ const Name_email = ({ onChange }) => {
       />
       <RegisterInputText>이메일 주소</RegisterInputText>
       <RegisterInput
+        ref={myRef}
         type="email"
         name="email"
         value={email}
