@@ -1,96 +1,15 @@
+// * IMPORT_MODULES
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../../modules/user';
-
 import { withRouter } from 'react-router-dom';
 import loginBackground from '../../public/loginBackground.jpeg';
 
-//import Container
+// * import Container
 import HeaderContainer from '../../container/HeaderContainer';
 
-//Condition DOM
-let conditonErrMessage = null;
-
-//Main Component
-const LoginPage = (props) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const { loginSuccess, error } = useSelector(({ userReduce }) => ({
-    loginSuccess: userReduce.loginSuccess,
-    error: userReduce.error,
-  }));
-
-  // Redux-Dispatch
-  const dispatch = useDispatch();
-
-  // Handler function
-  const onEmailHandler = (event) => {
-    setEmail(event.target.value);
-  };
-  const onPasswordHandler = (event) => {
-    setPassword(event.target.value);
-  };
-  const onRegisterHandler = () => {
-    props.history.push('/register');
-  };
-  const onSubmitHandler = (event) => {
-    event.preventDefault(); // 새로고침 방지
-    let requestBody = {
-      email,
-      password,
-    };
-    dispatch(loginUser(requestBody));
-  };
-
-  useEffect(() => {
-    if (error === '해당 이메일이 존재하지 않습니다.') {
-      cleanInput();
-    }
-    if (loginSuccess) {
-      props.history.push('/');
-    }
-  }, [error, loginSuccess, props.history]);
-
-  // Submit-Error-condition
-  const cleanInput = () => {
-    conditonErrMessage = (
-      <ErrMsg>이메일 혹은 패스워드가 잘못되었습니다.</ErrMsg>
-    );
-    setEmail('');
-    setPassword('');
-    if (email !== '') {
-      conditonErrMessage = <span></span>;
-    }
-  };
-
-  return (
-    <LoginPageContent>
-      <HeaderContainer />
-      <BackgroundImg src={loginBackground} alt="logoIng" />
-      <LoginForm onSubmit={onSubmitHandler}>
-        <span>
-          <LoginText>로그인</LoginText>
-        </span>
-        <RegisterSpan>
-          <RegisterRouter>신규 사용자이신가요? </RegisterRouter>
-          <RegisterBtn onClick={onRegisterHandler}>계정만들기</RegisterBtn>
-        </RegisterSpan>
-        <EmailText>이메일 주소</EmailText>
-        <EmailInput type="email" value={email} onChange={onEmailHandler} />
-        {conditonErrMessage}
-        <PasswordText>패스워드</PasswordText>
-        <PwdInput
-          type="password"
-          value={password}
-          onChange={onPasswordHandler}
-        />
-        <LoginBtn>로그인</LoginBtn>
-      </LoginForm>
-    </LoginPageContent>
-  );
-};
-
+// * STYLED_COMPONENTS
 const LoginPageContent = styled.div`
   display: flex;
   flex-direction: column;
@@ -207,5 +126,87 @@ const LoginBtn = styled.button`
     outline: none;
   }
 `;
+
+// * CONDITION_DOM
+let conditonErrMessage = null;
+
+// * MAIN_COMPONENTS
+const LoginPage = (props) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { loginSuccess, error } = useSelector(({ userReduce }) => ({
+    loginSuccess: userReduce.loginSuccess,
+    error: userReduce.error,
+  }));
+
+  //* REDUX_DISPATCH
+  const dispatch = useDispatch();
+
+  // Handler function
+  const onEmailHandler = (event) => {
+    setEmail(event.target.value);
+  };
+  const onPasswordHandler = (event) => {
+    setPassword(event.target.value);
+  };
+  const onRegisterHandler = () => {
+    props.history.push('/register');
+  };
+  const onSubmitHandler = (event) => {
+    event.preventDefault(); // 새로고침 방지
+    let requestBody = {
+      email,
+      password,
+    };
+    dispatch(loginUser(requestBody));
+  };
+
+  useEffect(() => {
+    if (error === '해당 이메일이 존재하지 않습니다.') {
+      cleanInput();
+    }
+    if (loginSuccess) {
+      props.history.push('/');
+    }
+  }, [error, loginSuccess, props.history]);
+
+  // Submit-Error-condition
+  const cleanInput = () => {
+    conditonErrMessage = (
+      <ErrMsg>이메일 혹은 패스워드가 잘못되었습니다.</ErrMsg>
+    );
+    setEmail('');
+    setPassword('');
+    if (email !== '') {
+      conditonErrMessage = <span></span>;
+    }
+  };
+
+  return (
+    <LoginPageContent>
+      <HeaderContainer />
+      <BackgroundImg src={loginBackground} alt="logoIng" />
+      <LoginForm onSubmit={onSubmitHandler}>
+        <span>
+          <LoginText>로그인</LoginText>
+        </span>
+        <RegisterSpan>
+          <RegisterRouter>신규 사용자이신가요? </RegisterRouter>
+          <RegisterBtn onClick={onRegisterHandler}>계정만들기</RegisterBtn>
+        </RegisterSpan>
+        <EmailText>이메일 주소</EmailText>
+        <EmailInput type="email" value={email} onChange={onEmailHandler} />
+        {conditonErrMessage}
+        <PasswordText>패스워드</PasswordText>
+        <PwdInput
+          type="password"
+          value={password}
+          onChange={onPasswordHandler}
+        />
+        <LoginBtn>로그인</LoginBtn>
+      </LoginForm>
+    </LoginPageContent>
+  );
+};
 
 export default withRouter(LoginPage);
