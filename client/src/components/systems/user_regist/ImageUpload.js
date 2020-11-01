@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import defaultAvatar from '../../../public/default.png';
 import ImageCrop from '../../utils/ImageCrop';
 import axios from 'axios';
 // * =================================
@@ -39,9 +38,9 @@ const ImageUpload = ({ onChange }) => {
     profileImage: registerReduce.profileImage,
   }));
 
-  useEffect(() => {
-    onChange('profileImage', defaultAvatar);
-  }, []);
+  // useEffect(() => {
+  //   onChange('profileImage', defaultAvatar);
+  // }, []);
 
   useEffect(() => {
     if (blobData) {
@@ -56,7 +55,7 @@ const ImageUpload = ({ onChange }) => {
           onChange('profileImage', response.data.image);
         });
     }
-  }, [blobData]);
+  }, [onChange, blobData]);
 
   let conditionImage = () => {
     return profileImage[0] === 'u'

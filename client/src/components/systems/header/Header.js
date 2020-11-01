@@ -4,72 +4,9 @@ import { withRouter } from 'react-router-dom';
 import { logOutUser } from '../../../modules/auth';
 import { useDispatch } from 'react-redux';
 import headerLogo from '../../../public/logo.png';
-let conditonRegistBtn = null;
-let conditonLoginBtn = null;
+import LoginContainer from '../../../container/LoginContainer';
 
-// ! ==================
-// ! HEADER-COMPONENT
-// ! ==================
-
-const Header = (props) => {
-  const dispatch = useDispatch();
-  const [open, setOpen] = useState(false);
-  // * ==================
-  // * React-Router
-  // * ==================
-  const goLoginPage = () => {
-    props.history.push('/login');
-  };
-  const goRegistPage = () => {
-    props.history.push('/register');
-  };
-  const goRootPage = () => {
-    props.history.push('/');
-  };
-
-  // * ==================
-  // * HANDLER_FUNCTIONS
-  // * ==================
-  const onClickHandler = () => {
-    dispatch(logOutUser());
-  };
-  const onMypageHandler = () => {
-    setOpen(!open);
-  };
-
-  // * ====================
-  // * CONDITION_RENDERING
-  // * ====================
-
-  props.auth === true
-    ? (conditonLoginBtn = (
-        <MypageBtn onClick={onMypageHandler}>
-          마이페이지
-          <ArcodianMypage open={open}>
-            <LogoutBtn onClick={onClickHandler}>내 정보</LogoutBtn>
-            <LogoutBtn onClick={onClickHandler}>로그아웃</LogoutBtn>
-          </ArcodianMypage>
-        </MypageBtn>
-      ))
-    : (conditonLoginBtn = <LoginBtn onClick={goLoginPage}>로그인</LoginBtn>);
-
-  // * ====================
-  // * STYLED_COMPONENT
-  // * ====================
-
-  return (
-    <HeaderDiv>
-      <HeaderLogo onClick={goRootPage}>
-        <LogoImg src={headerLogo} alt="logo" />
-      </HeaderLogo>
-      <TitleBtn>
-        {conditonLoginBtn}
-        {conditonRegistBtn}
-      </TitleBtn>
-    </HeaderDiv>
-  );
-};
-
+//* STYLED_COMPONENTS
 const HeaderDiv = styled.div`
   top: 0;
   position: fixed;
@@ -111,22 +48,6 @@ const LoginBtn = styled.button`
     outline: none;
   }
 `;
-// const SignUpBtn = styled.button`
-//   border: 0;
-//   color: white;
-//   background: none;
-//   font-size: 16px;
-//   font-weight: 500;
-//   width: 56px;
-//   padding: 0;
-//   height: 54px;
-//   cursor: pointer;
-//   &:hover {
-//     box-shadow: 0px 4px 0px rgb(27 185 93);
-//     outline: none;
-//   }
-// `;
-
 const ArcodianMypage = styled.div`
   box-shadow: 0px 5px 0px rgba(0, 0, 0, 0.7);
   position: fixed;
@@ -159,5 +80,72 @@ const LogoutBtn = styled.button`
     outline: none;
   }
 `;
+
+const Header = (props) => {
+  //* CONDITION_BUTTON
+  let conditonRegistBtn = null;
+  let conditonLoginBtn = null;
+  const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
+  const [loginPopup, setLoginPopup] = useState(false);
+
+  // * ==================
+  // * React-Router
+  // * ==================
+  const goLoginPage = () => {
+    setLoginPopup(true);
+    if (loginPopup) {
+      setLoginPopup(false);
+    }
+  };
+  const goRootPage = () => {
+    props.history.push('/');
+  };
+
+  // * ==================
+  // * HANDLER_FUNCTIONS
+  // * ==================
+  const onClickHandler = () => {
+    dispatch(logOutUser());
+  };
+  const onMypageHandler = () => {
+    setOpen(!open);
+  };
+
+  // * ====================
+  // * CONDITION_RENDERING
+  // * ====================
+
+  props.auth === true
+    ? (conditonLoginBtn = (
+        <MypageBtn onClick={onMypageHandler}>
+          마이페이지
+          <ArcodianMypage open={open}>
+            <LogoutBtn onClick={onClickHandler}>내 정보</LogoutBtn>
+            <LogoutBtn onClick={onClickHandler}>로그아웃</LogoutBtn>
+          </ArcodianMypage>
+        </MypageBtn>
+      ))
+    : (conditonLoginBtn = <LoginBtn onClick={goLoginPage}>로그인</LoginBtn>);
+
+  // * ====================
+  // * STYLED_COMPONENT
+  // * ====================
+
+  return (
+    <>
+      <HeaderDiv>
+        <HeaderLogo onClick={goRootPage}>
+          <LogoImg src={headerLogo} alt="logo" />
+        </HeaderLogo>
+        <TitleBtn>
+          {conditonLoginBtn}
+          {conditonRegistBtn}
+        </TitleBtn>
+      </HeaderDiv>
+      {loginPopup ? <LoginContainer goLoginPage={goLoginPage} /> : null}
+    </>
+  );
+};
 
 export default withRouter(Header);

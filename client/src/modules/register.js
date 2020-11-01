@@ -1,6 +1,7 @@
 import * as registerApi from '../api/register';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { createRequestActionTypes } from '../api/createRequestSaga';
+import defaultAvatar from '../public/default.png';
 
 // * =======================
 // * REGISTER_SAGA_MODULE
@@ -46,13 +47,13 @@ export function* registerSaga() {
 
 const initialState = {
   gender: '',
-  age: '',
+  age: '1',
   name: '',
   email: '',
   password: '',
   passwordConfirm: '',
   residence: '',
-  profileImage: '',
+  profileImage: defaultAvatar,
 };
 
 export default function registerReduce(state = initialState, action) {

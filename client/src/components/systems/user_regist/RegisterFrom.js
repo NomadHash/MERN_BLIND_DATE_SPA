@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 // * IMPORT_FORM_COMPONENT
-import Name_email from '../user_regist/Name_email';
+import NameEmail from './NameEmail';
 import Residence from '../user_regist/Residence';
-import Age_gender from '../user_regist/Age_gender';
+import AgeGender from './AgeGender';
 import ImageUpload from '../user_regist/ImageUpload';
 import Password from '../user_regist/Password';
 
@@ -51,8 +51,8 @@ const RegisterFrom = ({
     <>
       <FormContent>
         <RegistForm onSubmit={onSubmitHandler} encType="multipart/form-data">
-          <Age_gender onChange={onChange} />
-          <Name_email onChange={onChange} />
+          <AgeGender onChange={onChange} />
+          <NameEmail onChange={onChange} />
           <Password
             onChange={onChange}
             confilmErr={confilmErr}

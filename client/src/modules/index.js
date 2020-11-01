@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import userReduce, { userSaga } from './user';
+import userReduce, { userSaga } from './user_login';
 import authReduce, { authSaga } from './auth';
 import profileUploadReducer, { profileUploadSaga } from './imageUpload';
 import registerReduce, { registerSaga } from './register';

@@ -8,13 +8,12 @@ import backGround from '../../public/background.png';
 //import Container
 import HeaderContainer from '../../container/HeaderContainer';
 
-//LogoImg
-
 const LandingPage = (props) => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(authUser());
-  }, []);
+  }, [dispatch]);
 
   const onRegisterHandler = () => {
     props.history.push('/register');
@@ -66,7 +65,7 @@ const MainContent = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  top: 345px;
+  top: 260px;
 `;
 const RegisterButton = styled.button`
   font-size: 16px;
@@ -86,7 +85,7 @@ const RegisterButton = styled.button`
   }
 `;
 const LandingContent = styled.div`
-  height: 820px;
+  height: 80vh;
   background: linear-gradient(
       to top,
       rgba(0, 0, 0, 0.7),

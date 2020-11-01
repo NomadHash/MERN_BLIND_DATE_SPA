@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Element, scroller } from 'react-scroll';
@@ -57,7 +57,7 @@ const Name_email = ({ onChange }) => {
       onChange('email', '');
       scrollTo();
     }
-  }, [error]);
+  }, [error, onChange]);
 
   const onChangeHandler = (event) => {
     const { name, value } = event.target;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 // * =================================
@@ -35,7 +35,7 @@ const AgeSelect = styled.select`
   padding: 5px 10px;
 `;
 
-const Age_gender = ({ onChange }) => {
+const AgeGender = ({ onChange }) => {
   const [choice, setChoice] = useState();
   const gender = [
     { gender: '남', number: 0 },
@@ -60,10 +60,6 @@ const Age_gender = ({ onChange }) => {
       number: 4,
     },
   ];
-
-  useEffect(() => {
-    onChange('age', 1);
-  }, []);
 
   const genderHandler = (genderNum) => {
     setChoice(genderNum);
@@ -139,4 +135,4 @@ const GenderBtnstyles = {
   },
 };
 
-export default Age_gender;
+export default AgeGender;
