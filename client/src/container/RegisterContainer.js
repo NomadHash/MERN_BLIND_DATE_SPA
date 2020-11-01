@@ -114,9 +114,12 @@ const RegisterContainer = (props) => {
       setConfilmErr(1);
     } else {
       let requestBody = {
-        email,
+        gender,
+        age,
         name,
+        email,
         password,
+        residence,
         profileImage: profileImage,
       };
       dispatch(registerUser(requestBody));

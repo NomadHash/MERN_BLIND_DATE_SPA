@@ -74,6 +74,7 @@ const Name_email = ({ onChange }) => {
         value={name}
         onChange={onChangeHandler}
         style={{ width: '140px' }}
+        required
       />
       <RegisterInputText>이메일 주소</RegisterInputText>
       <Element name="myScrollToElement"></Element>
@@ -83,6 +84,7 @@ const Name_email = ({ onChange }) => {
         value={email}
         onChange={onChangeHandler}
         style={{ width: '250px' }}
+        required
       />
       {error && conditonErrMessage}
     </div>

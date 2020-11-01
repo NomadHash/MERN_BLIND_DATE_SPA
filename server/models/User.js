@@ -5,6 +5,14 @@ import config from "../config";
 const { SECRET_TOKEN } = config;
 
 const userSchema = mongoose.Schema({
+  gender: {
+    type: Number,
+    default: null,
+  },
+  age: {
+    type: Number,
+    default: null,
+  },
   name: {
     type: String,
     maxlength: 50,
@@ -18,9 +26,9 @@ const userSchema = mongoose.Schema({
     type: String,
     minlength: 5,
   },
-  lastname: {
-    type: String,
-    maxlength: 50,
+  residence: {
+    type: Number,
+    default: null,
   },
   profileImage: {
     type: String,

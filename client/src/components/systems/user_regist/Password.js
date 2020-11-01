@@ -68,6 +68,7 @@ const Password = ({ onChange, confilmErr, setConfilmErr }) => {
         value={password}
         onChange={onChangeHandler}
         style={{ width: '170px' }}
+        required
       />
       <RegisterInputText>패스워드 확인</RegisterInputText>
       <Element name="myScrollToElement"></Element>
@@ -77,6 +78,7 @@ const Password = ({ onChange, confilmErr, setConfilmErr }) => {
         value={confilmPassword}
         onChange={onChangeHandler}
         style={{ width: '170px' }}
+        required
       />
       {confilmErr ? conditonErrMessage : null}
     </div>
