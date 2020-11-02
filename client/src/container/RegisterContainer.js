@@ -127,19 +127,21 @@ const RegisterContainer = (props) => {
   };
   //* VIRTURE_DOM
   return (
-    <LoginPageContent>
+    <>
       <HeaderContainer />
-      <IntroDiv>
-        <IntroImg src={logoOnly} alt="logo" />
-        <Introtext>새 계정을 만들어 볼까요?</Introtext>
-      </IntroDiv>
-      <RegisterFrom
-        onSubmitHandler={onSubmitHandler}
-        onChange={onChange}
-        confilmErr={confilmErr}
-        setConfilmErr={setConfilmErr}
-      />
-    </LoginPageContent>
+      <LoginPageContent>
+        <IntroDiv>
+          <IntroImg src={logoOnly} alt="logo" />
+          <Introtext>새 계정을 만들어 볼까요?</Introtext>
+        </IntroDiv>
+        <RegisterFrom
+          onSubmitHandler={onSubmitHandler}
+          onChange={onChange}
+          confilmErr={confilmErr}
+          setConfilmErr={setConfilmErr}
+        />
+      </LoginPageContent>
+    </>
   );
 };
 

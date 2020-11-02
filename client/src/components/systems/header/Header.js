@@ -44,8 +44,8 @@ const LoginBtn = styled.button`
   color: #ff496c;
   cursor: pointer;
   &:hover {
-    box-shadow: 0px 4px 0px #ff496c;
-    outline: none;
+    background: linear-gradient(to right, #ff5858, #f857a6);
+    color: white;
   }
 `;
 const ArcodianMypage = styled.div`

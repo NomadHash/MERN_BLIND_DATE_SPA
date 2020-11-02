@@ -20,8 +20,8 @@ const LandingPage = (props) => {
   };
   return (
     <>
+      <HeaderContainer />
       <LandingContent>
-        <HeaderContainer />
         <MainContent>
           <SecondTitle>매치. 채팅. 디스커버리</SecondTitle>
           <RegisterButton onClick={onRegisterHandler}>

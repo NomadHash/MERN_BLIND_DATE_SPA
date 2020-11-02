@@ -1,6 +1,8 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { GiCancel } from 'react-icons/gi';
+import LoginForm from '../components/systems/user_login/LoginForm';
+import LoginPassport from '../components/systems/user_login/LoginPassport';
 
 const boxFade = keyframes`
   0% {
@@ -17,15 +19,21 @@ const boxFade = keyframes`
 
 const LoginModalDiv = styled.div`
   z-index: 1;
+  top: 0px;
   background: white;
   position: fixed;
   border-radius: 10px;
-  margin: auto 50vw;
-  transform: translate(-50%, 10%);
+  margin: 50vh 50vw;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   animation: ${boxFade} 0.25s forwards;
 `;
 
 const Background = styled.div`
+  top: 0px;
   background: #080808;
   width: 100vw;
   height: 100vh;
@@ -53,6 +61,8 @@ const LoginContainer = ({ goLoginPage }) => {
         <QuitButton onClick={goLoginPage}>
           <GiCancel />
         </QuitButton>
+        <LoginForm />
+        <LoginPassport />
       </LoginModalDiv>
     </>
   );
