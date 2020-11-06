@@ -34,7 +34,7 @@ const ErrMsg = styled.h3`
   margin: 5px 10px 0;
 `;
 
-const Password = ({ onChange, confilmErr, setConfilmErr }) => {
+const Password = ({ onChange, confilmErr }) => {
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
     onChange(name, value);
