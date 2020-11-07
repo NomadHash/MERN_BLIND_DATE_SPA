@@ -9,6 +9,11 @@ const SnsLoginDiv = styled.div`
   flex-direction: column;
   height: 110px;
   justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  top: 410px;
+  align-items: center;
+  height: 80px;
 `;
 
 const SnsLogin = () => {

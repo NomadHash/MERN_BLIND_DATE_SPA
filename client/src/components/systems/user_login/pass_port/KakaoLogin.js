@@ -2,18 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 
 const KakaoLoginButton = styled.button`
-  border: 2px solid gray;
-  border-radius: 23px;
-  padding: 13px 21px;
+  border: none;
+  border-radius: 9px;
+  padding: 10px 21px;
   font-size: 17px;
-  /* border: none; */
-  width: 330px;
+  width: 284px;
   font-weight: 500;
-  color: #676767;
+  color: white;
   cursor: pointer;
-  font-weight: 600;
-  background: none;
-  font-size: 16px;
+  font-weight: 500;
+  background: #f5d243;
+  font-size: 14px;
 `;
 
 const KakaoLogin = () => {

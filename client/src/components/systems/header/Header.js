@@ -78,10 +78,10 @@ const LogoutButton = styled.button`
 `;
 
 const Header = ({
-  onClickHandler,
+  logOutHandler,
   auth,
   loginSuccess,
-  goLoginPage,
+  openLoginModal,
   onMypageHandler,
   open,
   goRootPage,
@@ -97,12 +97,12 @@ const Header = ({
             <MypageBtnSpan onClick={onMypageHandler}>
               마이페이지
               <ArcodianMypageDiv open={open}>
-                <LogoutButton onClick={onClickHandler}>내 정보</LogoutButton>
-                <LogoutButton onClick={onClickHandler}>로그아웃</LogoutButton>
+                <LogoutButton onClick={logOutHandler}>내 정보</LogoutButton>
+                <LogoutButton onClick={logOutHandler}>로그아웃</LogoutButton>
               </ArcodianMypageDiv>
             </MypageBtnSpan>
           ) : (
-            <LoginButton onClick={goLoginPage}>로그인</LoginButton>
+            <LoginButton onClick={openLoginModal}>로그인</LoginButton>
           )}
         </TitleBtnDiv>
       </HeaderBlock>

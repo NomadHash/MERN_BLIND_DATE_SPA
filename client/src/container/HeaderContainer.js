@@ -4,25 +4,24 @@ import { logOutUser } from '../modules/auth';
 import Header from '../components/systems/header/Header';
 import { withRouter } from 'react-router-dom';
 import LoginContainer from '../container/LoginContainer';
+import { clearLoginState } from '../modules/user_login';
 
 const HeaderContainer = ({ history }) => {
   const [loginPopup, setLoginPopup] = useState(false);
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
 
-  const onClickHandler = () => {
-    dispatch(logOutUser());
-  };
-
   const onMypageHandler = () => {
     setOpen(!open);
   };
 
-  const goLoginPage = () => {
-    setLoginPopup(true);
-    if (loginPopup) {
-      setLoginPopup(false);
-    }
+  const openLoginModal = () => {
+    setLoginPopup(!loginPopup);
+  };
+
+  const logOutHandler = () => {
+    dispatch(logOutUser());
+    dispatch(clearLoginState());
   };
 
   const goRootPage = () => {
@@ -45,13 +44,15 @@ const HeaderContainer = ({ history }) => {
       <Header
         auth={auth}
         loginSuccess={loginSuccess}
-        onClickHandler={onClickHandler}
-        goLoginPage={goLoginPage}
+        logOutHandler={logOutHandler}
+        openLoginModal={openLoginModal}
         onMypageHandler={onMypageHandler}
         open={open}
         goRootPage={goRootPage}
       />
-      {loginPopup ? <LoginContainer goLoginPage={goLoginPage} /> : null}
+      {loginPopup ? (
+        <LoginContainer openLoginModal={openLoginModal} auth={auth} />
+      ) : null}
     </>
   );
 };

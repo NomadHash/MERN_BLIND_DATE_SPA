@@ -4,7 +4,7 @@ import { loginFormChangeField, loginUser } from '../modules/user_login';
 import { authUser } from '../modules/auth';
 import { useDispatch, useSelector } from 'react-redux';
 
-const LoginContainer = ({ goLoginPage }) => {
+const LoginContainer = ({ openLoginModal, auth }) => {
   //* REDUX_DISPATCH
   const dispatch = useDispatch();
 
@@ -34,15 +34,20 @@ const LoginContainer = ({ goLoginPage }) => {
 
   useEffect(() => {
     if (loginSuccess) {
-      goLoginPage();
       dispatch(authUser());
     }
   }, [loginSuccess, dispatch]);
+
+  useEffect(() => {
+    if (loginSuccess && auth) {
+      openLoginModal();
+    }
+  }, [auth, dispatch]);
   return (
     <>
       {/* LoginModal Componet */}
       <LoginModal
-        goLoginPage={goLoginPage}
+        openLoginModal={openLoginModal}
         onSubmitHandler={onSubmitHandler}
         loginFormOnChange={loginFormOnChange}
       />

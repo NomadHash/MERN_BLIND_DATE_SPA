@@ -9,13 +9,9 @@ import LogoOnly from '../../../public/logoOnly.png';
 // * STYLED_COMPONENTS
 const BoxFadeKeyframes = keyframes`
   0% {
-    width: 0;
-    height:0;
     opacity: 0;
   }
   100% {
-    width: 400px;
-    height: 600px;
     opacity: 1;
   }
 `;
@@ -32,11 +28,14 @@ const LoginModalDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  animation: ${BoxFadeKeyframes} 0.25s forwards;
+  width: 400px;
+  height: 600px;
+  animation: ${BoxFadeKeyframes} 0.5s forwards;
 `;
 
 const LoginImg = styled.img`
   width: 53px;
+  margin-bottom: 7px;
 `;
 
 const BackgroundDiv = styled.div`
@@ -59,21 +58,47 @@ const QuitButtonButton = styled.button`
   border: none;
   cursor: pointer;
 `;
+const ModalHeaderDiv = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  top: 45px;
+`;
+
+const LoginTextH2 = styled.h2`
+  color: #464646;
+  margin: 0;
+`;
+const UnderLineDiv = styled.div`
+  background: #ebebeb;
+  border-radius: 23px;
+  top: 376px;
+  position: absolute;
+  top: 10;
+  height: 2px;
+  width: 268px;
+`;
+
 // * COMPONENT
-const LoginModal = ({ goLoginPage, onSubmitHandler, loginFormOnChange }) => {
+const LoginModal = ({ openLoginModal, onSubmitHandler, loginFormOnChange }) => {
   return (
     <>
       <BackgroundDiv />
       <LoginModalDiv>
-        <LoginImg src={LogoOnly} alt="logo" />
-        <QuitButtonButton onClick={goLoginPage}>
+        <QuitButtonButton onClick={openLoginModal}>
           <GiCancel />
         </QuitButtonButton>
+        <ModalHeaderDiv>
+          <LoginImg src={LogoOnly} alt="logo" />
+          <LoginTextH2>로그인</LoginTextH2>
+        </ModalHeaderDiv>
         <LoginForm
           onSubmitHandler={onSubmitHandler}
           loginFormOnChange={loginFormOnChange}
         />{' '}
         {/* Login Form Componet */}
+        <UnderLineDiv></UnderLineDiv>
         <SnsLogin /> {/* PassPort SNS Login Componet*/}
       </LoginModalDiv>
     </>
