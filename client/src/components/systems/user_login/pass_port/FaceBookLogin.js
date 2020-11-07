@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const SC_FaceBookLoginBtn = styled.button`
+const FaceBookLoginButton = styled.button`
   border: 2px solid gray;
   border-radius: 23px;
   padding: 13px 21px;
@@ -17,7 +17,7 @@ const SC_FaceBookLoginBtn = styled.button`
 `;
 
 const FaceBookLogin = () => {
-  return <SC_FaceBookLoginBtn>페이스북 계정으로 로그인</SC_FaceBookLoginBtn>;
+  return <FaceBookLoginButton>페이스북 계정으로 로그인</FaceBookLoginButton>;
 };
 
 export default FaceBookLogin;

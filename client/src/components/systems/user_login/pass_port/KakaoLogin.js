@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const SC_KakaoLoginBtn = styled.button`
+const KakaoLoginButton = styled.button`
   border: 2px solid gray;
   border-radius: 23px;
   padding: 13px 21px;
@@ -17,7 +17,7 @@ const SC_KakaoLoginBtn = styled.button`
 `;
 
 const KakaoLogin = () => {
-  return <SC_KakaoLoginBtn>카카오 계정으로 로그인</SC_KakaoLoginBtn>;
+  return <KakaoLoginButton>카카오 계정으로 로그인</KakaoLoginButton>;
 };
 
 export default KakaoLogin;

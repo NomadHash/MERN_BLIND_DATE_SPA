@@ -7,7 +7,7 @@ import SnsLogin from './pass_port/SnsLogin';
 import LogoOnly from '../../../public/logoOnly.png';
 
 // * STYLED_COMPONENTS
-const boxFade = keyframes`
+const BoxFadeKeyframes = keyframes`
   0% {
     width: 0;
     height:0;
@@ -32,14 +32,14 @@ const LoginModalDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  animation: ${boxFade} 0.25s forwards;
+  animation: ${BoxFadeKeyframes} 0.25s forwards;
 `;
 
 const LoginImg = styled.img`
   width: 53px;
 `;
 
-const Background = styled.div`
+const BackgroundDiv = styled.div`
   top: 0px;
   background: #080808;
   width: 100vw;
@@ -49,7 +49,7 @@ const Background = styled.div`
   z-index: 1;
 `;
 
-const QuitButton = styled.button`
+const QuitButtonButton = styled.button`
   font-size: 24px;
   position: absolute;
   right: 5px;
@@ -60,20 +60,21 @@ const QuitButton = styled.button`
   cursor: pointer;
 `;
 // * COMPONENT
-const LoginModal = ({ goLoginPage }) => {
+const LoginModal = ({ goLoginPage, onSubmitHandler, loginFormOnChange }) => {
   return (
     <>
-      <Background />
+      <BackgroundDiv />
       <LoginModalDiv>
         <LoginImg src={LogoOnly} alt="logo" />
-        {/* Quit Modal Button */}
-        <QuitButton onClick={goLoginPage}>
+        <QuitButtonButton onClick={goLoginPage}>
           <GiCancel />
-        </QuitButton>
+        </QuitButtonButton>
+        <LoginForm
+          onSubmitHandler={onSubmitHandler}
+          loginFormOnChange={loginFormOnChange}
+        />{' '}
         {/* Login Form Componet */}
-        <LoginForm />
-        {/* PassPort SNS Login Componet*/}
-        <SnsLogin />
+        <SnsLogin /> {/* PassPort SNS Login Componet*/}
       </LoginModalDiv>
     </>
   );

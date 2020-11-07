@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 // React-component
 import LandingPage from './components/systems/LandingPage';
-import LoginPage from './components/systems/LoginPage';
 import RegisterContainer from './container/RegisterContainer';
 
 function App() {

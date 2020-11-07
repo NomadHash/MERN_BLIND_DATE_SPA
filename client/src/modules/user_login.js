@@ -1,9 +1,18 @@
-import * as UserApi from "../api/user";
-import { call, put, takeEvery } from "redux-saga/effects";
+import * as UserApi from '../api/user';
+import { call, put, takeEvery } from 'redux-saga/effects';
 
-const LOGIN_USER = "user/LOGIN_USER";
-const LOGIN_USER_SUCCESS = "user/LOGIN_USER_SUCCESS";
-const LOGIN_USER_FAILURE = "user/LOGIN_USER_FAILURE";
+// * =======================
+// * REGISTER_SAGA_MODULE
+// * =======================
+const LOGIN_FORM_CHANGE_FIELD = 'USER/LOGIN_FORM_CHANGE_FIELD'; // change_field action
+const LOGIN_USER = 'user/LOGIN_USER';
+const LOGIN_USER_SUCCESS = 'user/LOGIN_USER_SUCCESS';
+const LOGIN_USER_FAILURE = 'user/LOGIN_USER_FAILURE';
+
+export const loginFormChangeField = ({ key, value }) => ({
+  type: LOGIN_FORM_CHANGE_FIELD,
+  payload: { key, value },
+});
 
 export const loginUser = (formData) => ({
   type: LOGIN_USER,
@@ -30,8 +39,18 @@ export function* userSaga() {
   yield takeEvery(LOGIN_USER, loginUserSaga);
 }
 
-export default function userReduce(state = {}, action) {
+const initialState = {
+  email: '',
+  password: '',
+};
+
+export default function userReducer(state = initialState, action) {
   switch (action.type) {
+    case LOGIN_FORM_CHANGE_FIELD:
+      return {
+        ...state,
+        [action.payload.key]: action.payload.value,
+      };
     case LOGIN_USER:
       return {
         ...state,

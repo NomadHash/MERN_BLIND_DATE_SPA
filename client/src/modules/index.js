@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
-import userReduce, { userSaga } from './user_login';
+import userReducer, { userSaga } from './user_login';
 import authReduce, { authSaga } from './auth';
 import profileUploadReducer, { profileUploadSaga } from './imageUpload';
 import registerReduce, { registerSaga } from './register';
 import { all } from 'redux-saga/effects';
 
 const rootReducer = combineReducers({
-  userReduce,
+  userReducer,
   authReduce,
   registerReduce,
   profileUploadReducer,

@@ -4,7 +4,7 @@ import KakaoLogin from './KakaoLogin';
 import styled from 'styled-components';
 
 // STYLED-COMPONENTS
-const SC_SnsLogin_div = styled.div`
+const SnsLoginDiv = styled.div`
   display: flex;
   flex-direction: column;
   height: 110px;
@@ -13,10 +13,10 @@ const SC_SnsLogin_div = styled.div`
 
 const SnsLogin = () => {
   return (
-    <SC_SnsLogin_div>
+    <SnsLoginDiv>
       <FaceBookLogin />
       <KakaoLogin />
-    </SC_SnsLogin_div>
+    </SnsLoginDiv>
   );
 };
 
