@@ -4,11 +4,11 @@
   "description": "",
   "main": "./server/index.js",
   "scripts": {
-        "serve": "nodemon ./server/index.js --exec babel-node",
-        "client": "npm run start --prefix client",
-        "clean" : "killall -9 node",
-        "dev": "concurrently  \"npm run serve\" \"npm run client\""
-    },
+    "serve": "nodemon ./server/index.js --exec babel-node",
+    "client": "npm run start --prefix client",
+    "clean": "killall -9 node",
+    "dev": "concurrently  \"npm run serve\" \"npm run client\""
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -17,11 +17,13 @@
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "install": "^0.13.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.1",
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
-    "nodemon": "^2.0.5"
+    "nodemon": "^2.0.5",
+    "react-kakao-login": "^2.0.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",

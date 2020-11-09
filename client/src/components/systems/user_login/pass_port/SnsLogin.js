@@ -1,6 +1,6 @@
 import React from 'react';
 import FaceBookLogin from './FaceBookLogin';
-import KakaoLogin from './KakaoLogin';
+import Kakao from './Kakao';
 import styled from 'styled-components';
 
 // STYLED-COMPONENTS
@@ -20,7 +20,7 @@ const SnsLogin = () => {
   return (
     <SnsLoginDiv>
       <FaceBookLogin />
-      <KakaoLogin />
+      <Kakao />
     </SnsLoginDiv>
   );
 };
