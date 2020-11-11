@@ -81,7 +81,12 @@ const UnderLineDiv = styled.div`
 `;
 
 // * COMPONENT
-const LoginModal = ({ openLoginModal, onSubmitHandler, loginFormOnChange }) => {
+const LoginModal = ({
+  openLoginModal,
+  onSubmitHandler,
+  loginFormOnChange,
+  oAuthLoginHandler,
+}) => {
   return (
     <>
       <BackgroundDiv />
@@ -99,7 +104,8 @@ const LoginModal = ({ openLoginModal, onSubmitHandler, loginFormOnChange }) => {
         />{' '}
         {/* Login Form Componet */}
         <UnderLineDiv></UnderLineDiv>
-        <SnsLogin /> {/* PassPort SNS Login Componet*/}
+        <SnsLogin oAuthLoginHandler={oAuthLoginHandler} />{' '}
+        {/* PassPort SNS Login Componet*/}
       </LoginModalDiv>
     </>
   );

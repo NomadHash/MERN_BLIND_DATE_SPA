@@ -5,6 +5,10 @@ import config from "../config";
 const { SECRET_TOKEN } = config;
 
 const userSchema = mongoose.Schema({
+  oAuthId: {
+    type: Number,
+    default: null,
+  },
   gender: {
     type: Number,
     default: null,
@@ -16,6 +20,7 @@ const userSchema = mongoose.Schema({
   name: {
     type: String,
     maxlength: 50,
+    default: null,
   },
   email: {
     type: String,
@@ -75,6 +80,7 @@ userSchema.methods.comparePassword = function (plainPassword, callback) {
 
 userSchema.methods.generateToken = function (callback) {
   var user = this;
+  console.log(user);
   var token = jwt.sign({ id: user._id }, SECRET_TOKEN);
   user.token = token;
   user.save(function (err, user) {

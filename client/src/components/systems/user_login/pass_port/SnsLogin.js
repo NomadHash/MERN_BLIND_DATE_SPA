@@ -16,11 +16,11 @@ const SnsLoginDiv = styled.div`
   height: 80px;
 `;
 
-const SnsLogin = () => {
+const SnsLogin = ({ oAuthLoginHandler }) => {
   return (
     <SnsLoginDiv>
       <FaceBookLogin />
-      <Kakao />
+      <Kakao oAuthLoginHandler={oAuthLoginHandler} />
     </SnsLoginDiv>
   );
 };

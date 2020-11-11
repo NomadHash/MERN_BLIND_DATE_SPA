@@ -10,9 +10,7 @@ const buttonBlock = {
   fontWeight: '500',
   height: '32px',
   cursor: 'pointer',
-  fontWeight: '500',
   background: '#fae101',
-  fontSize: '14px',
   alignItems: 'center',
   display: 'flex',
   justifyContent: 'center',
@@ -24,13 +22,13 @@ const ButtoninnerText = styled.h3`
   font-size: 14px;
 `;
 
-const Kakao = (props) => {
+const Kakao = ({ oAuthLoginHandler }) => {
   return (
     <>
       <KaKaoLogin
         token={'f49e1a86dd2cbc9bcf21eb29793ec7d8'}
         buttonText="kakao"
-        onSuccess={console.log}
+        onSuccess={oAuthLoginHandler}
         onFail={console.error}
         onLogout={console.info}
         style={buttonBlock}

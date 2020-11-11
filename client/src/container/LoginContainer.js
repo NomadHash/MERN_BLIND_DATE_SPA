@@ -32,6 +32,16 @@ const LoginContainer = ({ openLoginModal, auth }) => {
     dispatch(loginUser(requestBody));
   };
 
+  const oAuthLoginHandler = (resData) => {
+    const { id } = resData.profile;
+    const { email } = resData.profile.kakao_account;
+    let request = {
+      oAuthId: id,
+      email,
+    };
+    dispatch(loginUser(request));
+  };
+
   useEffect(() => {
     if (loginSuccess) {
       dispatch(authUser());
@@ -42,7 +52,8 @@ const LoginContainer = ({ openLoginModal, auth }) => {
     if (loginSuccess && auth) {
       openLoginModal();
     }
-  }, [auth, dispatch]);
+  }, [auth, loginSuccess, openLoginModal]);
+
   return (
     <>
       {/* LoginModal Componet */}
@@ -50,6 +61,7 @@ const LoginContainer = ({ openLoginModal, auth }) => {
         openLoginModal={openLoginModal}
         onSubmitHandler={onSubmitHandler}
         loginFormOnChange={loginFormOnChange}
+        oAuthLoginHandler={oAuthLoginHandler}
       />
     </>
   );

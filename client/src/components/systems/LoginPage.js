@@ -177,7 +177,7 @@ const LoginPage = (props) => {
     if (loginSuccess) {
       props.history.push('/');
     }
-  }, [error, loginSuccess, props.history]);
+  }, [loginSuccess, props.history]);
 
   return (
     <LoginPageContent>
