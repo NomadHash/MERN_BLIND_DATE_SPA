@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import KaKaoLogin from 'react-kakao-login';
+import kaakoLogo from '../../../../public/kakaoLogo.png';
+require('dotenv').config();
+const KAKAO_APP_KEY = process.env.REACT_APP_KAKAO_APP_KEY;
 
 const buttonBlock = {
   border: 'none',
@@ -20,6 +23,14 @@ const buttonBlock = {
 const ButtoninnerText = styled.h3`
   margin: 0;
   font-size: 14px;
+  left: -7px;
+  position: relative;
+`;
+
+const LogoKakao = styled.img`
+  width: 19px;
+  position: relative;
+  left: -40px;
 `;
 
 const Kakao = ({ oAuthLoginHandler }) => {
@@ -32,13 +43,14 @@ const Kakao = ({ oAuthLoginHandler }) => {
   return (
     <>
       <KaKaoLogin
-        token={'f49e1a86dd2cbc9bcf21eb29793ec7d8'}
+        token={KAKAO_APP_KEY}
         buttonText="kakao"
         onSuccess={responseKakao}
         onFail={console.error}
         onLogout={console.info}
         style={buttonBlock}
       >
+        <LogoKakao src={kaakoLogo} alt="kakaoLogo" />
         <ButtoninnerText>카카오 계정으로 로그인</ButtoninnerText>
       </KaKaoLogin>
     </>

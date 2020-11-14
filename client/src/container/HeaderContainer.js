@@ -22,6 +22,10 @@ const HeaderContainer = ({ history }) => {
   const logOutHandler = () => {
     dispatch(logOutUser());
     dispatch(clearLoginState());
+    if (window?.FB.getAccessToken()) {
+      //Logout Facebook oAuth
+      window.FB.logout();
+    }
   };
 
   const goRootPage = () => {
