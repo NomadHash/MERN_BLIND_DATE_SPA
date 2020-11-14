@@ -1,5 +1,5 @@
 import React from 'react';
-import FaceBookLogin from './FaceBookLogin';
+import FaceBook from './FaceBook';
 import Kakao from './Kakao';
 import styled from 'styled-components';
 
@@ -19,7 +19,7 @@ const SnsLoginDiv = styled.div`
 const SnsLogin = ({ oAuthLoginHandler }) => {
   return (
     <SnsLoginDiv>
-      <FaceBookLogin />
+      <FaceBook oAuthLoginHandler={oAuthLoginHandler} />
       <Kakao oAuthLoginHandler={oAuthLoginHandler} />
     </SnsLoginDiv>
   );

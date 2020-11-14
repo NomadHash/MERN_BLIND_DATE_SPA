@@ -7,10 +7,12 @@ const router = express.Router();
 
 // Login
 router.post("/", (req, res) => {
+  console.log(req.body);
   //  OAUTH_LOGIN
   if (req.body?.oAuthId) {
     User.findOne({ oAuthId: req.body.oAuthId }, (err, user) => {
       if (!user) {
+        console.log("유저가 존재하지않습니디!");
         const userSchema = new User(req.body);
         // Save-Data-Base
         userSchema.save((err, _) => {

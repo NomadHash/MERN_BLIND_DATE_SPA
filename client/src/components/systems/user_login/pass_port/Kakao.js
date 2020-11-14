@@ -23,12 +23,18 @@ const ButtoninnerText = styled.h3`
 `;
 
 const Kakao = ({ oAuthLoginHandler }) => {
+  const responseKakao = (response) => {
+    console.log(response);
+    const { id } = response.profile;
+    const { email } = response.profile.kakao_account;
+    oAuthLoginHandler(id, email);
+  };
   return (
     <>
       <KaKaoLogin
         token={'f49e1a86dd2cbc9bcf21eb29793ec7d8'}
         buttonText="kakao"
-        onSuccess={oAuthLoginHandler}
+        onSuccess={responseKakao}
         onFail={console.error}
         onLogout={console.info}
         style={buttonBlock}

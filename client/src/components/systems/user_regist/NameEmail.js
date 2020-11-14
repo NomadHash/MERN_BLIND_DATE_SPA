@@ -48,7 +48,7 @@ const Name_email = ({ onChange }) => {
     scroller.scrollTo('myScrollToElement', {
       duration: 800,
       smooth: 'easeInOutQuart',
-      offset: -200,
+      offset: -600,
     });
   };
 
@@ -57,7 +57,7 @@ const Name_email = ({ onChange }) => {
       onChange('email', '');
       scrollTo();
     }
-  }, [error, onChange]);
+  }, [error]);
 
   const onChangeHandler = (event) => {
     const { name, value } = event.target;

@@ -32,9 +32,8 @@ const LoginContainer = ({ openLoginModal, auth }) => {
     dispatch(loginUser(requestBody));
   };
 
-  const oAuthLoginHandler = (resData) => {
-    const { id } = resData.profile;
-    const { email } = resData.profile.kakao_account;
+  const oAuthLoginHandler = (id, email) => {
+    console.log(id, email);
     let request = {
       oAuthId: id,
       email,

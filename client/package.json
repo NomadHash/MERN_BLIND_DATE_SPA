@@ -11,6 +11,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-easy-crop": "^3.1.1",
+    "react-facebook-login": "^4.1.1",
     "react-icon": "^1.0.0",
     "react-icons": "^3.11.0",
     "react-image-crop": "^8.6.6",
@@ -26,7 +27,7 @@
     "styled-components": "^5.1.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "HTTPS=true react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
