@@ -20,7 +20,7 @@ const RegisterInputText = styled.h2`
   margin: 0;
   margin-bottom: 8px;
   font-size: 30px;
-  color: #5f5f5f;
+  color: white;
   font-weight: 400;
   margin-top: 29px;
 `;

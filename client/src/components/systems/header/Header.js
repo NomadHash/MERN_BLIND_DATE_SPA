@@ -45,12 +45,11 @@ const LoginButton = styled.button`
   }
 `;
 const ArcodianMypageDiv = styled.div`
-  box-shadow: 0px 5px 0px rgba(0, 0, 0, 0.7);
-  position: fixed;
-  background: #eaeaea;
-  width: 136px;
+  position: absolute;
+  background: #ffffff;
+  // width: 136px;
   height: 5vw;
-  border-radius: 15px;
+  border-radius: 5px;
   align-items: flex-start;
   display: ${(props) => (props.open === true ? 'flex' : 'none')};
   flex-direction: column;
@@ -69,7 +68,7 @@ const LogoutButton = styled.button`
   color: #474747;
   cursor: pointer;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 15px;
   padding: 0px;
   margin-bottom: 15px;
   &:hover {
@@ -88,7 +87,7 @@ const Header = ({
 }) => {
   return (
     <>
-      <HeaderBlock>
+      {/* <HeaderBlock>
         <HeaderLogoWrapper onClick={goRootPage}>
           <LogoImg src={headerLogo} alt="logo" />
         </HeaderLogoWrapper>
@@ -97,7 +96,6 @@ const Header = ({
             <MypageBtnSpan onClick={onMypageHandler}>
               마이페이지
               <ArcodianMypageDiv open={open}>
-                <LogoutButton onClick={logOutHandler}>내 정보</LogoutButton>
                 <LogoutButton onClick={logOutHandler}>로그아웃</LogoutButton>
               </ArcodianMypageDiv>
             </MypageBtnSpan>
@@ -105,7 +103,7 @@ const Header = ({
             <LoginButton onClick={openLoginModal}>로그인</LoginButton>
           )}
         </TitleBtnDiv>
-      </HeaderBlock>
+      </HeaderBlock> */}
     </>
   );
 };

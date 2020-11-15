@@ -22,10 +22,6 @@ const HeaderContainer = ({ history }) => {
   const logOutHandler = () => {
     dispatch(logOutUser());
     dispatch(clearLoginState());
-    if (window?.FB.getAccessToken()) {
-      //Logout Facebook oAuth
-      window.FB.logout();
-    }
   };
 
   const goRootPage = () => {
@@ -33,7 +29,7 @@ const HeaderContainer = ({ history }) => {
   };
   const { auth } = useSelector(({ authReduce }) => {
     return {
-      auth: authReduce.testAuth?.isAuth,
+      auth: authReduce.userAuth?.isAuth,
     };
   });
 

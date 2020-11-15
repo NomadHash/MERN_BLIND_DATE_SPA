@@ -55,11 +55,11 @@ const ImageUpload = ({ onChange }) => {
           onChange('profileImage', response.data.image);
         });
     }
-  }, [onChange, blobData]);
+  }, [blobData]);
 
   let conditionImage = () => {
     return profileImage[0] === 'u'
-      ? `http://localhost:7000/${profileImage}`
+      ? `http://24cfb9a041fa.ngrok.io/${profileImage}`
       : profileImage;
   };
 

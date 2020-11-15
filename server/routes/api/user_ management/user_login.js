@@ -7,33 +7,32 @@ const router = express.Router();
 
 // Login
 router.post("/", (req, res) => {
-  console.log(req.body);
   //  OAUTH_LOGIN
   if (req.body?.oAuthId) {
-    User.findOne({ oAuthId: req.body.oAuthId }, (err, user) => {
-      if (!user) {
-        console.log("유저가 존재하지않습니디!");
-        const userSchema = new User(req.body);
-        // Save-Data-Base
-        userSchema.save((err, _) => {
-          if (err) return res.json({ success: false, err });
-          return res.status(200).json({
-            registerSuccess: true,
+    (async function () {
+      await User.findOne({ oAuthId: req.body.oAuthId }, (err, user) => {
+        if (!user) {
+          const userSchema = new User(req.body);
+          // Save-Data-Base
+          userSchema.save((err, _) => {
+            if (err) return res.json({ success: false, err });
           });
-        });
-      }
-
-      //Make Token
-      user.generateToken((err, user) => {
-        if (err) return res.status(400).send(err);
-        // save Token at Cookie
-        res
-          .cookie("x_auth", user.token)
-          .status(200)
-          .json({ loginSuccess: true, userId: user._Id, token: user.token });
+        }
       });
-    });
-    return;
+
+      await User.findOne({ oAuthId: req.body.oAuthId }, (err, user) => {
+        user.generateToken((err, user) => {
+          if (err) return res.status(400).send(err);
+
+          //save Token at Cookie
+          res
+            .cookie("x_auth", user.token)
+            .status(200)
+            .json({ loginSuccess: true, userId: user._Id, token: user.token });
+        });
+      });
+    })();
+
     // ===============
   } else {
     //Find Email at DB
@@ -51,17 +50,16 @@ router.post("/", (req, res) => {
             loginSuccess: false,
             message: "비밀번호가 틀렸습니다.",
           });
+      });
 
-        //Make Token
-        user.generateToken((err, user) => {
-          if (err) return res.status(400).send(err);
+      user.generateToken((err, user) => {
+        if (err) return res.status(400).send(err);
 
-          //save Token at Cookie
-          res
-            .cookie("x_auth", user.token)
-            .status(200)
-            .json({ loginSuccess: true, userId: user._Id, token: user.token });
-        });
+        //save Token at Cookie
+        res
+          .cookie("x_auth", user.token)
+          .status(200)
+          .json({ loginSuccess: true, userId: user._Id, token: user.token });
       });
     });
   }

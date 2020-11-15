@@ -6,7 +6,7 @@ const IdPwdH2 = styled.h2`
   font-size: 16px;
   margin: 0;
   font-weight: 500;
-  color: dimgrey;
+  color: white;
   margin-bottom: 4px;
   margin-left: 15px;
 `;
@@ -18,13 +18,15 @@ const LoginInputForm = styled.form`
   top: 148px;
 `;
 const LoginInput = styled.input`
-  font-size: 16px;
-  width: 237px;
+  width: 50vw;
+  font-size: 14px;
   border-radius: 23px;
   border: 2px solid #f8476c;
-  padding: 9px 21px;
+  padding: 6px 10px;
   font-weight: 600;
   margin-bottom: 15px;
+  color: white;
+  background: rgb(0, 0, 0, 0.4);
   &:focus {
     outline: none;
   }

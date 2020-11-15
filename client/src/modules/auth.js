@@ -66,7 +66,7 @@ export default function authReduce(state = {}, action) {
     case AUTH_USER_SUCCESS:
       return {
         ...state,
-        testAuth: action.payload,
+        userAuth: action.payload,
         error: null,
       };
     case AUTH_USER_FAILURE:
@@ -82,7 +82,7 @@ export default function authReduce(state = {}, action) {
     case LOG_OUT_USER_SUCCESS:
       return {
         ...state,
-        testAuth: null,
+        userAuth: null,
         error: null,
       };
     case LOG_OUT_USER_FAILURE:

@@ -1,10 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import LoginModal from '../components/systems/user_login/LoginModal';
 import { loginFormChangeField, loginUser } from '../modules/user_login';
 import { authUser } from '../modules/auth';
 import { useDispatch, useSelector } from 'react-redux';
 
-const LoginContainer = ({ openLoginModal, auth }) => {
+import { clearLoginState } from '../modules/user_login';
+import { logOutUser } from '../modules/auth';
+
+const LoginContainer = ({ openLoginModal }) => {
+  const logOutHandler = () => {
+    dispatch(logOutUser());
+    dispatch(clearLoginState());
+  };
+
+  const { auth } = useSelector(({ authReduce }) => {
+    return {
+      auth: authReduce.userAuth?.isAuth,
+    };
+  });
+
   //* REDUX_DISPATCH
   const dispatch = useDispatch();
 
@@ -33,11 +47,15 @@ const LoginContainer = ({ openLoginModal, auth }) => {
   };
 
   const oAuthLoginHandler = (id, email) => {
-    console.log(id, email);
     let request = {
       oAuthId: id,
       email,
     };
+
+    if (window.FB.getAccessToken()) {
+      window.FB.logout();
+    }
+
     dispatch(loginUser(request));
   };
 
@@ -55,7 +73,6 @@ const LoginContainer = ({ openLoginModal, auth }) => {
 
   return (
     <>
-      {/* LoginModal Componet */}
       <LoginModal
         openLoginModal={openLoginModal}
         onSubmitHandler={onSubmitHandler}

@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 // React-component
-import LandingPage from './components/systems/LandingPage';
+import AppFrame from './components/systems/AppFrame';
 import RegisterContainer from './container/RegisterContainer';
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
       <Switch>
         <Route path="/register" component={RegisterContainer} />
         {/* <Route path="/login" component={LoginPage} /> */}
-        <Route path="/" component={LandingPage} />
+        <Route path="/" component={AppFrame} />
       </Switch>
     </Router>
   );

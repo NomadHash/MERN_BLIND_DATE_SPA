@@ -7,22 +7,22 @@ const KAKAO_APP_KEY = process.env.REACT_APP_KAKAO_APP_KEY;
 
 const buttonBlock = {
   border: 'none',
-  borderRadius: '9px',
+  border: '2px solid white',
+  borderRadius: '27px',
   fontSize: '17px',
-  width: '284px',
-  fontWeight: '500',
-  height: '32px',
+  width: '67vw',
+  color: 'white',
   cursor: 'pointer',
-  background: '#fae101',
-  alignItems: 'center',
+  background: 'none',
   display: 'flex',
   justifyContent: 'center',
-  padding: '4px 0px',
+  padding: '7px 0px',
 };
 
 const ButtoninnerText = styled.h3`
   margin: 0;
   font-size: 14px;
+  font-weight: 500;
   left: -7px;
   position: relative;
 `;

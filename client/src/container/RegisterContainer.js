@@ -52,6 +52,13 @@ const LoginPageContent = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 1024px) {
+    align-items: normal;
+  }
+  @media (max-width: 768px) {
+    align-items: normal;
+  }
   position: relative;
 `;
 

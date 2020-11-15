@@ -17,19 +17,18 @@ const BoxFadeKeyframes = keyframes`
 `;
 
 const LoginModalDiv = styled.div`
-  z-index: 1;
-  top: 0px;
-  background: white;
-  position: fixed;
   border-radius: 10px;
-  margin: 50vh 50vw;
-  transform: translate(-50%, -50%);
+  height: 519px;
+  width: 75%;
+  top: 103px;
+  background: rgb(0, 0, 0, 0.2);
+
+  z-index: 1;
+  position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 400px;
-  height: 600px;
   animation: ${BoxFadeKeyframes} 0.5s forwards;
 `;
 
@@ -67,7 +66,7 @@ const ModalHeaderDiv = styled.div`
 `;
 
 const LoginTextH2 = styled.h2`
-  color: #464646;
+  color: white;
   margin: 0;
 `;
 const UnderLineDiv = styled.div`
