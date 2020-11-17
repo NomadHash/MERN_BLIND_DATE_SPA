@@ -1,7 +1,6 @@
 //IMPORT_MODULES
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { GiCancel } from 'react-icons/gi';
 import LoginForm from './LoginForm';
 import SnsLogin from './pass_port/SnsLogin';
 import LogoOnly from '../../../public/logoOnly.png';
@@ -19,12 +18,8 @@ const BoxFadeKeyframes = keyframes`
 const LoginModalDiv = styled.div`
   border-radius: 10px;
   height: 519px;
-  width: 75%;
-  top: 103px;
-  background: rgb(0, 0, 0, 0.2);
-
+  width: 300px;
   z-index: 1;
-  position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -37,26 +32,6 @@ const LoginImg = styled.img`
   margin-bottom: 7px;
 `;
 
-const BackgroundDiv = styled.div`
-  top: 0px;
-  background: #080808;
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  opacity: 0.6;
-  z-index: 1;
-`;
-
-const QuitButtonButton = styled.button`
-  font-size: 24px;
-  position: absolute;
-  right: 5px;
-  top: 9px;
-  color: gray;
-  background: none;
-  border: none;
-  cursor: pointer;
-`;
 const ModalHeaderDiv = styled.div`
   display: flex;
   align-items: center;
@@ -88,24 +63,18 @@ const LoginModal = ({
 }) => {
   return (
     <>
-      <BackgroundDiv />
-      <LoginModalDiv>
-        <QuitButtonButton onClick={openLoginModal}>
-          <GiCancel />
-        </QuitButtonButton>
-        <ModalHeaderDiv>
+      {/* <ModalHeaderDiv>
           <LoginImg src={LogoOnly} alt="logo" />
           <LoginTextH2>로그인</LoginTextH2>
-        </ModalHeaderDiv>
-        <LoginForm
+        </ModalHeaderDiv> */}
+      {/* <LoginForm
           onSubmitHandler={onSubmitHandler}
           loginFormOnChange={loginFormOnChange}
         />{' '}
         {/* Login Form Componet */}
-        <UnderLineDiv></UnderLineDiv>
-        <SnsLogin oAuthLoginHandler={oAuthLoginHandler} />{' '}
-        {/* PassPort SNS Login Componet*/}
-      </LoginModalDiv>
+      {/* <UnderLineDiv></UnderLineDiv> */}
+      <SnsLogin oAuthLoginHandler={oAuthLoginHandler} />{' '}
+      {/* PassPort SNS Login Componet*/}
     </>
   );
 };

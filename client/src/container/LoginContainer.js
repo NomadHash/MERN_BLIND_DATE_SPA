@@ -5,20 +5,13 @@ import { authUser } from '../modules/auth';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { clearLoginState } from '../modules/user_login';
-import { logOutUser } from '../modules/auth';
 
 const LoginContainer = ({ openLoginModal }) => {
-  const logOutHandler = () => {
-    dispatch(logOutUser());
-    dispatch(clearLoginState());
-  };
-
   const { auth } = useSelector(({ authReduce }) => {
     return {
       auth: authReduce.userAuth?.isAuth,
     };
   });
-
   //* REDUX_DISPATCH
   const dispatch = useDispatch();
 
@@ -30,7 +23,6 @@ const LoginContainer = ({ openLoginModal }) => {
       }),
     );
   };
-
   const { email, password, loginSuccess } = useSelector(({ userReducer }) => ({
     email: userReducer.email,
     password: userReducer.password,

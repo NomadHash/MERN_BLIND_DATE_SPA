@@ -1,10 +1,12 @@
 import React from 'react';
-import LandingPage from './LandingPage';
 import styled from 'styled-components';
-import logo from '../../public/logoWhite.png';
+import logo from '../../../public/logoWhite.png';
+import backGround from '../../../public/background.png';
 
 const BlockFrame = styled.div`
-  position: relative;
+  width: 100%;
+  z-index: -1;
+  position: fixed;
   background: linear-gradient(
       to top,
       rgba(0, 0, 0, 0.9),
@@ -12,21 +14,19 @@ const BlockFrame = styled.div`
       rgba(0, 0, 0, 0.7),
       rgba(0, 0, 0, 0.5)
     ),
-    url(/static/media/background.b2225a1e.png);
+    url(${backGround});
   background-size: cover;
   height: 100vh;
 `;
-
 const IntroduceBlock = styled.div`
   @media (min-width: 768px) {
-    position: relative;
+    position: fixed;
     width: 601px;
     left: 64px;
     display: block;
   }
   display: none;
 `;
-
 const LogoImg = styled.img`
   @media (min-width: 768px) {
     top: 45px;
@@ -34,17 +34,16 @@ const LogoImg = styled.img`
     width: 511px;
   }
 `;
-const AppFrame = () => {
+
+const Background = () => {
   return (
     <>
-      <BlockFrame>
-        <IntroduceBlock>
-          <LogoImg src={logo} alt="logo" />
-        </IntroduceBlock>
-        <LandingPage />
-      </BlockFrame>
+      <BlockFrame></BlockFrame>
+      <IntroduceBlock>
+        <LogoImg src={logo} alt="logo" />
+      </IntroduceBlock>
     </>
   );
 };
 
-export default AppFrame;
+export default Background;

@@ -50,6 +50,10 @@ const userSchema = mongoose.Schema({
   tokenExp: {
     type: Number,
   },
+  enteredUserInformation: {
+    type: Number,
+    default: 0,
+  },
 });
 
 userSchema.pre("save", function (next) {

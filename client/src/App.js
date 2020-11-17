@@ -1,19 +1,24 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
-// React-component
-import AppFrame from './components/systems/AppFrame';
 import RegisterContainer from './container/RegisterContainer';
+import LobbyContainer from './container/LobbyContainer';
+import InfoContainer from './container/InfoContainer';
+import LandingPage from './components/systems/LandingPage';
+import Background from './components/systems/background/Background';
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/register" component={RegisterContainer} />
-        {/* <Route path="/login" component={LoginPage} /> */}
-        <Route path="/" component={AppFrame} />
-      </Switch>
-    </Router>
+    <>
+      <Background />
+      <Router>
+        <Switch>
+          <Route path="/register" component={RegisterContainer} />
+          <Route path="/lobby" component={LobbyContainer} />
+          <Route path="/enterInfo" component={InfoContainer} />
+          <Route path="/" component={LandingPage} />
+        </Switch>
+      </Router>
+    </>
   );
 }
 

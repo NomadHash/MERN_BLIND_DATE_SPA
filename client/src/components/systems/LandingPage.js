@@ -1,39 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { authUser } from '../../modules/auth';
 import logoWhite from '../../public/logoWhite.png';
 import LoginContainer from '../../container/LoginContainer';
+import { useSelector } from 'react-redux';
+import { FaChevronLeft } from 'react-icons/fa';
 
 // STYLED_COMPONENTS
-const zUp = keyframes`
-
-  50% {
-    transform: translateY(0px);
-  }
-  70% {
-      transform: translateY(-12px);
-  }
-  100% {
-      transform: translateY(0px);
-  }
-`;
-
 const MainContent = styled.div`
- transform: translate(0,-50%);
-    position: fixed;
-    top: 50%;
-}
+  position: fixed;
+  top: 35%;
 `;
-
 const UserContent = styled.div`
+  @media (min-width: 768px) {
+    bottom: 100px;
+  }
   width: 420px;
   align-items: center;
   display: flex;
   flex-direction: column;
   position: fixed;
-  bottom: 90px;
+  bottom: 35px;
 `;
 const RegisterButton = styled.button`
   width: 83%;
@@ -42,12 +31,11 @@ const RegisterButton = styled.button`
   padding: 15px 90px;
   border-radius: 30px;
   border: none;
-  color: #333333;
+  color: #616161;
   font-weight: 600;
   cursor: pointer;
   margin-bottom: 15px;
 `;
-
 const LoginButton = styled.button`
   border: 3px solid white;
   width: 83%;
@@ -59,6 +47,10 @@ const LoginButton = styled.button`
   color: white;
   font-weight: 600;
   cursor: pointer;
+
+  &:active {
+    width: 80%;
+  }
 `;
 const LandingContent = styled.div`
   @media (min-width: 768px) {
@@ -73,39 +65,62 @@ const LandingContent = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-
   position: fixed;
   overflow: hidden;
-  top: 0;
   height: 100vh;
   background: linear-gradient(to right, #f25478, #fa4e46);
 `;
-
 const LandingLogo = styled.img`
   width: 220px;
 `;
-
 const SpanMessage = styled.span`
   margin: 0 auto;
   color: white;
-  font-weight: 700;
+  font-weight: 400;
   font-size: 13px;
   width: 80%;
   margin-bottom: 25px;
 `;
 
-const LandingPage = (props) => {
+const QuitButtonButton = styled.button`
+  @media (min-width: 768px) {
+    left: 15px;
+  }
+
+  color: white;
+  left: -10px;
+  top: 40px;
+
+  font-size: 29px;
+  position: absolute;
+  background: none;
+  border: none;
+  cursor: pointer;
+`;
+
+const LandingPage = ({ history }) => {
+  const [loginPopup, setLoginPopup] = useState(false);
   const dispatch = useDispatch();
+
+  const { auth } = useSelector(({ authReduce }) => {
+    return {
+      auth: authReduce.userAuth?.isAuth,
+    };
+  });
 
   useEffect(() => {
     dispatch(authUser());
   }, [dispatch]);
 
-  const onRegisterHandler = () => {
-    props.history.push('/register');
-  };
+  useEffect(() => {
+    if (auth) {
+      history.push('/lobby');
+    }
+  }, [auth]);
 
-  const [loginPopup, setLoginPopup] = useState(false);
+  const onRegisterHandler = () => {
+    history.push('/register');
+  };
 
   const openLoginModal = () => {
     setLoginPopup(!loginPopup);
@@ -114,6 +129,11 @@ const LandingPage = (props) => {
   return (
     <>
       <LandingContent>
+        {loginPopup && (
+          <QuitButtonButton onClick={openLoginModal}>
+            <FaChevronLeft />
+          </QuitButtonButton>
+        )}
         <MainContent>
           <LandingLogo src={logoWhite} alt="logo" />
         </MainContent>
@@ -124,11 +144,13 @@ const LandingPage = (props) => {
             간주됩니다. Tindux의 개인정보 취급방침 및 쿠키 정책에서 회원 정보
             처리 방법을 확인하실 수 있습니다.
           </SpanMessage>
-          <RegisterButton onClick={onRegisterHandler}>
-            계정 만들기
-          </RegisterButton>
           {!loginPopup ? (
-            <LoginButton onClick={openLoginModal}>로그인</LoginButton>
+            <>
+              <RegisterButton onClick={onRegisterHandler}>
+                계정 만들기
+              </RegisterButton>
+              <LoginButton onClick={openLoginModal}>로그인</LoginButton>
+            </>
           ) : (
             <LoginContainer openLoginModal={openLoginModal} />
           )}

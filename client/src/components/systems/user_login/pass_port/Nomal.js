@@ -28,7 +28,7 @@ const FaceBookLoginButton = styled.button`
   margin-bottom: 15px;
   align-items: center;
   padding: 13px 5px;
-  animation: ${BoxFadeKeyframes} 0.3s forwards;
+  animation: ${BoxFadeKeyframes} 0.2s forwards;
 `;
 
 const ButtonInnerDiv = styled.div`
@@ -67,7 +67,7 @@ const FaceBookLogin = ({ oAuthLoginHandler }) => {
                 padding: '10px 10px',
               }}
             /> */}
-            <ButtoninnerText>페이스북 계정으로 로그인</ButtoninnerText>
+            <ButtoninnerText>Tindux 계정으로 로그인</ButtoninnerText>
           </ButtonInnerDiv>
         </FaceBookLoginButton>
       )}

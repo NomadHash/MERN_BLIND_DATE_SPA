@@ -18,7 +18,6 @@ const LoginInputForm = styled.form`
   top: 148px;
 `;
 const LoginInput = styled.input`
-  width: 50vw;
   font-size: 14px;
   border-radius: 23px;
   border: 2px solid #f8476c;

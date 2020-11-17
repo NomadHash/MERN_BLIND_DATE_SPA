@@ -11,6 +11,7 @@ router.get("/", auth, (req, res) => {
     email: req.user.email,
     name: req.user.name,
     profileImage: req.user.profileImage,
+    enteredUserInformation: req.user.enteredUserInformation,
   });
 });
 
