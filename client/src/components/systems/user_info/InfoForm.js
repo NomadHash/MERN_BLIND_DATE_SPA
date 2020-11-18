@@ -1,7 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import logoOnly from '../../../public/logoOnly.png';
-import { Element, scroller } from 'react-scroll';
 import { HiCheck } from 'react-icons/hi';
 
 const boxFade = keyframes`
@@ -14,7 +13,7 @@ const boxFade = keyframes`
 `;
 const ResponseBlock = styled.div`
   @media (min-width: 768px) {
-    width: 430px;
+    width: 420px;
     left: 50vw;
     position: absolute;
   }
@@ -23,6 +22,8 @@ const ResponseBlock = styled.div`
   width: 100%;
   background: white;
   height: 100vh;
+  display: flex;
+  align-items: center;
 `;
 
 const FormBlock = styled.div`
@@ -30,8 +31,13 @@ const FormBlock = styled.div`
     width: 430px;
     top: 120px;
   }
+  @media (max-height: 812px) {
+    bottom: 120px;
+  }
+  @media (max-height: 667px) {
+    bottom: 40px;
+  }
   position: fixed;
-  top: 45px;
 
   display: flex;
   flex-direction: column;
@@ -48,7 +54,7 @@ const IntroImg = styled.img`
 
 const IntroDiv = styled.div`
   @media (min-width: 768px) {
-    margin-bottom: 65px;
+    margin-bottom: 50px;
   }
   position: relative;
   align-items: center;
@@ -64,11 +70,17 @@ const H2 = styled.h2`
 `;
 
 const Strong = styled.strong`
+  @media (max-width: 667px) {
+    font-size: 10px;
+  }
   color: #979797;
   font-size: 15px;
 `;
 
 const ListH3 = styled.h3`
+  @media (max-width: 667px) {
+    font-size: 16px;
+  }
   margin-top: 7px;
   font-weight: 600;
   margin-bottom: 2px;
@@ -76,6 +88,9 @@ const ListH3 = styled.h3`
 `;
 
 const ListStrong = styled.strong`
+  @media (max-width: 667px) {
+    font-size: 14px;
+  }
   color: #979797;
   font-weight: 500;
 `;
@@ -90,7 +105,7 @@ const UnList = styled.ul`
   @media (min-width: 768px) {
     margin-bottom: 105px;
   }
-  padding: 0 30px;
+  padding: 0 45px;
   list-style: none;
   margin: 0;
 
