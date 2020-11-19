@@ -1,100 +1,105 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-// * =================================
-// *       AGE_GENDER
-// * =================================
-// * STYLED_COMPONENT
-const TitleH2 = styled.h2`
-  margin-bottom: 8px;
-  font-size: 30px;
-  color: #5f5f5f;
-  font-weight: 400;
-  margin-top: 29px;
+import React from 'react';
+import styled, { keyframes } from 'styled-components';
+import { GrFormPrevious } from 'react-icons/gr';
+//* ======================
+//*     STYLED_COMPONENT
+//* ======================
+const boxFade = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+const BlockDiv = styled.div`
+  position: fixed;
+  top: 10px;
+  display: flex;
+  flex-direction: column;
+  animation: ${boxFade} 0.6s forwards;
+`;
+const RegisterInputText = styled.h2`
+  font-size: 50px;
+  font-weight: 700;
+  color: #303030;
+`;
+const ContinueBtnDiv = styled.div`
+  text-align: center;
+`;
+const ContinueBtn = styled.button`
+  border: none;
+  font-size: 25px;
+  color: #afafaf;
   cursor: pointer;
+  background: none;
+  background: #f7f7f7;
+  width: 100%;
+  border-radius: 100px;
+  padding: 6px;
 `;
 const ButtonList = styled.ul`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   width: 130px;
   list-style: none;
   padding: 0;
+  width: 100%;
 `;
-const AgeSelect = styled.select`
-  font-weight: 600;
-  color: white;
-  background: #f94670;
-  font-size: 18px;
-  border-radius: 32px;
+const PrevBtn = styled.button`
+  position: relative;
+  right: 160px;
+  top: 0;
+  font-size: 90px;
+  opacity: 0.2;
+  background: none;
   border: none;
-  padding: 5px 10px;
+  color: #afafaf;
+  cursor: pointer;
 `;
 //TODO ======================
-//TODO    AGE_GENDER (CP)
+//TODO    INFO_GENDER (CP)
 //TODO ======================
-const InfoGender = ({ onChange, changePages, gender, age }) => {
-  //* ======================
-  //*    USE_STATE
-  //* ======================
-  const [choice, setChoice] = useState();
+const InfoGender = ({ onChange, changePages, gender }) => {
   //* =======================
   //*   VARIABLE || FUNCTIONS
   //* =======================
   const genderList = [
-    { gender: '남', number: 0 },
-    { gender: '여', number: 1 },
-  ];
-  const ageList = [
-    {
-      age: '20 ~ 24',
-      number: 1,
-    },
-    {
-      age: '25 ~ 29',
-      number: 2,
-    },
-    {
-      age: '30 ~ 34',
-      number: 3,
-    },
-    {
-      age: '35 ~ 40',
-      number: 4,
-    },
+    { gender: '여성', number: 0 },
+    { gender: '남성', number: 1 },
   ];
   const genderHandler = (genderNum) => {
-    setChoice(genderNum);
     onChange('gender', genderNum);
-  };
-  const ageHandler = (event) => {
-    const { name, value } = event.target;
-    onChange(name, Number(value));
   };
   //* ========================
   //*   CONDITIONAL_CSS
   //* ========================
   const GenderBtnstyles = {
     onClick: {
-      border: 'none',
+      border: '3px solid rgb(249 126 74)',
       color: 'white',
       fontWeight: 'bold',
-      background: 'rgb(249, 70, 112)',
-      fontSize: '15px',
-      borderRadius: '16px',
-      padding: '5px 21px',
+      background: 'linear-gradient(to right, #ff4187, #fa8046)',
+      fontSize: '18px',
+      borderRadius: '30px',
+      padding: '9px 21px',
       cursor: 'pointer',
+      width: '280px',
+      marginBottom: '20px',
     },
     nonClick: {
-      border: 'none',
-      color: 'rgb(249, 70, 112)',
+      border: '3px solid #c9c9c9',
+      color: '#c9c9c9',
       fontWeight: 'bold',
-      background: 'white',
-      boxShadow: '0 0 0 2px rgb(249, 70, 112) inset',
-      fontSize: '15px',
-      borderRadius: '16px',
-      padding: '5px 21px',
+      background: 'none',
+      fontSize: '18px',
+      borderRadius: '30px',
+      padding: '9px 21px',
       cursor: 'pointer',
+      width: '280px',
+      marginBottom: '20px',
     },
   };
   const { onClick, nonClick } = GenderBtnstyles;
@@ -116,26 +121,20 @@ const InfoGender = ({ onChange, changePages, gender, age }) => {
       </li>
     );
   });
-  const ageRepeatElement = ageList.map((ele) => {
-    return (
-      <option key={ele.number} value={ele.number}>
-        {ele.age}
-      </option>
-    );
-  });
   //* ======================
   //*    RENDER
   //* ======================
   return (
-    <div>
-      <TitleH2>성별</TitleH2>
+    <BlockDiv>
+      <PrevBtn>
+        <GrFormPrevious onClick={() => changePages('prev')} />
+      </PrevBtn>
+      <RegisterInputText>성별:</RegisterInputText>
       <ButtonList>{repeatElement}</ButtonList>
-      <TitleH2>나이</TitleH2>
-      <AgeSelect onChange={ageHandler} value={age} name="age">
-        {ageRepeatElement}
-      </AgeSelect>
-      <button onClick={() => changePages('prec')}>이전</button>
-    </div>
+      <ContinueBtnDiv>
+        <ContinueBtn onClick={() => changePages('next')}>계속</ContinueBtn>
+      </ContinueBtnDiv>
+    </BlockDiv>
   );
 };
 export default InfoGender;

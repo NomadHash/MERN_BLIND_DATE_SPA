@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import InfoEnter from '../components/systems/user_info/InfoEnter';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeField } from '../modules/information';
-import InfoAgeGender from '../components/systems/user_info/InfoAgeGender';
+import InfoAge from '../components/systems/user_info/InfoAge';
 import InfoUserName from '../components/systems/user_info/InfoUserName';
-
+import InfoGender from '../components/systems/user_info/InfoGender';
 //TODO ======================
 //TODO    INFO_CONTAINER (CT)
 //TODO ======================
-
 const InfoContainer = () => {
   //* ======================
   //*    USE_DIS_PATCH
@@ -49,11 +48,11 @@ const InfoContainer = () => {
   };
   const renderList = [
     <InfoUserName changePages={changePages} onChange={onChange} name={name} />,
-    <InfoAgeGender
+    <InfoAge changePages={changePages} onChange={onChange} age={age} />,
+    <InfoGender
       changePages={changePages}
       onChange={onChange}
       gender={gender}
-      age={age}
     />,
   ];
   //* ======================
@@ -69,5 +68,4 @@ const InfoContainer = () => {
     </>
   );
 };
-
 export default InfoContainer;

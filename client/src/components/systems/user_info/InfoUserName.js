@@ -20,7 +20,7 @@ const BlockDiv = styled.div`
 `;
 const RegisterInputText = styled.h2`
   font-size: 50px;
-  font-weight: 400;
+  font-weight: 700;
   color: #303030;
 `;
 const RegisterInput = styled.input`
@@ -41,12 +41,19 @@ const Strong = styled.strong`
   text-align: center;
   margin-bottom: 90px;
 `;
+const ContinueBtnDiv = styled.div`
+  text-align: center;
+`;
 const ContinueBtn = styled.button`
-  background: none;
   border: none;
-  font-size: 30px;
+  font-size: 25px;
   color: #afafaf;
   cursor: pointer;
+  background: none;
+  background: #f7f7f7;
+  width: 100%;
+  border-radius: 100px;
+  padding: 6px;
 `;
 //TODO ======================
 //TODO    INFO_USER_NAME
@@ -74,15 +81,10 @@ const InfoUserName = ({ onChange, changePages, name }) => {
         required
       />
       <Strong>Tindux에는 다음과 같이 표시됩니다.</Strong>
-      <div
-        style={{
-          textAlign: 'center',
-        }}
-      >
+      <ContinueBtnDiv>
         <ContinueBtn onClick={() => changePages('next')}>계속</ContinueBtn>
-      </div>
+      </ContinueBtnDiv>
     </BlockDiv>
   );
 };
-
 export default InfoUserName;

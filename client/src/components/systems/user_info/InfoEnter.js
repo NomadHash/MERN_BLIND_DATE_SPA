@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { GrFormPrevious } from 'react-icons/gr';
 //* ======================
 //*     STYLED_COMPONENT
 //* ======================
@@ -23,22 +22,10 @@ const ResponseBlock = styled.div`
   overflow: hidden;
   height: 100vh;
 `;
-
-const PrevBtn = styled.button`
-  position: fixed;
-  left: 0;
-  top: 0;
-  font-size: 90px;
-  opacity: 0.2;
-  background: none;
-  border: none;
-  color: #afafaf;
-  cursor: pointer;
-`;
 //TODO ======================
 //TODO    INFO_CONTAINER (CP)
 //TODO ======================
-const InfoEnter = ({ currPage, changePages }) => {
+const InfoEnter = ({ currPage }) => {
   //* ======================
   //*    RENDER
   //* ======================

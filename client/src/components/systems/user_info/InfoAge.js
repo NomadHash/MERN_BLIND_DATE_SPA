@@ -1,10 +1,9 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { GrFormPrevious } from 'react-icons/gr';
-// * =================================
-// *       AGE_GENDER
-// * =================================
-// * STYLED_COMPONENT
+//* ======================
+//*     STYLED_COMPONENT
+//* ======================
 const boxFade = keyframes`
   0% {
     opacity: 0;
@@ -14,19 +13,16 @@ const boxFade = keyframes`
   }
 `;
 const BlockDiv = styled.div`
-  width: 420px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-
   position: fixed;
   top: 10px;
   flex-direction: column;
+  width: 280px;
   animation: ${boxFade} 0.6s forwards;
 `;
 const RegisterInputText = styled.h2`
   font-size: 50px;
-  font-weight: 400;
+  font-weight: 700;
   color: #303030;
   margin-bottom: 40px;
   margin-top: 25px;
@@ -38,23 +34,31 @@ const Strong = styled.strong`
   text-align: center;
   margin-bottom: 90px;
 `;
+const ContinueBtnDiv = styled.div`
+  text-align: center;
+`;
 const ContinueBtn = styled.button`
-  background: none;
   border: none;
-  font-size: 30px;
+  font-size: 25px;
   color: #afafaf;
   cursor: pointer;
+  background: none;
+  background: #f7f7f7;
+  width: 100%;
+  border-radius: 100px;
+  padding: 6px;
 `;
-
 const AgeSelect = styled.select`
-  margin-bottom: 10px;
   font-weight: 600;
   color: #aaaaaa;
   background: none;
   font-size: 30px;
   border-radius: 32px;
   border: none;
-  padding: 5px 10px;
+  width: 130px;
+  position: relative;
+  margin: 0 auto;
+  margin-bottom: 5px;
 `;
 const PrevBtn = styled.button`
   position: relative;
@@ -70,10 +74,7 @@ const PrevBtn = styled.button`
 //TODO ======================
 //TODO    AGE_GENDER (CP)
 //TODO ======================
-const InfoAgeGender = ({ onChange, changePages, gender, age }) => {
-  //* ======================
-  //*    USE_STATE
-  //* ======================
+const InfoAge = ({ onChange, changePages, age }) => {
   //* =======================
   //*   VARIABLE || FUNCTIONS
   //* =======================
@@ -95,7 +96,6 @@ const InfoAgeGender = ({ onChange, changePages, gender, age }) => {
       number: 4,
     },
   ];
-
   const ageHandler = (event) => {
     const { name, value } = event.target;
     onChange(name, Number(value));
@@ -126,8 +126,10 @@ const InfoAgeGender = ({ onChange, changePages, gender, age }) => {
         {ageRepeatElement}
       </AgeSelect>
       <Strong>나이는 공개됩니다.</Strong>
-      <ContinueBtn onClick={() => changePages('next')}>계속</ContinueBtn>
+      <ContinueBtnDiv>
+        <ContinueBtn onClick={() => changePages('next')}>계속</ContinueBtn>
+      </ContinueBtnDiv>
     </BlockDiv>
   );
 };
-export default InfoAgeGender;
+export default InfoAge;

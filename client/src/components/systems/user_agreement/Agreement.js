@@ -52,10 +52,10 @@ const FormBlock = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  animation: ${boxFade} 1s forwards;
 `;
 const IntroImg = styled.img`
   width: 35px;
-  animation: ${boxFade} 1s forwards;
 `;
 const IntroDiv = styled.div`
   @media (min-width: 768px) {
