@@ -4,16 +4,15 @@
   "description": "",
   "main": "./server/index.js",
   "scripts": {
-    "serve": "nodemon ./server/index.js --exec babel-node",
+    "serve": "nodemon --exec babel-node ./server/index.js ",
     "client": "npm run start --prefix client",
     "clean": "killall -9 node",
-    "dev": "concurrently  \"npm run serve\" \"npm run client\""
+    "dev": "concurrently \"npm run serve\" \"npm run client\" "
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.0",
-    "concurrently": "^5.3.0",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",

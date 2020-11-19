@@ -2,7 +2,9 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import logoOnly from '../../../public/logoOnly.png';
 import { HiCheck } from 'react-icons/hi';
-
+//* ======================
+//*     STYLED_COMPONENT
+//* ======================
 const boxFade = keyframes`
   0% {
     opacity: 0;
@@ -30,7 +32,6 @@ const ResponseBlock = styled.div`
   overflow: hidden;
   height: 100vh;
 `;
-
 const FormBlock = styled.div`
   @media (min-width: 768px) {
     width: 420px;
@@ -56,7 +57,6 @@ const IntroImg = styled.img`
   width: 35px;
   animation: ${boxFade} 1s forwards;
 `;
-
 const IntroDiv = styled.div`
   @media (min-width: 768px) {
     margin-bottom: 50px;
@@ -68,12 +68,10 @@ const IntroDiv = styled.div`
 
   margin-bottom: 20px;
 `;
-
 const H2 = styled.h2`
   color: #3e3e3e;
   margin-bottom: 10px;
 `;
-
 const Strong = styled.strong`
   @media (max-width: 667px) {
     font-size: 10px;
@@ -81,7 +79,6 @@ const Strong = styled.strong`
   color: #979797;
   font-size: 15px;
 `;
-
 const ListH3 = styled.h3`
   @media (max-width: 667px) {
     font-size: 16px;
@@ -91,7 +88,6 @@ const ListH3 = styled.h3`
   margin-bottom: 2px;
   color: #3e3e3e;
 `;
-
 const ListStrong = styled.strong`
   @media (max-width: 667px) {
     font-size: 14px;
@@ -99,13 +95,11 @@ const ListStrong = styled.strong`
   color: #979797;
   font-weight: 500;
 `;
-
 const ListSubTitle = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 5px;
 `;
-
 const UnList = styled.ul`
   @media (min-width: 768px) {
     margin-bottom: 105px;
@@ -116,16 +110,13 @@ const UnList = styled.ul`
 
   margin-bottom: 10px;
 `;
-
 const List = styled.li`
   margin-bottom: 10px;
 `;
-
 const ButtonDiv = styled.div`
   display: flex;
   justify-content: center;
 `;
-
 const Button = styled.button`
   color: white;
   border: none;
@@ -137,11 +128,19 @@ const Button = styled.button`
   cursor: pointer;
   background: linear-gradient(to right, #ff4187, #fa8046);
 `;
-
+//TODO ======================
+//TODO    AGREEMENT
+//TODO ======================
 const Agreement = ({ history }) => {
+  //* ========================
+  //*   VARIABLE || FUNCTIONS
+  //* ========================
   const agreeHandler = () => {
     history.push('/enterInfo');
   };
+  //! ============================================
+  //!    RENDER ('Too many same code's repeat')
+  //! ============================================
   return (
     <ResponseBlock>
       <FormBlock>
