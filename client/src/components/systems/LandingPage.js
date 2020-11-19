@@ -56,10 +56,7 @@ const LandingContent = styled.div`
   @media (min-width: 768px) {
     width: 420px;
     left: 50vw;
-    border-radius: 27px;
-    border: 11px solid #e5e5e5;
-    top: 10px;
-    height: 95vh;
+    height: 100vh;
   }
   left: 0;
   width: 100%;

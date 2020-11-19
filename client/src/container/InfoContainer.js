@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import InfoFrom from '../components/systems/user_info/InfoForm';
+import InfoCarousel from '../components/systems/user_info/infoCarousel';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeField } from '../modules/information';
 import { logOutUser } from '../modules/auth';
@@ -32,7 +32,7 @@ const InfoContainer = () => {
   );
   return (
     <>
-      <InfoFrom onChange={onChange} />
+      <InfoCarousel onChange={onChange} />
     </>
   );
 };
