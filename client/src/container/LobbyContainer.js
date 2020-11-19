@@ -11,7 +11,7 @@ const LobbyContainer = ({ history }) => {
   useEffect(() => {
     if (!enteredUserInformation) {
       console.log('유저 정보입력 ');
-      history.push('/enterInfo');
+      history.push('/agreement');
     }
   }, [enteredUserInformation]);
 

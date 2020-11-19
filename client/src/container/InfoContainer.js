@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import InfoCarousel from '../components/systems/user_info/infoCarousel';
+import InfoCarousel from '../components/systems/user_info/InfoCarousel';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeField } from '../modules/information';
 import { logOutUser } from '../modules/auth';

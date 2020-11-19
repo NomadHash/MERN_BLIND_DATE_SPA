@@ -2,10 +2,6 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import logoOnly from '../../../public/logoOnly.png';
 import { HiCheck } from 'react-icons/hi';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-
-import { createGlobalStyle } from 'styled-components';
 
 const boxFade = keyframes`
   0% {

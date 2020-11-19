@@ -5,7 +5,7 @@ import { HiCheck } from 'react-icons/hi';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import InfoRules from './InfoRules';
+import InfoAgeGender from './InfoAgeGender';
 
 import { createGlobalStyle } from 'styled-components';
 
@@ -63,15 +63,9 @@ const InfoCarousel = ({ onChange }) => {
       <Global />
       <div>
         <Slider {...settings}>
-          <div>
-            <InfoRules />
-          </div>
-          <div>
-            <InfoRules />
-          </div>
-          <div>
-            <InfoRules />
-          </div>
+          <div>{/* <InfoAgeGender onChange={onChange} /> */}</div>
+          <div>1</div>
+          <div></div>
           <div>
             <h3>4</h3>
           </div>
