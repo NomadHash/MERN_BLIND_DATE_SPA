@@ -6,6 +6,8 @@ import InfoAge from '../components/systems/user_info/InfoAge';
 import InfoUserName from '../components/systems/user_info/InfoUserName';
 import InfoGender from '../components/systems/user_info/InfoGender';
 import InfoUserImage from '../components/systems/user_info/InfoUserImage';
+import InfoResidence from '../components/systems/user_info/InfoResidence';
+
 //TODO ======================
 //TODO    INFO_CONTAINER (CT)
 //TODO ======================
@@ -58,6 +60,11 @@ const InfoContainer = () => {
     <InfoUserImage
       onChange={onChange}
       profileImage={profileImage}
+      changePages={changePages}
+    />,
+    <InfoResidence
+      onChange={onChange}
+      residence={residence}
       changePages={changePages}
     />,
   ];

@@ -49,6 +49,22 @@ const PrevBtn = styled.button`
   color: #afafaf;
   cursor: pointer;
 `;
+const ContinueBtnDiv = styled.div`
+  text-align: center;
+  width: 100%;
+`;
+const ContinueBtn = styled.button`
+  border: none;
+  font-size: 25px;
+  color: #afafaf;
+  cursor: pointer;
+  background: none;
+  background: #f7f7f7;
+  width: 100%;
+  border-radius: 100px;
+  padding: 6px;
+  width: 100%;
+`;
 const Strong = styled.strong`
   font-size: 15px;
   font-weight: 500;
@@ -98,8 +114,10 @@ const InfoUserImage = ({ onChange, profileImage, changePages }) => {
       <Strong>나의 가장 멋진 사진!</Strong>
       <Preview src={conditionImage} alt="profileImage" />
       <ImageCrop setBlobData={setBlobData} />
+      <ContinueBtnDiv>
+        <ContinueBtn onClick={() => changePages('next')}>계속</ContinueBtn>
+      </ContinueBtnDiv>
     </BlockDiv>
   );
 };
-
 export default InfoUserImage;
