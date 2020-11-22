@@ -59,7 +59,7 @@ const ImageUpload = ({ onChange }) => {
 
   let conditionImage = () => {
     return profileImage[0] === 'u'
-      ? `http://24cfb9a041fa.ngrok.io/${profileImage}`
+      ? `http://12656b16ad3c.ngrok.io/${profileImage}`
       : profileImage;
   };
 

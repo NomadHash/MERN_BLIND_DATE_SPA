@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 import { changeField } from '../modules/register';
 
 // * IMPORT_COMPONENTS
-import RegisterFrom from '../components/systems/user_regist/RegisterFrom';
+// import RegisterFrom from '../components/systems/user_regist/RegisterFrom';
 
 //* IMPORT_CONTAINER
 import HeaderContainer from './HeaderContainer';

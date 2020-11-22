@@ -48,12 +48,9 @@ export function* infoSaga() {
 }
 
 const initialState = {
-  gender: '',
-  age: '1',
   name: '',
-  email: '',
-  password: '',
-  passwordConfirm: '',
+  age: '1',
+  gender: '',
   residence: '',
   profileImage: defaultAvatar,
 };

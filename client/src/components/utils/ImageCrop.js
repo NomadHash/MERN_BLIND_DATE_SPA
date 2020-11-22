@@ -3,11 +3,9 @@ import ReactCrop from 'react-image-crop';
 import style from 'styled-components';
 import 'react-image-crop/dist/ReactCrop.css';
 import { HiPlusCircle } from 'react-icons/hi';
-// * =================================
-// *       IMAGE_CROP_MODULE
-// * =================================
-
-// * STYLED_COMPONENT
+//* ======================
+//*     STYLED_COMPONENT
+//* ======================
 const BackGround = style.div`
     background: rgba(0,0,0,0.3);
     position: fixed;
@@ -16,7 +14,6 @@ const BackGround = style.div`
     right: 0px;
     left: 0px;
 `;
-
 const SetButton = style.button`
     border: none;
     color: white;
@@ -39,7 +36,6 @@ const BtnDiv = style.div`
     background: #f1f0f0;
     border-radius: 0px 0px 11px 11px;
     border-top: 1px solid #d2d2d2`;
-
 const CropContainer = style.div`
 background: white;
     display: flex;
@@ -48,12 +44,11 @@ background: white;
     position: relative;
     margin: 0 auto;
     top: 50vh;
-    width: 390px;
+        width: 330px;
     height: auto;
     transform: translate(0, -50%);
     box-shadow: 0px 6px 9px rgba(0, 0, 0, 0.3);
 `;
-
 const MainTextSpan = style.span`
     border-bottom: 1px solid #e6e6e6;
     color: #272727;
@@ -62,34 +57,17 @@ const MainTextSpan = style.span`
     border-radius: 10px 10px 0px 0px;
     padding: 13px 0px;
     margin-bottom: 8px;`;
-
 const MainTextH3 = style.span`
     margin: 4px;
     text-align: start;
     margin-left: 15px;
     font-size: 14px;
     `;
-
 const UploadBtn = style.label`
-  //   font-family: inherit;
-  //   border: none;
-  //   font-weight: 500;
-  //   background: none;
-  //   width: 100%;
-  //   text-align: left;
-  //   color: #333333;
-  //   font-size: 14px;
-  //   padding: 5px 15px;
-  //   cursor : pointer;
-  //  &:hover {
-  //    background-color: #0064d4;
-  //     color: white;
-  //  }
-  //  &:focus {
-  //    outline:none;
-  //  }
       `;
-
+//TODO ======================
+//TODO    IMAGE_CROP (MODULE)
+//TODO ======================
 class ImageCrop extends PureComponent {
   state = {
     src: null,
@@ -101,7 +79,9 @@ class ImageCrop extends PureComponent {
     cropSrc: null,
     file: null,
   };
-
+  //* ========================
+  //*   VARIABLE || FUNCTIONS
+  //* ========================
   onSelectFile = (e) => {
     if (e.target.files && e.target.files.length > 0) {
       const reader = new FileReader();
@@ -111,19 +91,15 @@ class ImageCrop extends PureComponent {
       reader.readAsDataURL(e.target.files[0]);
     }
   };
-
   onImageLoaded = (image) => {
     this.imageRef = image;
   };
-
   onCropComplete = (crop) => {
     this.makeClientCrop(crop);
   };
-
   onCropChange = (crop, percentCrop) => {
     this.setState({ crop });
   };
-
   async makeClientCrop(crop) {
     if (this.imageRef && crop.width && crop.height) {
       const croppedImageUrl = await this.getCroppedImg(
@@ -136,13 +112,11 @@ class ImageCrop extends PureComponent {
       });
     }
   }
-
   setNewImage = () => {
     const { file } = this.state;
     this.setState({ src: null });
     this.props.setBlobData(file);
   };
-
   getCroppedImg(image, crop, fileName) {
     const canvas = document.createElement('canvas');
     const scaleX = image.naturalWidth / image.width;
@@ -162,7 +136,6 @@ class ImageCrop extends PureComponent {
       crop.width,
       crop.height,
     );
-
     return new Promise((resolve, reject) => {
       canvas.toBlob((blob) => {
         if (!blob) {
@@ -178,13 +151,15 @@ class ImageCrop extends PureComponent {
       }, 'image/jpeg');
     });
   }
-
+  //* ======================
+  //*    RENDER
+  //* ======================
   render() {
     const { crop, src } = this.state;
     return (
       <>
         {!src && (
-          <div>
+          <div style={{ textAlign: 'center' }}>
             <UploadBtn htmlFor="ex_file">
               <HiPlusCircle
                 style={{

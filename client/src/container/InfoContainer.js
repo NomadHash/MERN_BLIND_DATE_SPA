@@ -5,6 +5,7 @@ import { changeField } from '../modules/information';
 import InfoAge from '../components/systems/user_info/InfoAge';
 import InfoUserName from '../components/systems/user_info/InfoUserName';
 import InfoGender from '../components/systems/user_info/InfoGender';
+import InfoUserImage from '../components/systems/user_info/InfoUserImage';
 //TODO ======================
 //TODO    INFO_CONTAINER (CT)
 //TODO ======================
@@ -53,6 +54,11 @@ const InfoContainer = () => {
       changePages={changePages}
       onChange={onChange}
       gender={gender}
+    />,
+    <InfoUserImage
+      onChange={onChange}
+      profileImage={profileImage}
+      changePages={changePages}
     />,
   ];
   //* ======================
