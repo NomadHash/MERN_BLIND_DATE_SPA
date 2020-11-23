@@ -137,7 +137,7 @@ const InfoResidence = ({ onChange, residence, changePages }) => {
       <Strong>거주 지역과 인접한 키워드를 선택해주세요</Strong>
       <Locationlist>{iterationElement}</Locationlist>
       <ContinueBtnDiv>
-        <ContinueBtn onClick={() => changePages('next')}>완료</ContinueBtn>
+        <ContinueBtn onClick={() => changePages('next')}>계속</ContinueBtn>
       </ContinueBtnDiv>
     </BlockDiv>
   );

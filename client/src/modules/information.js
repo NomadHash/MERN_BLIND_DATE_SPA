@@ -1,4 +1,4 @@
-// import * as registerApi from '../api/register';
+import * as updateInfoApi from '../api/information';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { createRequestActionTypes } from '../api/createRequestSaga';
 import defaultAvatar from '../public/default.png';
@@ -9,42 +9,42 @@ import defaultAvatar from '../public/default.png';
 const CHANGE_FIELD = 'information/CHANGE_FIELD'; // change_field action
 
 const [
-  INFORMATION,
-  INFORMATION_SUCCESS,
-  INFORMATION_FAILURE,
-] = createRequestActionTypes('information/INFORMATION');
+  UPDATE_INFO,
+  UPDATE_INFO_SUCCESS,
+  UPDATE_INFO_FAILURE,
+] = createRequestActionTypes('information/UPDATE_INFO');
 
 export const changeField = ({ key, value }) => ({
   type: CHANGE_FIELD,
   payload: { key, value },
 });
 
-// export const registerUser = (formData) => ({
-//   type: REGISTER,
-//   payload: formData,
-// });
+export const updateUserInfo = (formData) => ({
+  type: UPDATE_INFO,
+  payload: formData,
+});
 
-export function* infoUserSaga(action) {
+export function* updateUserInfoSaga(action) {
   try {
-    // const registerRusult = yield call(
-    //   registerApi.registerUserAsync,
-    //   action.payload,
-    // );
-    // yield put({
-    //   type: REGISTER_SUCCESS,
-    //   payload: registerRusult,
-    // });
+    const updateRusult = yield call(
+      updateInfoApi.updateUserAsync,
+      action.payload,
+    );
+    yield put({
+      type: UPDATE_INFO_SUCCESS,
+      payload: updateRusult,
+    });
   } catch (e) {
-    // console.log(e);
-    // yield put({
-    //   type: REGISTER_FAILURE,
-    //   payload: e,
-    // });
+    console.log(e);
+    yield put({
+      type: UPDATE_INFO_FAILURE,
+      payload: e,
+    });
   }
 }
 
 export function* infoSaga() {
-  // yield takeEvery(REGISTER, registerUserSaga);
+  yield takeEvery(UPDATE_INFO, updateUserInfoSaga);
 }
 
 const initialState = {
@@ -62,22 +62,22 @@ export default function infoReduce(state = initialState, action) {
         ...state,
         [action.payload.key]: action.payload.value,
       };
-    // case REGISTER:
-    //   return {
-    //     ...state,
-    //   };
-    // case REGISTER_SUCCESS:
-    //   return {
-    //     ...state,
-    //     registerSuccess: action.payload.registerSuccess,
-    //     err: null,
-    //   };
-    // case REGISTER_FAILURE:
-    //   return {
-    //     ...state,
-    //     registerSuccess: false,
-    //     error: action.payload.message,
-    //   };
+    case UPDATE_INFO:
+      return {
+        ...state,
+      };
+    case UPDATE_INFO_SUCCESS:
+      return {
+        ...state,
+        updateSuccess: action.payload.registerSuccess,
+        err: null,
+      };
+    case UPDATE_INFO_FAILURE:
+      return {
+        ...state,
+        updateSuccess: false,
+        error: action.payload.message,
+      };
 
     default:
       return state;

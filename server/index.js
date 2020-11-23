@@ -14,6 +14,7 @@ import userLogOutRouter from "./routes/api/user_ management/user_logout";
 import userRegisterRouter from "./routes/api/user_ management/user_register";
 import userAuthRouter from "./routes/api/user_ management/user_auth";
 import userUploadImage from "./routes/api/user_ management/user_uploadImage";
+import updateUserInfo from "./routes/api/user_ management/user_update_info";
 
 // Middle-ware
 app.use(morgan("dev"));
@@ -41,6 +42,7 @@ app.use("/api/users/logout", userLogOutRouter);
 app.use("/api/users/register", userRegisterRouter);
 app.use("/api/users/auth", userAuthRouter);
 app.use("/api/users/upload", userUploadImage);
+app.use("/api/users/updateinfo", updateUserInfo);
 
 app.listen(SERVER_PORT, (req, res) => {
   console.log(`Server on port ${SERVER_PORT}`);

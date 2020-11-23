@@ -7,6 +7,7 @@ import InfoUserName from '../components/systems/user_info/InfoUserName';
 import InfoGender from '../components/systems/user_info/InfoGender';
 import InfoUserImage from '../components/systems/user_info/InfoUserImage';
 import InfoResidence from '../components/systems/user_info/InfoResidence';
+import { updateUserInfo } from '../modules/information';
 
 //TODO ======================
 //TODO    INFO_CONTAINER (CT)
@@ -24,7 +25,7 @@ const InfoContainer = () => {
   //*    USE_SELECTOR
   //* ======================
   const { gender, age, name, residence, profileImage } = useSelector(
-    ({ infoReduce }) => ({
+    ({ infoReduce, authReduce }) => ({
       gender: infoReduce.gender,
       age: infoReduce.age,
       name: infoReduce.name,
@@ -32,6 +33,10 @@ const InfoContainer = () => {
       profileImage: infoReduce.profileImage,
     }),
   );
+  const { email } = useSelector(({ authReduce }) => ({
+    email: authReduce.userAuth.email,
+  }));
+
   //* ========================
   //*   VARIABLE || FUNCTIONS
   //* ========================
@@ -49,6 +54,18 @@ const InfoContainer = () => {
       }),
     );
   };
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
+    let requestBody = {
+      gender,
+      age,
+      name,
+      residence,
+      profileImage,
+      email,
+    };
+    dispatch(updateUserInfo(requestBody));
+  };
   const renderList = [
     <InfoUserName changePages={changePages} onChange={onChange} name={name} />,
     <InfoAge changePages={changePages} onChange={onChange} age={age} />,
@@ -57,15 +74,16 @@ const InfoContainer = () => {
       onChange={onChange}
       gender={gender}
     />,
-    <InfoUserImage
-      onChange={onChange}
-      profileImage={profileImage}
-      changePages={changePages}
-    />,
     <InfoResidence
       onChange={onChange}
       residence={residence}
       changePages={changePages}
+    />,
+    <InfoUserImage
+      onChange={onChange}
+      profileImage={profileImage}
+      changePages={changePages}
+      onSubmitHandler={onSubmitHandler}
     />,
   ];
   //* ======================
@@ -73,11 +91,7 @@ const InfoContainer = () => {
   //* ======================
   return (
     <>
-      <InfoEnter
-        onChange={onChange}
-        currPage={renderList[enterPage]}
-        changePages={changePages}
-      />
+      <InfoEnter currPage={renderList[enterPage]} />
     </>
   );
 };

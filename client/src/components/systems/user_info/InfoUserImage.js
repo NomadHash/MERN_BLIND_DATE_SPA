@@ -73,7 +73,12 @@ const Strong = styled.strong`
   margin-bottom: 60px;
 `;
 
-const InfoUserImage = ({ onChange, profileImage, changePages }) => {
+const InfoUserImage = ({
+  onChange,
+  profileImage,
+  changePages,
+  onSubmitHandler,
+}) => {
   //* ======================
   //*    USE_STATE
   //* ======================
@@ -115,7 +120,7 @@ const InfoUserImage = ({ onChange, profileImage, changePages }) => {
       <Preview src={conditionImage} alt="profileImage" />
       <ImageCrop setBlobData={setBlobData} />
       <ContinueBtnDiv>
-        <ContinueBtn onClick={() => changePages('next')}>계속</ContinueBtn>
+        <ContinueBtn onClick={onSubmitHandler}>완료</ContinueBtn>
       </ContinueBtnDiv>
     </BlockDiv>
   );
