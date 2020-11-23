@@ -21,6 +21,7 @@ const ResponseBlock = styled.div`
 `;
 
 const Lobby = () => {
+  //test
   return <ResponseBlock>lobby.js</ResponseBlock>;
 };
 
