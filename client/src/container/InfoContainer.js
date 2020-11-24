@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { withRouter } from 'react-router-dom';
 import InfoEnter from '../components/systems/user_info/InfoEnter';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeField } from '../modules/information';
@@ -8,11 +9,12 @@ import InfoGender from '../components/systems/user_info/InfoGender';
 import InfoUserImage from '../components/systems/user_info/InfoUserImage';
 import InfoResidence from '../components/systems/user_info/InfoResidence';
 import { updateUserInfo } from '../modules/information';
+import { authUser } from '../modules/auth';
 
 //TODO ======================
 //TODO    INFO_CONTAINER (CT)
 //TODO ======================
-const InfoContainer = () => {
+const InfoContainer = ({ history }) => {
   //* ======================
   //*    USE_DIS_PATCH
   //* ======================
@@ -24,19 +26,25 @@ const InfoContainer = () => {
   //* ======================
   //*    USE_SELECTOR
   //* ======================
-  const { gender, age, name, residence, profileImage } = useSelector(
-    ({ infoReduce, authReduce }) => ({
-      gender: infoReduce.gender,
-      age: infoReduce.age,
-      name: infoReduce.name,
-      residence: infoReduce.residence,
-      profileImage: infoReduce.profileImage,
-    }),
-  );
-  const { email } = useSelector(({ authReduce }) => ({
-    email: authReduce.userAuth.email,
+  const {
+    gender,
+    age,
+    name,
+    residence,
+    profileImage,
+    enteredUserInformation,
+  } = useSelector(({ infoReduce }) => ({
+    gender: infoReduce.gender,
+    age: infoReduce.age,
+    name: infoReduce.name,
+    residence: infoReduce.residence,
+    profileImage: infoReduce.profileImage,
+    enteredUserInformation: infoReduce.enteredUserInformation,
   }));
-
+  const { email, isUpdate } = useSelector(({ authReduce }) => ({
+    email: authReduce.userAuth.email,
+    isUpdate: authReduce.userAuth.enteredUserInformation,
+  }));
   //* ========================
   //*   VARIABLE || FUNCTIONS
   //* ========================
@@ -63,9 +71,23 @@ const InfoContainer = () => {
       residence,
       profileImage,
       email,
+      enteredUserInformation: true,
     };
     dispatch(updateUserInfo(requestBody));
   };
+
+  useEffect(() => {
+    console.log(enteredUserInformation);
+    if (enteredUserInformation) {
+      dispatch(authUser());
+    }
+  }, [enteredUserInformation]);
+
+  useEffect(() => {
+    if (isUpdate) {
+      history.push('/lobby');
+    }
+  }, [isUpdate, history]);
   const renderList = [
     <InfoUserName changePages={changePages} onChange={onChange} name={name} />,
     <InfoAge changePages={changePages} onChange={onChange} age={age} />,
@@ -76,6 +98,7 @@ const InfoContainer = () => {
     />,
     <InfoResidence
       onChange={onChange}
+      ß
       residence={residence}
       changePages={changePages}
     />,

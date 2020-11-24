@@ -21,14 +21,14 @@ router.post("/", (req, res) => {
       });
 
       await User.findOne({ oAuthId: req.body.oAuthId }, (err, user) => {
-        user.generateToken((err, user) => {
+        user.generateToken((err, token) => {
           if (err) return res.status(400).send(err);
 
           //save Token at Cookie
           res
-            .cookie("x_auth", user.token)
+            .cookie("x_auth", token)
             .status(200)
-            .json({ loginSuccess: true, userId: user._Id, token: user.token });
+            .json({ loginSuccess: true, userId: user._Id });
         });
       });
     })();

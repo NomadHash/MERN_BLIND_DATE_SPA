@@ -1,23 +1,42 @@
 import React, { useEffect } from 'react';
 import Lobby from '../components/contents/lobby/Lobby';
 import { useSelector } from 'react-redux';
+import { logOutUser } from '../modules/auth';
+import { useDispatch } from 'react-redux';
+import { authUser, loginUser } from '../modules/auth';
+import infoReduce from '../modules/information';
 
 const LobbyContainer = ({ history }) => {
-  const { enteredUserInformation } = useSelector(({ authReduce }) => {
-    return {
-      enteredUserInformation: authReduce.userAuth?.enteredUserInformation,
-    };
-  });
+  const dispatch = useDispatch();
+  const { loginSuccess, auth, enteredUserInformation } = useSelector(
+    ({ authReduce }) => {
+      return {
+        auth: authReduce.userAuth?.isAuth,
+        loginSuccess: authReduce.loginSuccess,
+        enteredUserInformation: authReduce.userAuth?.enteredUserInformation,
+      };
+    },
+  );
+
   useEffect(() => {
     if (!enteredUserInformation) {
-      console.log('유저 정보입력 ');
       history.push('/agreement');
     }
-  }, [enteredUserInformation]);
+  }, [enteredUserInformation, history]);
+
+  useEffect(() => {
+    if (!localStorage.getItem('CURRENT_USER')) {
+      history.push('/');
+    }
+  }, [loginSuccess]);
+
+  const logoutHandler = () => {
+    dispatch(logOutUser());
+  };
 
   return (
     <>
-      <Lobby />
+      <Lobby logoutHandler={logoutHandler} />
     </>
   );
 };

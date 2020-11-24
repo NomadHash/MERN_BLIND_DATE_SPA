@@ -20,9 +20,13 @@ const ResponseBlock = styled.div`
   background: linear-gradient(to right, #f25478, #fa4e46);
 `;
 
-const Lobby = () => {
-  //test
-  return <ResponseBlock>lobby.js</ResponseBlock>;
+const Lobby = ({ logoutHandler }) => {
+  return (
+    <ResponseBlock>
+      lobby.js
+      <button onClick={logoutHandler}>log out test</button>
+    </ResponseBlock>
+  );
 };
 
 export default Lobby;

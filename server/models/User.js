@@ -44,15 +44,15 @@ const userSchema = mongoose.Schema({
     default: 0,
   },
   image: String,
-  token: {
-    type: String,
-  },
-  tokenExp: {
-    type: Number,
-  },
+  // token: {
+  //   type: String,
+  // },
+  // tokenExp: {
+  //   type: Number,
+  // },
   enteredUserInformation: {
-    type: Number,
-    default: 0,
+    type: Boolean,
+    default: false,
   },
 });
 
@@ -84,13 +84,13 @@ userSchema.methods.comparePassword = function (plainPassword, callback) {
 
 userSchema.methods.generateToken = function (callback) {
   var user = this;
-  console.log(user);
   var token = jwt.sign({ id: user._id }, SECRET_TOKEN);
-  user.token = token;
-  user.save(function (err, user) {
-    if (err) return callback(err);
-    callback(null, user);
-  });
+  callback(null, token);
+  // user.token = token;
+  // user.save(function (err, user) {
+  //   if (err) return callback(err);
+  //   callback(null, user);
+  // });
 };
 
 // Schema-static-methods
@@ -98,10 +98,10 @@ userSchema.methods.generateToken = function (callback) {
 userSchema.statics.findByToken = function (token, callback) {
   var user = this;
   jwt.verify(token, SECRET_TOKEN, (err, decoded) => {
+    console.log(decoded);
     user.findOne(
       {
         _id: decoded?.id,
-        token: token,
       },
       (err, user) => {
         console.log(err);

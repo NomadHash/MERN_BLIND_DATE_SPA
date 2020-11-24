@@ -1,27 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import LoginModal from '../components/systems/user_login/LoginModal';
-import { loginFormChangeField, loginUser } from '../modules/user_login';
-import { authUser } from '../modules/auth';
+// import { loginFormChangeField, loginUser } from '../modules/user_login';
+import { authUser, loginUser } from '../modules/auth';
 import { useDispatch, useSelector } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { clearLoginState } from '../modules/user_login';
+
 //! ============================================
 //!    lOGIN_CONTAINER (CT) ('nomal login FC not yet!')
 //! ============================================
 
-const LoginContainer = ({ openLoginModal }) => {
+const LoginContainer = ({ openLoginModal, history }) => {
   //* ======================
   //*    USE_SELECTOR
   //* ======================
-  const { auth } = useSelector(({ authReduce }) => {
+  const { auth, loginSuccess } = useSelector(({ authReduce }) => {
     return {
       auth: authReduce.userAuth?.isAuth,
+      loginSuccess: authReduce.loginSuccess,
     };
   });
-  const { email, password, loginSuccess } = useSelector(({ userReducer }) => ({
-    email: userReducer.email,
-    password: userReducer.password,
-    loginSuccess: userReducer.loginSuccess,
-  }));
+  // const { email, password, loginSuccess } = useSelector(({ userReducer }) => ({
+  //   email: userReducer.email,
+  //   password: userReducer.password,
+
+  //   loginSuccess: userReducer.loginSuccess,
+  // }));
   //* ======================
   //*    USE_DIS_PATCH
   //* ======================
@@ -29,22 +33,22 @@ const LoginContainer = ({ openLoginModal }) => {
   //* ========================
   //*   VARIABLE || FUNCTIONS
   //* ========================
-  const loginFormOnChange = (name, value) => {
-    dispatch(
-      loginFormChangeField({
-        key: name,
-        value,
-      }),
-    );
-  };
-  const onSubmitHandler = (event) => {
-    event.preventDefault();
-    let requestBody = {
-      email,
-      password,
-    };
-    dispatch(loginUser(requestBody));
-  };
+  // const loginFormOnChange = (name, value) => {
+  //   dispatch(
+  //     loginFormChangeField({
+  //       key: name,
+  //       value,
+  //     }),
+  //   );
+  // };
+  // const onSubmitHandler = (event) => {
+  //   event.preventDefault();
+  //   let requestBody = {
+  //     email,
+  //     password,
+  //   };
+  //   dispatch(loginUser(requestBody));
+  // };
   const oAuthLoginHandler = (id, email) => {
     let request = {
       oAuthId: id,
@@ -63,11 +67,12 @@ const LoginContainer = ({ openLoginModal }) => {
       dispatch(authUser());
     }
   }, [loginSuccess, dispatch]);
+
   useEffect(() => {
-    if (loginSuccess && auth) {
-      openLoginModal();
+    if (auth) {
+      history.push('/lobby');
     }
-  }, [auth, loginSuccess, openLoginModal]);
+  }, [auth]);
   //* ======================
   //*    RENDER
   //* ======================
@@ -75,12 +80,12 @@ const LoginContainer = ({ openLoginModal }) => {
     <>
       <LoginModal
         openLoginModal={openLoginModal}
-        onSubmitHandler={onSubmitHandler}
-        loginFormOnChange={loginFormOnChange}
+        // onSubmitHandler={onSubmitHandler}
+        // loginFormOnChange={loginFormOnChange}
         oAuthLoginHandler={oAuthLoginHandler}
       />
     </>
   );
 };
 
-export default LoginContainer;
+export default withRouter(LoginContainer);

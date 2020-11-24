@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
-import { authUser } from '../../modules/auth';
 import logoWhite from '../../public/logoWhite.png';
 import LoginContainer from '../../container/LoginContainer';
 import { useSelector } from 'react-redux';
 import { FaChevronLeft } from 'react-icons/fa';
-
-// STYLED_COMPONENTS
+// * =======================
+// * STYLED_COMPONENTS
+// * =======================
 const MainContent = styled.div`
   position: fixed;
   top: 35%;
@@ -78,7 +77,6 @@ const SpanMessage = styled.span`
   width: 80%;
   margin-bottom: 25px;
 `;
-
 const QuitButtonButton = styled.button`
   @media (min-width: 768px) {
     left: 15px;
@@ -96,25 +94,26 @@ const QuitButtonButton = styled.button`
 `;
 
 const LandingPage = ({ history }) => {
+  //* =================================
+  //*    USE_STATE || USE_SELECTOR
+  //* =================================
   const [loginPopup, setLoginPopup] = useState(false);
-  const dispatch = useDispatch();
-
   const { auth } = useSelector(({ authReduce }) => {
     return {
       auth: authReduce.userAuth?.isAuth,
     };
   });
-
+  //* ======================
+  //*    USE_EFFECT
+  //* ======================
   useEffect(() => {
-    dispatch(authUser());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (auth) {
+    if (localStorage.getItem('CURRENT_USER')) {
       history.push('/lobby');
     }
-  }, [auth]);
-
+  }, []);
+  //* ========================
+  //*   VARIABLE || FUNCTIONS
+  //* ========================
   const onRegisterHandler = () => {
     history.push('/register');
   };
@@ -122,7 +121,9 @@ const LandingPage = ({ history }) => {
   const openLoginModal = () => {
     setLoginPopup(!loginPopup);
   };
-
+  //* ======================
+  //*    RENDER
+  //* ======================
   return (
     <>
       <LandingContent>

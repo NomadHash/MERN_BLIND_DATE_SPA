@@ -5,5 +5,6 @@ export async function loginUser(formData) {
   if (!response.data.loginSuccess) {
     throw new Error('해당 이메일이 존재하지 않습니다.');
   }
+  localStorage.setItem('CURRENT_USER', JSON.stringify(response.data));
   return response.data;
 }

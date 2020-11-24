@@ -1,9 +1,14 @@
 import * as authApi from '../api/auth';
 import { call, put, takeEvery } from 'redux-saga/effects';
-
+import { createRequestActionTypes } from '../api/createRequestSaga';
 // * =======================
 // * AUTH_SAGA_MODULE
 // * =======================
+const [
+  LOGIN_USER,
+  LOGIN_USER_SUCCESS,
+  LOGIN_USER_FAILURE,
+] = createRequestActionTypes('auth/LOGIN_USER');
 
 const AUTH_USER = 'auth/AUTH_USER';
 const AUTH_USER_SUCCESS = 'auth/AUTH_USER_SUCCESS';
@@ -16,7 +21,10 @@ const LOG_OUT_USER_FAILURE = 'auth/LOG_OUT_USER_FAILURE';
 export const authUser = () => ({
   type: AUTH_USER,
 });
-
+export const loginUser = (formData) => ({
+  type: LOGIN_USER,
+  payload: formData,
+});
 export const logOutUser = () => ({
   type: LOG_OUT_USER,
 });
@@ -31,6 +39,22 @@ export function* authUserSaga() {
   } catch (e) {
     yield put({
       type: AUTH_USER_FAILURE,
+      payload: e,
+    });
+  }
+}
+
+export function* loginUserSaga(action) {
+  try {
+    const loginRusult = yield call(authApi.loginUser, action.payload);
+    yield put({
+      type: LOGIN_USER_SUCCESS,
+      payload: loginRusult,
+    });
+  } catch (e) {
+    console.log(e);
+    yield put({
+      type: LOGIN_USER_FAILURE,
       payload: e,
     });
   }
@@ -55,6 +79,7 @@ export function* logOutSaga() {
 export function* authSaga() {
   yield takeEvery(AUTH_USER, authUserSaga);
   yield takeEvery(LOG_OUT_USER, logOutSaga);
+  yield takeEvery(LOGIN_USER, loginUserSaga);
 }
 
 export default function authReduce(state = {}, action) {
@@ -74,6 +99,22 @@ export default function authReduce(state = {}, action) {
         ...state,
         error: action.payload.message,
       };
+    case LOGIN_USER:
+      return {
+        ...state,
+      };
+    case LOGIN_USER_SUCCESS:
+      return {
+        ...state,
+        loginSuccess: action.payload.loginSuccess,
+        token: action.payload.token,
+      };
+    case LOGIN_USER_FAILURE:
+      return {
+        ...state,
+        loginSuccess: false,
+        error: action.payload.message,
+      };
 
     case LOG_OUT_USER:
       return {
@@ -82,6 +123,7 @@ export default function authReduce(state = {}, action) {
     case LOG_OUT_USER_SUCCESS:
       return {
         ...state,
+        loginSuccess: false,
         userAuth: null,
         error: null,
       };

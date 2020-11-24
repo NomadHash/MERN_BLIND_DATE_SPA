@@ -6,6 +6,7 @@ let auth = (req, res, next) => {
   let token = req.cookies.x_auth;
   // 토큰을 복호화 한뒤 유저를 찾기.
   User.findByToken(token, (err, user) => {
+    console.log(token);
     if (err) throw err;
     if (!user) return res.json({ isAuth: false, error: token });
     req.token = token;

@@ -53,6 +53,7 @@ const initialState = {
   gender: '',
   residence: '',
   profileImage: defaultAvatar,
+  enteredUserInformation: false,
 };
 
 export default function infoReduce(state = initialState, action) {
@@ -70,7 +71,7 @@ export default function infoReduce(state = initialState, action) {
       return {
         ...state,
         updateSuccess: action.payload.registerSuccess,
-        err: null,
+        enteredUserInformation: true,
       };
     case UPDATE_INFO_FAILURE:
       return {
