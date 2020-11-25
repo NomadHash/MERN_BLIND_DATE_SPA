@@ -3,8 +3,7 @@ import Lobby from '../components/contents/lobby/Lobby';
 import { useSelector } from 'react-redux';
 import { logOutUser } from '../modules/auth';
 import { useDispatch } from 'react-redux';
-import { authUser, loginUser } from '../modules/auth';
-import infoReduce from '../modules/information';
+import { authUser } from '../modules/auth';
 
 const LobbyContainer = ({ history }) => {
   const dispatch = useDispatch();
@@ -19,16 +18,22 @@ const LobbyContainer = ({ history }) => {
   );
 
   useEffect(() => {
-    if (!enteredUserInformation) {
+    if (!auth) {
+      dispatch(authUser());
+    }
+  }, [auth, dispatch]);
+
+  useEffect(() => {
+    if (auth && !enteredUserInformation) {
       history.push('/agreement');
     }
-  }, [enteredUserInformation, history]);
+  }, [enteredUserInformation, history, auth]);
 
   useEffect(() => {
     if (!localStorage.getItem('CURRENT_USER')) {
       history.push('/');
     }
-  }, [loginSuccess]);
+  }, [loginSuccess, history]);
 
   const logoutHandler = () => {
     dispatch(logOutUser());

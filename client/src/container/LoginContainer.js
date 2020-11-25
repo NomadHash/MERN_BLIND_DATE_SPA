@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import LoginModal from '../components/systems/user_login/LoginModal';
-// import { loginFormChangeField, loginUser } from '../modules/user_login';
 import { authUser, loginUser } from '../modules/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { clearLoginState } from '../modules/user_login';
-
 //! ============================================
 //!    lOGIN_CONTAINER (CT) ('nomal login FC not yet!')
 //! ============================================
@@ -72,7 +69,7 @@ const LoginContainer = ({ openLoginModal, history }) => {
     if (auth) {
       history.push('/lobby');
     }
-  }, [auth]);
+  }, [history, auth]);
   //* ======================
   //*    RENDER
   //* ======================

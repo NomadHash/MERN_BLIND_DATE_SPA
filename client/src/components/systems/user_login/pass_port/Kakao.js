@@ -1,20 +1,10 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import KaKaoLogin from 'react-kakao-login';
-import kaakoLogo from '../../../../public/kakaoLogo.png';
 require('dotenv').config();
 const KAKAO_APP_KEY = process.env.REACT_APP_KAKAO_APP_KEY;
-const BoxFadeKeyframes = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-`;
 
 const buttonBlock = {
-  border: 'none',
   border: '2px solid white',
   borderRadius: '27px',
   fontSize: '17px',
@@ -35,12 +25,6 @@ const ButtoninnerText = styled.h3`
   position: relative;
 `;
 
-const LogoKakao = styled.img`
-  width: 19px;
-  position: relative;
-  left: -40px;
-`;
-
 const Kakao = ({ oAuthLoginHandler }) => {
   const responseKakao = (response) => {
     const { id } = response.profile;
@@ -57,7 +41,6 @@ const Kakao = ({ oAuthLoginHandler }) => {
         onLogout={console.info}
         style={buttonBlock}
       >
-        {/* <LogoKakao src={kaakoLogo} alt="kakaoLogo" /> */}
         <ButtoninnerText>카카오 계정으로 로그인</ButtoninnerText>
       </KaKaoLogin>
     </>

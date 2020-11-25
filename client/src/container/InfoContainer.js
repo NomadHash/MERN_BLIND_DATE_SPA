@@ -81,7 +81,7 @@ const InfoContainer = ({ history }) => {
     if (enteredUserInformation) {
       dispatch(authUser());
     }
-  }, [enteredUserInformation]);
+  }, [dispatch, enteredUserInformation]);
 
   useEffect(() => {
     if (isUpdate) {
@@ -118,4 +118,4 @@ const InfoContainer = ({ history }) => {
     </>
   );
 };
-export default InfoContainer;
+export default withRouter(InfoContainer);

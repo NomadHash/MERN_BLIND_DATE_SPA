@@ -1,6 +1,5 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { FaFacebookSquare } from 'react-icons/fa';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 require('dotenv').config();
 const FACE_BOOK_APP_KEY = process.env.REACT_APP_FACE_BOOK_APP_KEY;
@@ -59,14 +58,6 @@ const FaceBookLogin = ({ oAuthLoginHandler }) => {
       render={(renderProps) => (
         <FaceBookLoginButton>
           <ButtonInnerDiv onClick={renderProps.onClick}>
-            {/* <FaFacebookSquare
-              style={{
-                marginLeft: '29px',
-                marginRight: '23px',
-                fontSize: '26px',
-                padding: '10px 10px',
-              }}
-            /> */}
             <ButtoninnerText>페이스북 계정으로 로그인</ButtoninnerText>
           </ButtonInnerDiv>
         </FaceBookLoginButton>

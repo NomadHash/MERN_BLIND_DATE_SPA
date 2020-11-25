@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import logoWhite from '../../public/logoWhite.png';
 import LoginContainer from '../../container/LoginContainer';
-import { useSelector } from 'react-redux';
 import { FaChevronLeft } from 'react-icons/fa';
 // * =======================
 // * STYLED_COMPONENTS
@@ -98,11 +97,6 @@ const LandingPage = ({ history }) => {
   //*    USE_STATE || USE_SELECTOR
   //* =================================
   const [loginPopup, setLoginPopup] = useState(false);
-  const { auth } = useSelector(({ authReduce }) => {
-    return {
-      auth: authReduce.userAuth?.isAuth,
-    };
-  });
   //* ======================
   //*    USE_EFFECT
   //* ======================
@@ -110,7 +104,7 @@ const LandingPage = ({ history }) => {
     if (localStorage.getItem('CURRENT_USER')) {
       history.push('/lobby');
     }
-  }, []);
+  }, [history]);
   //* ========================
   //*   VARIABLE || FUNCTIONS
   //* ========================
