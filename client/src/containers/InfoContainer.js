@@ -77,7 +77,6 @@ const InfoContainer = ({ history }) => {
   };
 
   useEffect(() => {
-    console.log(enteredUserInformation);
     if (enteredUserInformation) {
       dispatch(authUser());
     }

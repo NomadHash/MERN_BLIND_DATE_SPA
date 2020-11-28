@@ -4,8 +4,13 @@ import { useSelector } from 'react-redux';
 import { logOutUser } from '../modules/auth';
 import { useDispatch } from 'react-redux';
 import { authUser } from '../modules/auth';
-
+//* ============================================
+//*    LOBBY_CONTAINER
+//* ============================================
 const LobbyContainer = ({ history }) => {
+  //* ============================
+  //*    USE_SELECTOR || DISPATCH
+  //* ============================
   const dispatch = useDispatch();
   const { auth, enteredUserInformation, error } = useSelector(
     ({ authReduce }) => {
@@ -16,7 +21,9 @@ const LobbyContainer = ({ history }) => {
       };
     },
   );
-
+  //* ======================
+  //*    USE_EFFECT
+  //* ======================
   useEffect(() => {
     if (!auth) {
       dispatch(authUser());
@@ -24,7 +31,7 @@ const LobbyContainer = ({ history }) => {
     if (error) {
       history.push('/');
     }
-  }, [dispatch, error]);
+  }, [dispatch, error, history]);
 
   useEffect(() => {
     if (auth && !enteredUserInformation) {
@@ -38,10 +45,16 @@ const LobbyContainer = ({ history }) => {
     }
   }, [auth, history]);
 
+  //* ========================
+  //*   VARIABLE || FUNCTIONS
+  //* ========================
   const logoutHandler = () => {
     dispatch(logOutUser());
   };
 
+  //* ======================
+  //*    RENDER
+  //* ======================
   return (
     <>
       <Lobby logoutHandler={logoutHandler} />

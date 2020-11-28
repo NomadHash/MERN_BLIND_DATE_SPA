@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { withRouter } from 'react-router-dom';
+import React from 'react';
 import styled from 'styled-components';
-import logoWhite from '../../public/logoWhite.png';
-import LoginContainer from '../../container/LoginContainer';
+import logoWhite from '../../../public/logoWhite.png';
+import LoginContainer from '../../../containers/LoginContainer';
 import { FaChevronLeft } from 'react-icons/fa';
 // * =======================
 // * STYLED_COMPONENTS
@@ -92,30 +91,7 @@ const QuitButtonButton = styled.button`
   cursor: pointer;
 `;
 
-const LandingPage = ({ history }) => {
-  //* =================================
-  //*    USE_STATE || USE_SELECTOR
-  //* =================================
-  const [loginPopup, setLoginPopup] = useState(false);
-  //* ======================
-  //*    USE_EFFECT
-  //* ======================
-  useEffect(() => {
-    const userStorage = JSON.parse(localStorage.getItem('CURRENT_USER'));
-    if (userStorage?.isAuth) {
-      history.push('/lobby');
-    }
-  }, [history]);
-  //* ========================
-  //*   VARIABLE || FUNCTIONS
-  //* ========================
-  const onRegisterHandler = () => {
-    history.push('/register');
-  };
-
-  const openLoginModal = () => {
-    setLoginPopup(!loginPopup);
-  };
+const Landing = ({ openLoginModal, loginPopup, onRegisterHandler }) => {
   //* ======================
   //*    RENDER
   //* ======================
@@ -153,4 +129,4 @@ const LandingPage = ({ history }) => {
   );
 };
 
-export default withRouter(LandingPage);
+export default Landing;
