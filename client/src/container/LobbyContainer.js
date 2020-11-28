@@ -7,12 +7,12 @@ import { authUser } from '../modules/auth';
 
 const LobbyContainer = ({ history }) => {
   const dispatch = useDispatch();
-  const { loginSuccess, auth, enteredUserInformation } = useSelector(
+  const { auth, enteredUserInformation, error } = useSelector(
     ({ authReduce }) => {
       return {
         auth: authReduce.userAuth?.isAuth,
-        loginSuccess: authReduce.loginSuccess,
         enteredUserInformation: authReduce.userAuth?.enteredUserInformation,
+        error: authReduce.error,
       };
     },
   );
@@ -21,7 +21,10 @@ const LobbyContainer = ({ history }) => {
     if (!auth) {
       dispatch(authUser());
     }
-  }, [auth, dispatch]);
+    if (error) {
+      history.push('/');
+    }
+  }, [dispatch, error]);
 
   useEffect(() => {
     if (auth && !enteredUserInformation) {
@@ -33,7 +36,7 @@ const LobbyContainer = ({ history }) => {
     if (!localStorage.getItem('CURRENT_USER')) {
       history.push('/');
     }
-  }, [loginSuccess, history]);
+  }, [auth, history]);
 
   const logoutHandler = () => {
     dispatch(logOutUser());

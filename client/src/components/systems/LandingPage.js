@@ -101,7 +101,8 @@ const LandingPage = ({ history }) => {
   //*    USE_EFFECT
   //* ======================
   useEffect(() => {
-    if (localStorage.getItem('CURRENT_USER')) {
+    const userStorage = JSON.parse(localStorage.getItem('CURRENT_USER'));
+    if (userStorage?.isAuth) {
       history.push('/lobby');
     }
   }, [history]);
