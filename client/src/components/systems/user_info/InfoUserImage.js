@@ -17,7 +17,7 @@ const boxFade = keyframes`
 const RegisterInputText = styled.h2`
   margin-bottom: 10px;
   margin-top: 0px;
-  font-size: 50px;
+  font-size: 6vh;
   font-weight: 700;
   color: #303030;
 `;
@@ -70,7 +70,7 @@ const Strong = styled.strong`
   font-weight: 500;
   color: #9d9d9d;
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 30px;
 `;
 
 const InfoUserImage = ({

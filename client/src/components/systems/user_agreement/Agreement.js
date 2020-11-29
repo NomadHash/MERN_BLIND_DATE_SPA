@@ -38,11 +38,11 @@ const FormBlock = styled.div`
     top: 120px;
   }
   @media (max-height: 812px) {
-    bottom: 20vh;
+    top: 9vh;
   }
-  @media (max-height: 667px) {
-    bottom: 20%;
-  }
+  // @media (max-height: 667px) {
+  //   bottom: 20%;
+  // }
   position: fixed;
 
   display: flex;

@@ -26,7 +26,7 @@ const BlockDiv = styled.div`
 const RegisterInputText = styled.h2`
   margin-bottom: 10px;
   margin-top: 0px;
-  font-size: 50px;
+  font-size: 6vh;
   font-weight: 700;
   color: #303030;
 `;
@@ -63,15 +63,15 @@ const ContinueBtn = styled.button`
   padding: 6px;
 `;
 const LocatiobLi = styled.li`
-  margin-bottom: 12px;
-  margin-right: 15px;
+  margin-bottom: 7px;
+  margin-right: 12px;
 `;
 const Strong = styled.strong`
   font-size: 15px;
   font-weight: 500;
   color: #9d9d9d;
   text-align: center;
-  margin-bottom: 25px;
+  margin-bottom: 12px;
 `;
 const InfoResidence = ({ onChange, residence, changePages }) => {
   //* ======================
