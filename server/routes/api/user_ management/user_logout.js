@@ -1,8 +1,8 @@
-import express from "express";
-import auth from "../../../middleware/auth";
+const express = require("express");
+const auth = require("../../../middleware/auth");
 
 //import MongoDB Model
-import User from "../../../models/User";
+const User = require("../../../models/User");
 
 const router = express.Router();
 
@@ -16,4 +16,4 @@ router.get("/", auth, (req, res) => {
   });
 });
 
-export default router;
+module.exports = router;

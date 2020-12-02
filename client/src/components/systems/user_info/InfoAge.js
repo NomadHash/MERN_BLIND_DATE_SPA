@@ -13,9 +13,13 @@ const boxFade = keyframes`
   }
 `;
 const BlockDiv = styled.div`
+  @media (max-width: 768px) {
+    bottom: 0;
+    margin-bottom: 80px;
+  }
   display: flex;
   position: fixed;
-  top: 10px;
+  bottom: 30vh;
   flex-direction: column;
   width: 280px;
   animation: ${boxFade} 0.6s forwards;

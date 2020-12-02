@@ -1,31 +1,15 @@
-import express from "express";
+const express = require("express");
 const app = express();
-import cookieParser from "cookie-parser";
-import mongoose from "mongoose";
-import morgan from "morgan";
+const cookieParser = require("cookie-parser");
+const mongoose = require("mongoose");
+const morgan = require("morgan");
+const cors = require("cors");
 
-// import .env(DB_URL, Server_Port)
-import config from "./config/index";
+// const .env(DB_URL, Server_Port)
+const config = require("./config/index");
 const { DB_URL, SERVER_PORT } = config;
 
-//Routes
-import userLoginRouter from "./routes/api/user_ management/user_login";
-import userLogOutRouter from "./routes/api/user_ management/user_logout";
-import userRegisterRouter from "./routes/api/user_ management/user_register";
-import userAuthRouter from "./routes/api/user_ management/user_auth";
-import userUploadImage from "./routes/api/user_ management/user_uploadImage";
-import updateUserInfo from "./routes/api/user_ management/user_update_info";
-
-// Middle-ware
-app.use(morgan("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
-
-//set-static
-app.use("/uploads", express.static("uploads"));
-
-// mongoose.connect();
+// mongoose
 mongoose
   .connect(DB_URL, {
     useNewUrlParser: true,
@@ -36,6 +20,25 @@ mongoose
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
 
+//Routes
+const userLoginRouter = require("./routes/api/user_ management/user_login");
+const userLogOutRouter = require("./routes/api/user_ management/user_logout");
+const userRegisterRouter = require("./routes/api/user_ management/user_register");
+const userAuthRouter = require("./routes/api/user_ management/user_auth");
+const userUploadImage = require("./routes/api/user_ management/user_uploadImage");
+const updateUserInfo = require("./routes/api/user_ management/user_update_info");
+const loadUserCards = require("./routes/api/contents/user_cards");
+
+// Middle-ware
+app.use(cors());
+app.use(morgan("dev"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+//set-static
+app.use("/uploads", express.static("uploads"));
+
 // user-managment-API-Router
 app.use("/api/users/login", userLoginRouter);
 app.use("/api/users/logout", userLogOutRouter);
@@ -43,6 +46,8 @@ app.use("/api/users/register", userRegisterRouter);
 app.use("/api/users/auth", userAuthRouter);
 app.use("/api/users/upload", userUploadImage);
 app.use("/api/users/updateinfo", updateUserInfo);
+app.use("/api/users/updateinfo", updateUserInfo);
+app.use("/api/user_cards", loadUserCards);
 
 app.listen(SERVER_PORT, (req, res) => {
   console.log(`Server on port ${SERVER_PORT}`);

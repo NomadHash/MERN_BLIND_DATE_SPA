@@ -14,10 +14,14 @@ const boxFade = keyframes`
   }
 `;
 const BlockDiv = styled.div`
+  @media (max-width: 768px) {
+    bottom: 0;
+    margin-bottom: 80px;
+  }
   width: 290px;
   justify-content: center;
   position: fixed;
-  top: 10px;
+  bottom: 30vh;
   display: flex;
   align-items: center;
   flex-direction: column;

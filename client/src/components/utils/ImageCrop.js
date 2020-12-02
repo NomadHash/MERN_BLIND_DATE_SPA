@@ -159,7 +159,7 @@ class ImageCrop extends PureComponent {
     return (
       <>
         {!src && (
-          <div style={{ textAlign: 'center' }}>
+          <div style={{ textAlign: 'center', marginBottom: '30px' }}>
             <UploadBtn htmlFor="ex_file">
               <HiPlusCircle
                 style={{

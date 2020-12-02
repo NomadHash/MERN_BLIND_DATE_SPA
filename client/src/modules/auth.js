@@ -1,5 +1,5 @@
 import * as authApi from '../api/auth';
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
 import { createRequestActionTypes } from '../api/createRequestSaga';
 // * =======================
 // * AUTH_SAGA_MODULE
@@ -17,6 +17,13 @@ const AUTH_USER_FAILURE = 'auth/AUTH_USER_FAILURE';
 const LOG_OUT_USER = 'auth/LOG_OUT_USER';
 const LOG_OUT_USER_SUCCESS = 'auth/LOG_OUT_USER_SUCCESS';
 const LOG_OUT_USER_FAILURE = 'auth/LOG_OUT_USER_FAILURE';
+
+const TEMP_USER = 'auth/TEMP_USER';
+
+export const tempUser = (user) => ({
+  type: TEMP_USER,
+  user,
+});
 
 export const authUser = () => ({
   type: AUTH_USER,
@@ -77,13 +84,18 @@ export function* logOutSaga() {
 }
 
 export function* authSaga() {
-  yield takeEvery(AUTH_USER, authUserSaga);
-  yield takeEvery(LOG_OUT_USER, logOutSaga);
-  yield takeEvery(LOGIN_USER, loginUserSaga);
+  yield takeLatest(AUTH_USER, authUserSaga);
+  yield takeLatest(LOG_OUT_USER, logOutSaga);
+  yield takeLatest(LOGIN_USER, loginUserSaga);
 }
 
 export default function authReduce(state = {}, action) {
   switch (action.type) {
+    case TEMP_USER:
+      return {
+        ...state,
+        userAuth: action.user,
+      };
     case AUTH_USER:
       return {
         ...state,

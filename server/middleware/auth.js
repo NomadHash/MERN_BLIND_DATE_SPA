@@ -1,12 +1,9 @@
-import User from "../models/User";
+const User = require("../models/User");
 
 let auth = (req, res, next) => {
-  // 인증 처리.
-  // 클라이언트 쿠키에서 토큰을 가져옴.
   let token = req.cookies.x_auth;
-  // 토큰을 복호화 한뒤 유저를 찾기.
+
   User.findByToken(token, (err, user) => {
-    console.log(token);
     if (err) throw err;
     if (!user) return res.json({ isAuth: false, error: token });
     req.token = token;
@@ -18,4 +15,4 @@ let auth = (req, res, next) => {
   //없으면 불허가
 };
 
-export default auth;
+module.exports = auth;

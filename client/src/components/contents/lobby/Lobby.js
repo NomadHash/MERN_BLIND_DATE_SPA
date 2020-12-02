@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 const ResponseBlock = styled.div`
   @media (min-width: 768px) {
+    background: white;
     width: 420px;
     left: 50vw;
     border-radius: 27px;
@@ -19,11 +20,9 @@ const ResponseBlock = styled.div`
   height: 100vh;
   background: linear-gradient(to right, #f25478, #fa4e46);
 `;
-
 const Lobby = ({ logoutHandler }) => {
   return (
     <ResponseBlock>
-      lobby.js
       <button onClick={logoutHandler}>log out test</button>
     </ResponseBlock>
   );

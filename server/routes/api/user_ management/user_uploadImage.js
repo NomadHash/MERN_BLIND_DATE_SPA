@@ -1,4 +1,4 @@
-import express from "express";
+const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 
@@ -29,4 +29,4 @@ router.post("/", (req, res) => {
   });
 });
 
-export default router;
+module.exports = router;

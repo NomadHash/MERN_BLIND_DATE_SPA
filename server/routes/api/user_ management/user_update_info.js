@@ -1,7 +1,7 @@
-import express from "express";
+const express = require("express");
 
 //import MongoDB Model
-import User from "../../../models/User";
+const User = require("../../../models/User");
 
 const router = express.Router();
 
@@ -25,4 +25,4 @@ router.post("/", (req, res) => {
     }
   );
 });
-export default router;
+module.exports = router;

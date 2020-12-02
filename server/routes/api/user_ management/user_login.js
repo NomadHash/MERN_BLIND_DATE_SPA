@@ -1,41 +1,40 @@
-import express from "express";
-
-//import MongoDB Model
-import User from "../../../models/User";
-
+const express = require("express");
 const router = express.Router();
+const User = require("../../../models/User");
 
-// Login
 router.post("/", (req, res) => {
+  // =================
   //  OAUTH_LOGIN
-  if (req.body?.oAuthId) {
-    (async function () {
-      await User.findOne({ oAuthId: req.body.oAuthId }, (err, user) => {
-        if (!user) {
-          const userSchema = new User(req.body);
-          // Save-Data-Base
-          userSchema.save((err, _) => {
-            if (err) return res.json({ success: false, err });
-          });
-        }
-      });
+  // =================
+  if (req.body.oAuthId) {
+    User.findOne({ oAuthId: req.body.oAuthId }, (err, user) => {
+      if (!user) {
+        const userSchema = new User(req.body);
+        userSchema.save((err, _) => {
+          if (err) return res.json({ success: false, err });
+        });
 
-      await User.findOne({ oAuthId: req.body.oAuthId }, (err, user) => {
+        userSchema.generateToken((err, token) => {
+          if (err) return res.status(400).send(err);
+          res
+            .cookie("x_auth", token)
+            .status(200)
+            .json({ loginSuccess: true, userId: userSchema._Id });
+        });
+      } else {
         user.generateToken((err, token) => {
           if (err) return res.status(400).send(err);
-
-          //save Token at Cookie
           res
             .cookie("x_auth", token)
             .status(200)
             .json({ loginSuccess: true, userId: user._Id });
         });
-      });
-    })();
-
-    // ===============
+      }
+    });
   } else {
-    //Find Email at DB
+    // =================
+    //  NOMAL_LOGIN
+    // =================
     User.findOne({ email: req.body.email }, (err, user) => {
       if (!user) {
         return res.json({
@@ -43,7 +42,6 @@ router.post("/", (req, res) => {
           message: "해당 이메일에 해당하는 유저가 없습니다.",
         });
       }
-      //Check Password
       user.comparePassword(req.body.password, (err, isMatch) => {
         if (!isMatch)
           return res.json({
@@ -51,11 +49,11 @@ router.post("/", (req, res) => {
             message: "비밀번호가 틀렸습니다.",
           });
       });
-
       user.generateToken((err, user) => {
-        if (err) return res.status(400).send(err);
-
-        //save Token at Cookie
+        if (err) {
+          res.cookie("x_auth", "");
+          return res.status(400).send(err);
+        }
         res
           .cookie("x_auth", user.token)
           .status(200)
@@ -65,4 +63,4 @@ router.post("/", (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;

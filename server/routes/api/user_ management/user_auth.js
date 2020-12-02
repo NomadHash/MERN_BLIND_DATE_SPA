@@ -1,5 +1,5 @@
-import express from "express";
-import auth from "../../../middleware/auth";
+const express = require("express");
+const auth = require("../../../middleware/auth");
 
 const router = express.Router();
 
@@ -10,9 +10,10 @@ router.get("/", auth, (req, res) => {
     isAuth: true,
     email: req.user.email,
     name: req.user.name,
+    gender: req.user.gender,
     profileImage: req.user.profileImage,
     enteredUserInformation: req.user.enteredUserInformation,
   });
 });
 
-export default router;
+module.exports = router;

@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import config from "../config";
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const config = require("../config");
 const { SECRET_TOKEN } = config;
 
 const userSchema = mongoose.Schema({
@@ -44,12 +44,6 @@ const userSchema = mongoose.Schema({
     default: 0,
   },
   image: String,
-  // token: {
-  //   type: String,
-  // },
-  // tokenExp: {
-  //   type: Number,
-  // },
   enteredUserInformation: {
     type: Boolean,
     default: false,
@@ -98,21 +92,21 @@ userSchema.methods.generateToken = function (callback) {
 userSchema.statics.findByToken = function (token, callback) {
   var user = this;
   jwt.verify(token, SECRET_TOKEN, (err, decoded) => {
-    console.log(decoded);
-    user.findOne(
-      {
-        _id: decoded?.id,
-      },
-      (err, user) => {
-        console.log(err);
-        if (err) return callback(err);
-        callback(null, user);
-      }
-    );
-    // 유저 아이디를 이용하여 유저를 찾은뒤 클라이언트의 토큰과 db토큰과 비교
+    if (decoded) {
+      user.findOne(
+        {
+          _id: decoded.id,
+        },
+        (err, user) => {
+          console.log(err);
+          if (err) return callback(err);
+          callback(null, user);
+        }
+      );
+    }
   });
 };
 
 const User = mongoose.model("User", userSchema);
 
-export default User;
+module.exports = User;

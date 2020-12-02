@@ -29,10 +29,14 @@ const Preview = styled.img`
   cursor: pointer;
 `;
 const BlockDiv = styled.div`
+  @media (max-width: 768px) {
+    bottom: 0;
+    margin-bottom: 15px;
+  }
   width: 290px;
   justify-content: center;
   position: fixed;
-  top: 10px;
+  bottom: 25vh;
   display: flex;
   align-items: center;
   flex-direction: column;

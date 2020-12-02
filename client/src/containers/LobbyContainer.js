@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { logOutUser } from '../modules/auth';
 import { useDispatch } from 'react-redux';
 import { authUser } from '../modules/auth';
+import { loadUserList } from '../modules/userCard';
 //* ============================================
 //*    LOBBY_CONTAINER
 //* ============================================
@@ -12,26 +13,24 @@ const LobbyContainer = ({ history }) => {
   //*    USE_SELECTOR || DISPATCH
   //* ============================
   const dispatch = useDispatch();
-  const { auth, enteredUserInformation, error } = useSelector(
+  const { auth, enteredUserInformation, error, userData } = useSelector(
     ({ authReduce }) => {
       return {
         auth: authReduce.userAuth?.isAuth,
         enteredUserInformation: authReduce.userAuth?.enteredUserInformation,
         error: authReduce.error,
+        userData: authReduce.userAuth,
       };
     },
   );
-  //* ======================
+  //* ====================
   //*    USE_EFFECT
-  //* ======================
+  //* ====================
   useEffect(() => {
-    if (!auth) {
-      dispatch(authUser());
-    }
-    if (error) {
+    if (error || !auth) {
       history.push('/');
     }
-  }, [dispatch, error, history]);
+  }, [error, history, auth]);
 
   useEffect(() => {
     if (auth && !enteredUserInformation) {
@@ -40,14 +39,14 @@ const LobbyContainer = ({ history }) => {
   }, [enteredUserInformation, history, auth]);
 
   useEffect(() => {
-    if (!localStorage.getItem('CURRENT_USER')) {
-      history.push('/');
+    if (auth) {
+      dispatch(loadUserList(userData));
     }
-  }, [auth, history]);
+  }, [auth]);
 
-  //* ========================
+  //* =========================
   //*   VARIABLE || FUNCTIONS
-  //* ========================
+  //* =========================
   const logoutHandler = () => {
     dispatch(logOutUser());
   };
@@ -61,5 +60,4 @@ const LobbyContainer = ({ history }) => {
     </>
   );
 };
-
 export default LobbyContainer;
